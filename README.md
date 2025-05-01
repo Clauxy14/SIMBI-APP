@@ -1,54 +1,103 @@
-<!-- # React + TypeScript + Vite
+SIMBI Core User Flow (Web App )
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔹 1. Welcome & Onboarding
+✨ Animated SIMBI intro (“Hey there! I’m SIMBI, your AI study buddy!”)
 
-Currently, two official plugins are available:
+🌟 Select SIMBI personality:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Sassy Buddy / Gentle Coach / Tactical Tutor / Supportive Bestie
 
-## Expanding the ESLint configuration
+📚 Choose goals (exam prep, habit building, project, etc.)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+📝 Input subjects + upcoming deadlines
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+💡 Pick preferred study style (Pomodoro, Deep work, short quizzes)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🔐 Optional account creation (Email / Google / Wallet connect)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+🔹 2. Dashboard (Home Base)
+🎯 Daily Study Goal shown clearly
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-``` -->
+🔄 Visual streak tracker (calendar style)
+
+📈 XP bar with level-up progress
+
+😎 SIMBI state/animation reflects mood (happy, bored, annoyed)
+
+🔔 Encouragement or warnings from SIMBI (“You've got this!” / “We need to talk...”)
+
+🔹 3. Start Studying (Learning Hub)
+⏱️ Choose or auto-start study session (based on adaptive plan)
+
+🧠 Study content via:
+
+Flashcards
+
+Quizzes (AI-generated)
+
+Custom reading sections with summarizer
+
+⏳ Timer (Pomodoro with breaks)
+
+💬 SIMBI provides commentary + mini-rewards during progress
+
+🔹 4. Break Time / Rewards
+🎁 Earn:
+
+XP Points
+
+Tokens (Web3)
+
+Emojis/stickers/NFT badges
+
+🧩 Optional: Play a SIMBI mini-game
+
+🎉 View animation of SIMBI cheering/dancing
+
+🔹 5. Study Plan Manager
+📆 Visual timeline with:
+
+Milestones
+
+Deadlines
+
+Skipped sessions flagged
+
+🧠 Re-adjust plan automatically with AI if user is behind
+
+📝 Add new goals, subjects, or quiz topics
+
+🔹 6. Accountability & Progress
+🕵️‍♂️ Weekly review with SIMBI’s tone:
+
+Funny if lazy week
+
+Motivational if productive
+
+🧾 Download or share progress report
+
+👥 Compare streaks or achievements with friends
+
+🎖️ Showcase NFT badges in profile
+
+🔹 7. Settings & Preferences
+🎭 Switch SIMBI personality mode
+
+🕹️ Enable/disable Telegram Bot reminders
+
+🎨 Change color theme / animation settings
+
+🧏 Accessibility settings (font, voice, motion toggle)
+
+🔹 8. Telegram Bot Flow (Web3 Integration)
+⌚ Set daily reminder times
+
+🔗 Connect wallet (for rewards + credentials)
+
+📚 Quick Quiz Command /quiz
+
+🪙 Earn tokens for completing goals
+
+🎖️ Claim NFTs via Telegram after study session
+
+🤝 Join study challenge or group (P2P accountability)
