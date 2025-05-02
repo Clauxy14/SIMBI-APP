@@ -28,7 +28,7 @@ const Signup: React.FC = () => {
           client_id: "YOUR_GOOGLE_CLIENT_ID",
           callback: handleCredentialResponse,
           ux_mode: "redirect",
-          login_uri: "simbi-app.vercel.app/welcome",
+          login_uri: "simbi-app.vercel.app/*",
         });
 
         window.google.accounts.id.renderButton(
