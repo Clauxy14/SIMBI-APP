@@ -61,7 +61,7 @@ const Signup: React.FC = () => {
     const userObject = decodeJwt(response.credential);
     console.log("Google User:", userObject);
     localStorage.setItem("simbiUser", JSON.stringify(userObject));
-    navigate("/welcome");
+    navigate("*");
   };
 
   const decodeJwt = (token: string) => {

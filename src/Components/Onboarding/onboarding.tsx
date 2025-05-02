@@ -21,7 +21,7 @@ const slides = [
     title: "Tough Love",
     description:
       "Procrastination again? I will call you out. See me as your friend who will never let you slack.",
-    image: "/assets/Tough-love.svg",
+    image: "/assets/tough-love.png",
     imageStyle: { maxWidth: "45%" },
   },
   {

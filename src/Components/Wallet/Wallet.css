@@ -75,12 +75,12 @@
 /* Media Queries for Wallet Page Responsiveness */
 @media (max-width: 1024px) {
   .wallet-wrapper {
+    max-width: 90%;
     padding: 30px 40px;
   }
 
   .wallet-page {
     display: flex;
-    flex-direction: column;
     justify-content: center;
   }
 
@@ -89,8 +89,7 @@
   }
 
   .wallet-panel {
-    /* width: 100%; */
-    padding: 0 70px;
+    width: 90%;
   }
 
   .wallet-panel h2 {
@@ -100,15 +99,15 @@
 }
 
 @media (max-width: 780px) {
-  .wallet-page {
+  .wallet-container {
     flex-direction: column;
     align-items: center;
+    width: 70%;
+    /* margin-right: 7rem; */
   }
+
   .logo {
     width: 100px;
-  }
-  .wallet-panel {
-    width: 100%;
   }
 
   .wallet-panel h2 {
@@ -124,11 +123,9 @@
   .wallet-wrapper {
     padding: 20px;
   }
+
   .logo {
     width: 80px;
-  }
-  .wallet-panel {
-    padding: 24px;
   }
 
   .wallet-panel h2 {

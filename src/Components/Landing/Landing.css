@@ -172,7 +172,7 @@
   .login-redirect {
     padding: 12px 20px;
     font-size: 0.8rem;
-    max-width: 100%;
+    width: 100%;
   }
 
   .landing-text h1 {

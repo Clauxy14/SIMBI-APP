@@ -87,6 +87,10 @@
   color: #2a7de1;
 }
 
+.wallet-connect:hover {
+  color: #fff;
+}
+
 .redirect-signup {
   font-size: 0.9rem;
   text-align: center;

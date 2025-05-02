@@ -35,7 +35,7 @@ const ConnectWallet: React.FC = () => {
         <img src="/assets/icons/Simbi-logo.png" alt="Simbi Logo" />
       </div>
       <div className="wallet-page">
-        <div>
+        <div className="wallet-container">
           <div className="wallet-panel">
             <h2>Connect a wallet</h2>
             <div className="wallet-list">

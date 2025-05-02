@@ -55,7 +55,7 @@ const Login: React.FC = () => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  });
 
   const handleCredentialResponse = (response: { credential: string }) => {
     const userObject = decodeJwt(response.credential);
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
       const parsedUser = JSON.parse(storedUser);
       if (parsedUser.email === userObject.email) {
         localStorage.setItem("simbiUser", JSON.stringify(userObject));
-        navigate("/welcome");
+        navigate("*");
       } else {
         setAccountError(true);
       }
