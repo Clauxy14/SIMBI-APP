@@ -17,7 +17,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
 }
 
 .onboarding-header {
@@ -89,7 +88,7 @@ body {
   width: 75%;
   background-color: #ffcc00;
   border-radius: 20px;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 
 .button-group {
@@ -113,7 +112,7 @@ button:hover {
 }
 
 button:active {
-  transition: all 0.5s;
+  transition: all 0.3s;
   transform: scale(0.8);
   background-color: #1c5bbfab;
 }
@@ -129,8 +128,6 @@ button.skip:hover {
   background-color: #3a86ff;
   color: #fff;
 }
-
-/* Base styles already defined above */
 
 /* Tablets (768px - 1024px) */
 @media screen and (max-width: 1024px) {

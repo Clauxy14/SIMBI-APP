@@ -19,7 +19,7 @@ const ConnectWallet: React.FC = () => {
           method: "eth_requestAccounts",
         })) as string;
         console.log("Connected wallet:", accounts[0]);
-        navigate("/welcome");
+        navigate("*");
       } else {
         alert(`${wallet} connection not implemented yet.`);
       }
