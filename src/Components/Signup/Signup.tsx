@@ -25,10 +25,10 @@ const Signup: React.FC = () => {
     script.onload = () => {
       if (window.google) {
         window.google.accounts.id.initialize({
-          client_id: "YOUR_GOOGLE_CLIENT_ID", // replace with real one
+          client_id: "YOUR_GOOGLE_CLIENT_ID",
           callback: handleCredentialResponse,
           ux_mode: "redirect",
-          login_uri: "http://localhost:5173", // replace with your actual redirect URI
+          login_uri: "simbi-app.vercel.app/welcome",
         });
 
         window.google.accounts.id.renderButton(
@@ -47,7 +47,7 @@ const Signup: React.FC = () => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  });
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -55,7 +55,7 @@ const Signup: React.FC = () => {
     if (credential) {
       handleCredentialResponse({ credential });
     }
-  }, []);
+  });
 
   const handleCredentialResponse = (response: { credential: string }) => {
     const userObject = decodeJwt(response.credential);

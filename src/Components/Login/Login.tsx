@@ -30,7 +30,7 @@ const Login: React.FC = () => {
     script.onload = () => {
       if (window.google && window.google.accounts) {
         const options: GoogleInitOptions = {
-          client_id: "YOUR_GOOGLE_CLIENT_ID", // Replace with real client ID
+          client_id: "YOUR_GOOGLE_CLIENT_ID",
           callback: handleCredentialResponse,
           ux_mode: "redirect",
           login_uri: window.location.origin + "/login",
@@ -186,7 +186,7 @@ const Login: React.FC = () => {
             className="wallet-connect"
             onClick={() => navigate("/connect-wallet")}
           >
-            Connect Wallet
+            Sign In With Wallet
           </button>
 
           <p className="redirect-signup">

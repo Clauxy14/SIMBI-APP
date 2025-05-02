@@ -37,7 +37,6 @@
 .landing-content {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   margin-top: 30px;
   gap: 7rem;
 }
@@ -92,114 +91,93 @@
   color: #ffffff;
 }
 
-/* Default: Desktop first design already in place */
+/* Max width 1240px (Large tablets / small desktops) */
+@media (max-width: 1024px) {
+  .landing-wrapper {
+    padding: 20px 60px;
+  }
 
-/* Tablets (768px to 1024px) */
-@media screen and (max-width: 1024px) {
-  .signup-content,
-  .landing-content,
-  .slide {
+  .language-switch {
+    display: none;
+  }
+
+  .landing-content {
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
-  }
-
-  .signup-illustration,
-  .landing-illustration,
-  .slide-image {
-    width: 60%;
-    height: auto;
-  }
-
-  .slide-text,
-  .landing-text {
-    max-width: 80%;
     text-align: center;
-  }
-
-  .slide-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .slide-text p {
-    font-size: 1.3rem;
+    gap: 0;
+    margin: 0;
   }
 
   .get-started,
-  .login-redirect,
-  .signup-button {
+  .login-redirect {
     width: 100%;
-    padding: 15px 0;
+    font-size: 1rem;
+  }
+
+  .landing-illustration {
+    width: 58%;
+  }
+  .landing-text h1 {
+    margin-bottom: 25px;
+    font-size: 1.9rem;
+    text-align: center;
   }
 }
 
-/* Small Tablets and Large Phones (up to 768px) */
-@media screen and (max-width: 768px) {
-  .signup-wrapper,
-  .onboarding-wrapper,
+/* Max width 780px (Tablets) */
+@media (max-width: 768px) {
   .landing-wrapper {
     padding: 20px 30px;
   }
 
-  .slide-text h1 {
-    font-size: 2rem;
-  }
-
-  .slide-text p {
-    font-size: 1.1rem;
-  }
-
-  .slide-image {
-    width: 65%;
-    max-height: 40%;
-  }
-
-  button {
+  .get-started,
+  .login-redirect {
+    /* padding: 15px 60px; */
     font-size: 1rem;
-    padding: 14px 20px;
-    width: 100%;
   }
 
-  .signup-illustration {
-    display: none; /* Hide illustration on small screens */
+  .landing-text {
+    margin-top: 30px;
+  }
+
+  .landing-text h1 {
+    font-size: 1.7rem;
+    line-height: 1.4;
   }
 }
 
-/* Phones (up to 480px) */
-@media screen and (max-width: 480px) {
-  .signup-form h2 {
-    font-size: 1.4rem;
-    text-align: center;
+/* Max width 600px (Mobile landscape) */
+@media (max-width: 600px) {
+  .get-started,
+  .login-redirect {
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    width: 90%;
   }
 
-  .slide-text h1 {
-    font-size: 1.7rem;
+  .landing-text h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+}
+
+/* Max width 400px (Mobile portrait) */
+@media (max-width: 400px) {
+  .landing-wrapper {
+    padding: 15px;
   }
 
-  .slide-text p {
-    font-size: 1rem;
+  .get-started,
+  .login-redirect {
+    padding: 12px 20px;
+    font-size: 0.8rem;
+    max-width: 100%;
   }
 
-  .progress {
-    gap: 10px;
-  }
-
-  .slide-image {
-    width: 80%;
-  }
-
-  .toggle-password-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .signup-wrapper {
-    padding: 10px 15px;
-  }
-
-  input,
-  select {
-    font-size: 1rem;
-    padding: 12px;
+  .landing-text h1 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    line-height: 1.3;
   }
 }

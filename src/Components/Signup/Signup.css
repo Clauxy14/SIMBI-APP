@@ -12,7 +12,7 @@
 }
 
 .signup-illustration {
-  width: 48%;
+  width: 47%;
 }
 
 .signup-form {
@@ -33,7 +33,6 @@ input:focus {
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 0px;
-  /* margin-top: 0; */
 }
 
 .divider-line {
@@ -108,4 +107,121 @@ input:focus {
   color: #3a86ff;
   cursor: pointer;
   margin-left: 6px;
+}
+
+/* Max width 1024px - small desktops / large tablets */
+@media (max-width: 1024px) {
+  .signup-wrapper {
+    padding-top: 30px;
+  }
+
+  .logo {
+    margin-bottom: 25px;
+  }
+
+  .signup-content {
+    margin: auto;
+    width: 65%;
+    /* gap: 3rem; */
+    box-shadow: 2px 2px 5px 2px #151a206c;
+    border-radius: 10px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.7rem;
+  }
+
+  .signup-button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .signup-illustration {
+    display: none;
+  }
+}
+
+/* Max width 780px - tablets */
+@media (max-width: 780px) {
+  .signup-content {
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    width: 100px;
+  }
+  .signup-form {
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.7rem;
+  }
+
+  .signup-illustration {
+    display: none;
+  }
+
+  .signup-button {
+    width: 100%;
+  }
+}
+
+/* Max width 600px - mobile landscape */
+@media (max-width: 600px) {
+  .signup-content {
+    width: 90%;
+    box-shadow: 0 0 0;
+    border: 0;
+    padding: 10px 20px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .signup-form input,
+  .signup-form select,
+  .signup-button {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+
+  .password-input-wrapper input {
+    width: 91%;
+  }
+}
+
+/* Max width 400px - mobile portrait */
+@media (max-width: 480px) {
+  .signup-wrapper {
+    padding: 15px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.3rem;
+  }
+
+  .signup-form input,
+  .signup-form select,
+  .signup-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .toggle-password-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .password-input-wrapper input {
+    width: 92%;
+  }
 }

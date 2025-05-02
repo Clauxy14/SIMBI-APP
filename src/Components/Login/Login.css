@@ -98,3 +98,73 @@
   cursor: pointer;
   margin-left: 6px;
 }
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .login-wrapper {
+    padding: 30px;
+  }
+
+  .login-content {
+    margin: auto;
+    width: 65%;
+    /* gap: 3rem; */
+    box-shadow: 2px 2px 5px 2px #151a206c;
+    border-radius: 10px;
+  }
+
+  .login-illustration {
+    display: none;
+  }
+
+  .login-button,
+  .wallet-connect {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 780px) {
+  .login-content {
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-form {
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-content {
+    width: 90%;
+    box-shadow: 0 0 0;
+    border: 0;
+    padding: 10px 20px;
+  }
+
+  .login-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .login-form input {
+    font-size: 0.95rem;
+  }
+
+  .login-button,
+  .wallet-connect {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-wrapper {
+    padding: 15px;
+  }
+
+  .login-form h2 {
+    font-size: 1.7rem;
+  }
+}

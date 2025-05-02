@@ -15,14 +15,14 @@ const slides = [
     description:
       "I break down complex stuff into the language you will understand. Academic jargon is allowed here.",
     image: "/assets/Cut-bluff.svg",
-    imageStyle: { maxWidth: "47%" },
+    imageStyle: { maxWidth: "45%" },
   },
   {
     title: "Tough Love",
     description:
       "Procrastination again? I will call you out. See me as your friend who will never let you slack.",
     image: "/assets/Tough-love.svg",
-    imageStyle: { maxWidth: "47%" },
+    imageStyle: { maxWidth: "45%" },
   },
   {
     title: "Brain Hacks",
@@ -54,7 +54,11 @@ const Onboarding: React.FC = () => {
       <div className="onboarding-container">
         <header className="onboarding-header">
           <div className="logo">
-            <img src="/assets/icons/Simbi-logo.png" alt="Simbi Logo" />
+            <img
+              src="/assets/icons/Simbi-logo.png"
+              alt="Simbi Logo"
+              className="logo"
+            />
           </div>
 
           <div className="language-fixed">
