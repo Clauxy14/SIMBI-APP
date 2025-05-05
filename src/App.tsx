@@ -9,7 +9,7 @@ import Landing from "./Components/Landing/Landing";
 import Signup from "./Components/Signup/Signup";
 import Login from "./Components/Login/Login";
 import ConnectWallet from "./Components/Wallet/Wallet";
-// import Welcome from "./Components/Welcome/Welcome";
+import Welcome from "./Components/welcome/welcome";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/connect-wallet" element={<ConnectWallet />} />
-        {/* <Route path="/welcome" element={<Welcome />} /> */}
+        <Route path="/welcome" element={<Welcome />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

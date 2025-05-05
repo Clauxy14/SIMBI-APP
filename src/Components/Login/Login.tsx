@@ -55,7 +55,7 @@ const Login: React.FC = () => {
     return () => {
       document.body.removeChild(script);
     };
-  });
+  }, []);
 
   const handleCredentialResponse = (response: { credential: string }) => {
     const userObject = decodeJwt(response.credential);
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
       const parsedUser = JSON.parse(storedUser);
       if (parsedUser.email === userObject.email) {
         localStorage.setItem("simbiUser", JSON.stringify(userObject));
-        navigate("*");
+        navigate("/welcome");
       } else {
         setAccountError(true);
       }
@@ -95,19 +95,32 @@ const Login: React.FC = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem("simbiUser");
+    setAccountError(false);
 
-    if (!storedUser) {
-      setAccountError(true);
-      return;
-    }
+    try {
+      const response = await fetch(
+        "https://simbi-ai.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
-    const user = JSON.parse(storedUser);
-    if (user.email === email && user.password === password) {
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const result = await response.json();
+      localStorage.setItem("simbiUser", JSON.stringify(result));
+
       navigate("/welcome");
-    } else {
+    } catch (error) {
+      console.error("Login error:", error);
       setAccountError(true);
     }
   };
@@ -124,7 +137,7 @@ const Login: React.FC = () => {
 
       <div className="login-content">
         <form className="login-form" onSubmit={handleSubmit}>
-          <h2>Sign in to Simbi</h2>
+          <h2>Sign in to get acess to unlimited learning</h2>
 
           {/* Google Sign-In Button */}
           <div id="google-signin-button"></div>

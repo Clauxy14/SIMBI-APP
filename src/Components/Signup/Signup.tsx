@@ -1,3 +1,4 @@
+// src/pages/Signup.tsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
@@ -7,7 +8,6 @@ import visibleIcon from "/assets/icons/eye.svg";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,54 +20,37 @@ const Signup: React.FC = () => {
     script.src = "https://accounts.google.com/gsi/client";
     script.async = true;
     script.defer = true;
-    document.body.appendChild(script);
 
     script.onload = () => {
-      if (window.google) {
-        window.google.accounts.id.initialize({
-          client_id: "YOUR_GOOGLE_CLIENT_ID",
-          callback: handleCredentialResponse,
-          ux_mode: "redirect",
-          login_uri: "simbi-app.vercel.app/*",
-        });
+      window.google.accounts.id.initialize({
+        client_id: "YOUR_GOOGLE_CLIENT_ID",
+        callback: handleCredentialResponse,
+        ux_mode: "redirect",
+        login_uri: `${window.location.origin}/welcome`,
+      });
 
-        window.google.accounts.id.renderButton(
-          document.getElementById("googleSignInDiv")!,
-          {
-            theme: "outline",
-            size: "large",
-            logo_alignment: "center",
-            text: "signup_with",
-            shape: "rectangular",
-          }
-        );
-      }
+      window.google.accounts.id.renderButton(
+        document.getElementById("googleSignInDiv")!,
+        { theme: "outline", size: "large", text: "signup_with" }
+      );
     };
+
+    document.body.appendChild(script);
 
     return () => {
       document.body.removeChild(script);
     };
-  });
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const credential = url.searchParams.get("credential");
-    if (credential) {
-      handleCredentialResponse({ credential });
-    }
-  });
+  }, []);
 
   const handleCredentialResponse = (response: { credential: string }) => {
     const userObject = decodeJwt(response.credential);
-    console.log("Google User:", userObject);
     localStorage.setItem("simbiUser", JSON.stringify(userObject));
-    navigate("*");
+    navigate("/login");
   };
 
   const decodeJwt = (token: string) => {
     try {
-      const base64Url = token.split(".")[1];
-      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const base64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
       const jsonPayload = decodeURIComponent(
         atob(base64)
           .split("")
@@ -75,36 +58,60 @@ const Signup: React.FC = () => {
           .join("")
       );
       return JSON.parse(jsonPayload);
-    } catch (error) {
-      console.error("Failed to decode JWT", error);
+    } catch (err) {
+      console.error("JWT decode error", err);
       return null;
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!name || !email || !password || !educationLevel) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    const userData = {
-      name,
-      email,
-      password,
-      educationLevel,
-      keepLoggedIn,
-    };
+    const userData = { name, email, password, educationLevel };
 
-    console.log("User Submitted:", userData);
-    localStorage.setItem("simbiUser", JSON.stringify(userData));
-    navigate("/login");
+    try {
+      const response = await fetch(
+        "https://simbi-ai.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Signup failed");
+      }
+
+      const result = await response.json();
+
+      // Optionally store token or user data
+      localStorage.setItem("simbiUser", JSON.stringify(result));
+
+      navigate("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("An error occurred during signup. Please try again.");
+    }
   };
+
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!name || !email || !password || !educationLevel) {
+  //     alert("Please fill in all required fields.");
+  //     return;
+  //   }
+
+  //   const userData = { name, email, password, educationLevel, keepLoggedIn };
+  //   localStorage.setItem("simbiUser", JSON.stringify(userData));
+  //   navigate("/login");
+  // };
 
   return (
     <div className="signup-wrapper">
@@ -115,28 +122,22 @@ const Signup: React.FC = () => {
           className="logo"
         />
       </header>
-
       <div className="signup-content">
         <form className="signup-form" onSubmit={handleSubmit}>
           <h2>Sign up to get access to unlimited learning</h2>
-
-          {/* Google Sign-In Button (Redirect Mode) */}
           <div id="googleSignInDiv" className="google-btn" />
-
           <div className="divider-line">
             <span className="line"></span>
             <span className="divider">or with email</span>
             <span className="line"></span>
           </div>
-
           <input
             type="text"
-            placeholder="Full name"
+            placeholder="Username"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
-
           <input
             type="email"
             placeholder="Email"
@@ -144,7 +145,6 @@ const Signup: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-
           <div className="password-input-wrapper">
             <input
               type={showPassword ? "text" : "password"}
@@ -155,16 +155,10 @@ const Signup: React.FC = () => {
             />
             <img
               src={showPassword ? visibleIcon : invisibleIcon}
-              alt={showPassword ? "Hide password" : "Show password"}
               className="toggle-password-icon"
-              onClick={togglePasswordVisibility}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && togglePasswordVisibility()}
-              aria-label="Toggle password visibility"
+              onClick={() => setShowPassword(!showPassword)}
             />
           </div>
-
           <select
             value={educationLevel}
             onChange={(e) => setEducationLevel(e.target.value)}
@@ -174,7 +168,6 @@ const Signup: React.FC = () => {
             <option value="secondary">Secondary School</option>
             <option value="university">University</option>
           </select>
-
           <label className="remember-me">
             <input
               type="checkbox"
@@ -183,17 +176,14 @@ const Signup: React.FC = () => {
             />
             Keep me logged in
           </label>
-
           <button type="submit" className="signup-button">
             Sign up
           </button>
-
           <p className="redirect-login">
             Already have an account?{" "}
             <span onClick={() => navigate("/login")}>Log in</span>
           </p>
         </form>
-
         <img
           src="/assets/character-design.png"
           alt="Simbi Character"
