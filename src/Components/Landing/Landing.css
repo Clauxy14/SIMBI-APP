@@ -41,7 +41,7 @@
 }
 
 .landing-illustration {
-  width: 36.4%;
+  max-width: 36.4%;
 }
 
 .landing-text {

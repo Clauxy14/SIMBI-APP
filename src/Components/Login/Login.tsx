@@ -30,10 +30,11 @@ const Login: React.FC = () => {
     script.onload = () => {
       if (window.google && window.google.accounts) {
         const options: GoogleInitOptions = {
-          client_id: "YOUR_GOOGLE_CLIENT_ID",
+          client_id:
+            "6846893560-imp57m3r6aft7c9lpu4c7sor3tuf1oid.apps.googleusercontent.com",
           callback: handleCredentialResponse,
           ux_mode: "redirect",
-          login_uri: window.location.origin + "/login",
+          login_uri: "http://localhost:3000/welcome",
         };
 
         window.google.accounts.id.initialize(options);

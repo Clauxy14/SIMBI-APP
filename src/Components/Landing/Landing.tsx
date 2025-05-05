@@ -35,7 +35,7 @@ const Landing: React.FC = () => {
 
         <div className="landing-text">
           <h1>
-            Everything is learnable and <br /> fun with, come along!
+            Everything is learnable and <br /> fun with Simbi, come along!
           </h1>
           <button onClick={() => navigate("/signup")} className="get-started">
             Get started
