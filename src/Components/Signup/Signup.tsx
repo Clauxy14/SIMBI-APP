@@ -27,7 +27,7 @@ const Signup: React.FC = () => {
           "6846893560-imp57m3r6aft7c9lpu4c7sor3tuf1oid.apps.googleusercontent.com",
         callback: handleCredentialResponse,
         ux_mode: "redirect",
-        login_uri: "http://localhost:3000/welcome",
+        login_uri: "https://simbi-app.vercel.app/welcome",
       });
 
       window.google.accounts.id.renderButton(

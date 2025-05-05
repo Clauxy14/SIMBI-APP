@@ -34,7 +34,7 @@ const Login: React.FC = () => {
             "6846893560-imp57m3r6aft7c9lpu4c7sor3tuf1oid.apps.googleusercontent.com",
           callback: handleCredentialResponse,
           ux_mode: "redirect",
-          login_uri: "http://localhost:3000/welcome",
+          login_uri: window.location.origin + "/welcome",
         };
 
         window.google.accounts.id.initialize(options);
