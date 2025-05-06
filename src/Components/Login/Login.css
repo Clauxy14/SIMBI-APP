@@ -18,7 +18,7 @@
 }
 
 .login-illustration {
-  width: 38.3%;
+  max-width: 37.7%;
 }
 
 .login-form {
@@ -35,7 +35,7 @@
   font-weight: 700;
   color: #1e293b;
   margin: 0;
-  padding: 0;
+  margin-top: 15px;
 }
 
 .login-form input {

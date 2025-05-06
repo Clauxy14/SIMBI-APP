@@ -12,7 +12,7 @@
 }
 
 .signup-illustration {
-  width: 42%;
+  max-width: 40%;
 }
 
 .signup-form {
@@ -33,6 +33,7 @@ input:focus {
   font-weight: 700;
   color: #1e293b;
   margin: 0;
+  margin-top: 20px;
 }
 
 .divider-line {
@@ -49,6 +50,22 @@ input:focus {
   text-align: center;
   font-size: 0.9rem;
   color: #b6bbb2;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #fde8e8;
+  padding: 0.4rem;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.google-signin-container div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup-form input,
