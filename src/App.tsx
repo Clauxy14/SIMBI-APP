@@ -10,6 +10,8 @@ import Signup from "./Components/Signup/Signup";
 import Login from "./Components/Login/Login";
 import ConnectWallet from "./Components/Wallet/Wallet";
 import Welcome from "./Components/welcome/welcome";
+import AskSimbi from "./Components/AskSimbi/AskSimbi";
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/connect-wallet" element={<ConnectWallet />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/askSimbi" element={<AskSimbi />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
