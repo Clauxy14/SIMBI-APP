@@ -1,0 +1,297 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.quiz{
+    /* height: 100vh; */
+    width: 100vw;
+    background: #F8F8F8;
+    padding-top: 7rem;
+}
+
+.navbar-container{
+    width: 20%;
+    max-width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* z-index: 100; */
+    padding-top: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* display: none; */
+}
+
+.quiz-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F8F8F8;
+    padding-bottom: 3rem;
+}
+
+form{
+    padding-top: 2rem;
+    background: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 50%;
+    margin: 0;
+    border-radius: 16px;
+}
+
+.quiz-card{
+    background: var(--Primary-Electric-Blue-100, rgba(217, 234, 255, 1));
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    /* max-width: 825px; */
+
+
+}
+
+.quiz-selection{
+    padding: 2rem;
+}
+
+label{
+    font-family: Nunito;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0px;
+
+}
+
+.quiz-dropdown{
+    width: 100%;
+    height: 3rem;
+    border: 1px solid rgba(189, 189, 189, 1);
+    border-radius: 16px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-family: Nunito;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgb(73, 72, 72);
+    margin-bottom: 2rem;
+    margin-top: 0.7rem;
+
+
+}
+
+.difficulty-buttons{
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.difficulty-buttons button{
+    background: var(--Primary-Electric-Blue-50, rgba(238, 246, 255, 1));
+    border: 1px solid var(--Primary-Electric-Blue-200, rgba(188, 219, 255, 1));
+    border-radius: 16px;
+    padding: 0.5rem;
+    width: 8rem;
+    height: 3rem;
+    font-family: Nunito;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgba(30, 41, 59, 1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.difficulty-btn:hover {
+    background-color: rgb(134, 181, 235);
+  }
+  
+
+  .difficulty-btn.active {
+    background-color: rgba(58, 134, 255, 1);
+    color: white;
+    border-color: #007bff;
+  }
+
+.start-quiz{
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.start-button{
+    background: var(--Primary-Electric-Blue-500, rgba(58, 134, 255, 1));
+    border-radius: 16px;
+    padding: 0.5rem;
+    width: 8rem;
+    height: 3rem;
+    font-family: Nunito;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgba(255, 255, 255, 1);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.quiz-card h1{
+    font-family: Nunito;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgba(61, 64, 86, 1);
+    background: var(--Primary-Electric-Blue-100, rgba(217, 234, 255, 1));
+}
+
+.quiz-card p{
+    font-family: Nunito;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 130%;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgba(0, 0, 0, 1);  
+    background: var(--Primary-Electric-Blue-100, rgba(217, 234, 255, 1));  
+}
+
+
+@media (max-width: 1024px) {
+
+
+    form{
+        width: 80%;
+        padding: 1rem;
+    }
+
+    html{
+        font-size: 14px;
+    }
+
+    .quiz-form, .quiz, .quiz-selection, 
+    .quiz-type, .difficulty, label, 
+    .difficulty-buttons, .duration{
+        background-color: white;
+    }
+
+    .quiz-form{
+        width: 100%;
+        margin-right: 0;
+        margin-left: auto;
+    }
+
+    .navbar-container{
+        width: 0;
+        background-color: white;
+    }
+
+    img{
+        width: 7rem;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .difficulty-buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .difficulty-buttons button{
+        background: var(--Primary-Electric-Blue-50, rgba(238, 246, 255, 1));
+        border: 1px solid var(--Primary-Electric-Blue-200, rgba(188, 219, 255, 1));
+        border-radius: 16px;
+        padding: 0.5rem;
+        width: 100%;
+        height: 3rem;
+        font-family: Nunito;
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 150%;
+        letter-spacing: 0px;
+        color: rgba(30, 41, 59, 1);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .difficulty-btn:hover {
+        background-color: rgb(134, 181, 235);
+      }
+      
+    
+      .difficulty-btn.active {
+        background-color: rgba(58, 134, 255, 1);
+        color: white;
+        border-color: #007bff;
+      }
+
+      .start-button{
+        background: var(--Primary-Electric-Blue-500, rgba(58, 134, 255, 1));
+        border-radius: 16px;
+        padding: 0.5rem;
+        width: 100%;
+        height: 3rem;
+        font-family: Nunito;
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 150%;
+        letter-spacing: 0px;
+        color: rgba(255, 255, 255, 1);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .start-quiz{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .navbar-container{
+        width: 0;
+        background-color: white;
+    }
+
+    form{
+        width: 100%;
+        padding: 1rem;
+    }
+
+    img{
+        width: 6rem;
+        background-color: transparent;
+    }
+    .logo{
+        width: 0;
+        height: 0;
+    }
+}
+

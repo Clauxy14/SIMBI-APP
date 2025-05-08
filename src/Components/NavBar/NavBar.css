@@ -23,16 +23,18 @@ ul{
     gap: 2rem;
     align-items: left;
     padding-left: 1.1rem;
+    background: rgba(255, 255, 255, 1);
 }
 
 
 li{
     list-style-type: none;
+    background: rgba(255, 255, 255, 1);
 }
 
 .logo{
     margin-bottom: 1rem;
-    width: 100%;
+    width: 8rem;
     height: 40px;
     position: fixed;
     top: 1rem;
@@ -40,6 +42,7 @@ li{
     z-index: 1001;
     cursor: pointer;
     border: none;
+    background: rgba(255, 255, 255, 1);
 }
 
 .links{
@@ -50,6 +53,7 @@ li{
     line-height: 150%;
     letter-spacing: 0px;
     color: rgba(115, 115, 115, 1);
+    background: rgba(255, 255, 255, 1);
 }
 
 .nav-links{
@@ -77,7 +81,7 @@ li{
       .logo {
         display: block;
         margin-bottom: 1rem;
-        width: 80%;
+        width: 8rem;
       }
 
     ul img{

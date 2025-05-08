@@ -3,8 +3,6 @@ import axios from "axios";
 import "./AskSimbi.css";
 import { useNavigate } from "react-router-dom";
 
-
-
 interface Message {
   sender: "user" | "ai";
   text: string;
@@ -13,14 +11,17 @@ interface Message {
 const AskSimbi: React.FC = () => {
   const navigate = useNavigate();
   const bottomRef = useRef<HTMLDivElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null); // Ref to the textarea
   const [questionInput, setQuestionInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+
+  // Auto-scroll when messages or loading state changes
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
-  
 
+  // Suggestions array
   const suggestions = [
     "Give me a study tip",
     "Quiz me now",
@@ -28,7 +29,7 @@ const AskSimbi: React.FC = () => {
   ];
 
   const handleSendQuestion = async (text: string) => {
-    if (!text.trim()) return;
+    if (!text.trim()) return;  // Prevent empty input from being sent
 
     const userMessage: Message = { sender: "user", text };
     const updatedMessages = [...messages, userMessage];
@@ -80,29 +81,33 @@ const AskSimbi: React.FC = () => {
   const parsedUser = storedUser ? JSON.parse(storedUser) : null;
   const userName = parsedUser?.name || parsedUser?.given_name || "User";
 
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setQuestionInput(e.target.value);
+
+    // Dynamically adjust the height of the textarea
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"; // Reset the height to auto to shrink when text is deleted
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set the height to the scroll height of the content
+    }
+  };
 
   return (
     <div className="chat-container">
-      {/* <h2 className="chat-title">Ask SIMBI</h2> */}
-
       {messages.length === 0 && (
         <div className="suggestions">
-          <img src="/assets/askSimbi-image.svg" className="askSimbi-image" alt="Logo" style={{width: "9.5rem", height: "3rem"}}/>
-          <p className="greeting">
-            Hi {userName} 👋!
-          </p>
-
+          <img src="/assets/askSimbi-image.svg" className="askSimbi-image" alt="Logo" style={{ width: "9.5rem", height: "3rem" }} />
+          <p className="greeting">Hi {userName} 👋!</p>
           <h6>How can I help you?</h6>
           <div className="suggestionBox">
-          {suggestions.map((suggestion, idx) => (
-            <button
-              key={idx}
-              className="suggestion-button"
-              onClick={() => handleSendQuestion(suggestion)}
-            >
-              {suggestion}
-            </button>
-          ))}
+            {suggestions.map((suggestion, idx) => (
+              <button
+                key={idx}
+                className="suggestion-button"
+                onClick={() => handleSendQuestion(suggestion)}
+              >
+                {suggestion}
+              </button>
+            ))}
           </div>
         </div>
       )}
@@ -122,36 +127,34 @@ const AskSimbi: React.FC = () => {
 
       <div className="input-area">
         <textarea
-          rows={(0.2 / 100) * window.innerHeight}
-          cols={(0.5 / 100) * window.innerWidth}
+          ref={textareaRef} // Attach the ref
+          rows={1}
           maxLength={500}
           value={questionInput}
-          onChange={(e) => setQuestionInput(e.target.value)}
+          onChange={handleTextareaChange}
           placeholder="Ask SIMBI anything"
           className="chat-input"
         />
-        </div>
-        <div className="input-buttons">
-          <button
-            onClick={() => navigate("")} // Adjust to your actual dashboard route
-            className="cancel-button"
-          >
-            Cancel
-          </button>
+      </div>
 
-          <button
-            onClick={() => handleSendQuestion(questionInput)}
-            disabled={loading}
-            className="send-button"
-          >
-            {loading ? "Asking..." : "Ask SIMBI"}
-          </button>
-        </div>
-      
+      <div className="input-buttons">
+        <button
+          onClick={() => navigate("")} // Adjust to your actual dashboard route
+          className="cancel-button"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => handleSendQuestion(questionInput)}
+          disabled={loading}
+          className="send-button"
+        >
+          {loading ? "Asking..." : "Ask SIMBI"}
+        </button>
+      </div>
     </div>
   );
 };
 
 export default AskSimbi;
-// Note: Ensure to replace the API URL and headers with the correct ones for your Mistral API setup.
-// Also, make sure to handle the API key securely and not expose it in the client-side code.

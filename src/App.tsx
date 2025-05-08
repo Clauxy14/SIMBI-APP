@@ -11,6 +11,7 @@ import Login from "./Components/Login/Login";
 import ConnectWallet from "./Components/Wallet/Wallet";
 import Welcome from "./Components/welcome/welcome";
 import AskSimbi from "./Components/AskSimbi/AskSimbi";
+import QuizPage from "./Components/Quiz/QuizPage";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/connect-wallet" element={<ConnectWallet />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/askSimbi" element={<AskSimbi />} />
+        <Route path="/quizPage" element={<QuizPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

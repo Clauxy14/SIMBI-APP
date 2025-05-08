@@ -129,30 +129,58 @@
     margin: auto;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    width: 33%;
+    width: 100%; /* Full width */
+    max-width: 500px; /* Max width for larger screens */
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 2rem;
+    align-items: flex-start; /* Align the textarea to the top */
+    height: auto; /* Let it grow dynamically */
   }
-
+  
   textarea {
-    width: 33%;
+    width: 100%; /* Make it responsive */
+    max-width: 100%; /* Prevent overflow */
+    min-height: 50px; /* Ensure it starts with a minimum height */
+    padding: 10px;
     border-radius: 30px;
     font-size: 15px;
-    resize: none;
-
+    resize: none; /* Disable manual resizing */
     background-color: #fff;
     border: none;
+    box-sizing: border-box;
   }
   
   .chat-input {
     flex-grow: 1;
-    resize: none;
     padding: 20px;
     font-size: 15px;
     border-radius: 30px;
+    resize: none; /* Disable manual resizing */
   }
+  
+  /* Responsive media queries */
+  @media (max-width: 768px) {
+    .input-area {
+      width: 90%; /* 90% width for smaller screens */
+    }
+  
+    textarea {
+      font-size: 14px; /* Slightly smaller font for small screens */
+      padding: 12px; /* Slightly larger padding */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .input-area {
+      width: 100%; /* Full width on very small screens */
+    }
+  
+    textarea {
+      font-size: 13px; /* Smaller font on very small screens */
+      padding: 10px; /* Adjust padding */
+    }
+  }
+  
 
 .input-buttons{
     display: flex;
