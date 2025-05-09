@@ -61,7 +61,7 @@ const Onboarding: React.FC = () => {
             />
           </div>
 
-          <div className="language-fixed">
+          {/* <div className="language-fixed">
             <p className="language-site">
               SITE LANGUAGE{" "}
               <span className="Language-english">
@@ -76,7 +76,7 @@ const Onboarding: React.FC = () => {
                 </span>
               </span>
             </p>
-          </div>
+          </div> */}
         </header>
 
         <div className="slide">

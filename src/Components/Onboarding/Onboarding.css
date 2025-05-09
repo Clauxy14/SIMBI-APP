@@ -26,7 +26,7 @@ body {
   align-items: center;
   padding-top: 15px;
 }
-.language-fixed {
+/* .language-fixed {
   margin-right: 30px;
 }
 .language-site {
@@ -38,13 +38,13 @@ body {
   margin-left: 10px;
   color: #3a86ff;
   font-family: "Inter", sans-serif;
-}
+} */
 
 .slide {
   display: flex;
   justify-content: center;
   gap: 7rem;
-  margin-top: 30px;
+  margin-top: 4rem;
 }
 
 .slide-text {

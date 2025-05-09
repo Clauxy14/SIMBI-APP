@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.language-switch {
+/* .language-switch {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -31,12 +31,12 @@
 .flag {
   width: 18px;
   height: 12px;
-}
+} */
 
 .landing-content {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 4rem;
   gap: 7rem;
 }
 

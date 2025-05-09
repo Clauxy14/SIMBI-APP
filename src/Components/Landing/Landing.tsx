@@ -13,7 +13,7 @@ const Landing: React.FC = () => {
           alt="Simbi Logo"
           className="logo"
         />
-        <div className="language-switch">
+        {/* <div className="language-switch">
           <span className="language-text">SITE LANGUAGE</span>
           <span className="language-option">
             ENGLISH{" "}
@@ -23,7 +23,7 @@ const Landing: React.FC = () => {
               className="flag"
             />
           </span>
-        </div>
+        </div> */}
       </header>
 
       <div className="landing-content">

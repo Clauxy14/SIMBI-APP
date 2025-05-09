@@ -22,14 +22,10 @@ const AskSimbi: React.FC = () => {
   }, [messages, loading]);
 
   // Suggestions array
-  const suggestions = [
-    "Give me a study tip",
-    "Quiz me now",
-    "Motivate me!",
-  ];
+  const suggestions = ["Give me a study tip", "Quiz me now", "Motivate me!"];
 
   const handleSendQuestion = async (text: string) => {
-    if (!text.trim()) return;  // Prevent empty input from being sent
+    if (!text.trim()) return; // Prevent empty input from being sent
 
     const userMessage: Message = { sender: "user", text };
     const updatedMessages = [...messages, userMessage];
@@ -63,7 +59,8 @@ const AskSimbi: React.FC = () => {
         }
       );
 
-      const aiText = res.data.choices?.[0]?.message?.content ?? "No response received.";
+      const aiText =
+        res.data.choices?.[0]?.message?.content ?? "No response received.";
       const aiMessage: Message = { sender: "ai", text: aiText };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
@@ -95,7 +92,12 @@ const AskSimbi: React.FC = () => {
     <div className="chat-container">
       {messages.length === 0 && (
         <div className="suggestions">
-          <img src="/assets/askSimbi-image.svg" className="askSimbi-image" alt="Logo" style={{ width: "9.5rem", height: "3rem" }} />
+          <img
+            src="/assets/askSimbi-image.svg"
+            className="askSimbi-image"
+            alt="Logo"
+            style={{ width: "9.5rem", height: "3rem" }}
+          />
           <p className="greeting">Hi {userName} 👋!</p>
           <h6>How can I help you?</h6>
           <div className="suggestionBox">
@@ -116,7 +118,9 @@ const AskSimbi: React.FC = () => {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`chat-bubble ${msg.sender === "user" ? "right" : "left"}`}
+            className={`chat-bubble ${
+              msg.sender === "user" ? "right" : "left"
+            }`}
           >
             {msg.text}
           </div>
@@ -139,10 +143,10 @@ const AskSimbi: React.FC = () => {
 
       <div className="input-buttons">
         <button
-          onClick={() => navigate("")} // Adjust to your actual dashboard route
+          onClick={() => navigate("/quizPage")} // Adjust to your actual dashboard route
           className="cancel-button"
         >
-          Cancel
+          Quiz Session
         </button>
 
         <button

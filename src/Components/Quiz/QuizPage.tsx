@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../NavBar/NavBar";  
+import NavBar from "../NavBar/NavBar";
 import "./QuizPage.css";
 
 const QuizPage: React.FC = () => {
@@ -35,9 +35,9 @@ const QuizPage: React.FC = () => {
       <div className="navbar-container">
         <NavBar />
       </div>
-      <div className="quiz-form">
+      <div className="quiz-form-container">
         {/* ✅ Attach startQuiz to the form */}
-        <form onSubmit={startQuiz}>
+        <form onSubmit={startQuiz} className="quiz-form">
           <div className="quiz-card">
             <img src="/assets/small-logo-blue.svg" className="quiz-logo" />
             <h1>{`Welcome ${userName}`}</h1>
@@ -53,12 +53,15 @@ const QuizPage: React.FC = () => {
 
           <div className="quiz-selection">
             {/* topic, academic level, no. of questions */}
-            
+
             {/* Subject Dropdown */}
-            <div className="quiz-type">     
-              <label>Choose Quiz</label><br/>
+            <div className="quiz-type">
+              <label className="quiz-label">Choose Quiz</label>
+              <br />
               <select className="quiz-dropdown" required>
-                <option value="" disabled selected>Subject</option>
+                <option value="" disabled selected>
+                  Subject
+                </option>
                 <option value="English">English Language</option>
                 <option value="Biology">Biology</option>
                 <option value="Accounting">Accounting</option>
@@ -68,15 +71,22 @@ const QuizPage: React.FC = () => {
 
             {/* Difficulty Buttons */}
             <div className="difficulty">
-              <label>Difficulty Level</label><br/>
-              <div className="difficulty-buttons" role="radiogroup" aria-label="Difficulty Level">
+              <label className="quiz-label">Difficulty Level</label>
+              <br />
+              <div
+                className="difficulty-buttons"
+                role="radiogroup"
+                aria-label="Difficulty Level"
+              >
                 {["easy", "medium", "hard"].map((level) => (
                   <button
                     type="button"
                     key={level}
                     role="radio"
                     aria-checked={selectedDifficulty === level}
-                    className={`difficulty-btn ${selectedDifficulty === level ? "active" : ""}`}
+                    className={`difficulty-btn ${
+                      selectedDifficulty === level ? "active" : ""
+                    }`}
                     onClick={() => setSelectedDifficulty(level)}
                   >
                     {level.charAt(0).toUpperCase() + level.slice(1)}
@@ -87,9 +97,12 @@ const QuizPage: React.FC = () => {
 
             {/* Duration Dropdown */}
             <div className="duration">
-              <label>Duration</label><br/>
+              <label className="quiz-label">Duration</label>
+              <br />
               <select className="quiz-dropdown" required>
-                <option value="" disabled selected>Select</option>
+                <option value="" disabled selected>
+                  Select
+                </option>
                 <option value="15 Minutes">15 Minutes</option>
                 <option value="25 Minutes">25 Minutes</option>
                 <option value="30 Minutes">30 Minutes</option>

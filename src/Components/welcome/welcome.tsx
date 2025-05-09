@@ -89,12 +89,12 @@ const Welcome: React.FC = () => {
       // Store the AI response if needed
       localStorage.setItem("simbiAIResponse", JSON.stringify(data));
 
-      navigate("/dashboard");
+      navigate("/askSimbi");
     } catch (error) {
       console.error("Error sending data to Simbi AI:", error);
       // You might want to show an error message to the user
       // or implement a retry mechanism
-      navigate("/dashboard"); // Still navigate even if API fails
+      navigate("/askSimbi"); // Still navigate even if API fails
     } finally {
       setIsLoading(false);
     }
@@ -142,7 +142,7 @@ const Welcome: React.FC = () => {
         </p>
 
         <div className="welcome-container">
-          <div className="sidebar">
+          <div className="welcome-sidebar">
             {steps.map((step, index) => (
               <div
                 key={index}
