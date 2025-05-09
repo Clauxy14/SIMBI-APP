@@ -134,9 +134,9 @@ const Signup: React.FC = () => {
                 onSuccess={handleGoogleSuccess}
                 onError={handleGoogleFailure}
                 useOneTap
-                text="signup_with"
+                // text="signup_with"
                 shape="pill"
-                size="large"
+                // size="large"
               />
             </GoogleOAuthProvider>
           </div>

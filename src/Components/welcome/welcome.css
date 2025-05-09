@@ -80,7 +80,7 @@
 
 .desc {
   margin-top: 0.3rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #888;
   font-size: 0.95rem;
 }
@@ -147,7 +147,7 @@
   height: 6px;
   background: #eee;
   border-radius: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   position: relative;
   overflow: hidden;
 }
@@ -170,12 +170,12 @@
 .welcome-label {
   display: block;
   font-weight: 600;
-  margin: 3rem 0 1.5rem 0;
+  margin: 2rem 0 1rem 0;
   color: #222;
   font-size: 20px;
 }
 
-select,
+.select,
 .dropdown {
   width: 100%;
   padding: 0.6rem;
@@ -183,10 +183,14 @@ select,
   border-radius: 8px;
   font-size: 1rem;
   background: #fff;
-  color: #333;
+  color: #696969;
 }
 
-.option-btn {
+.first-option {
+  color: #9b9b9ba4;
+}
+
+.option-btnn {
   display: block;
   width: 70%;
   margin: 0.5rem 0;
@@ -200,8 +204,27 @@ select,
   font-weight: 500;
 }
 
+.option-btnn:hover {
+  background: #edf3ff;
+}
+
+.option-btnn:active {
+  transform: none;
+}
+
+.option-btnn:focus {
+  background-color: #2a6fd8;
+  color: #fff;
+}
+
+.div-next-butn {
+  display: flex;
+  justify-content: end;
+}
 .next-butn {
-  margin-top: 2.5rem;
+  width: 30%;
+  margin-top: 2rem;
+  margin-bottom: 0;
   background: #347dff;
   color: white;
   border: none;
@@ -214,4 +237,99 @@ select,
 
 .next-butn:hover {
   background: #2a6fd8;
+}
+
+/* ≤ 1024px (Tablet landscape) */
+@media (max-width: 1024px) {
+  .welcome-title-content {
+    padding: 1rem 2rem;
+  }
+
+  .welcome-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar,
+  .form-section {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .option-btnn {
+    width: 100%;
+  }
+}
+
+/* ≤ 780px (Tablet portrait) */
+@media (max-width: 780px) {
+  .welcome-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .user-info {
+    align-self: flex-end;
+  }
+
+  .welcome-title {
+    font-size: 2rem;
+  }
+
+  .sidebar,
+  .form-section {
+    padding: 1.5rem;
+  }
+}
+
+/* ≤ 600px (Large phones / small tablets) */
+@media (max-width: 600px) {
+  .welcome-title-content {
+    padding: 1rem;
+  }
+
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+
+  .sidebar,
+  .form-section {
+    padding: 1rem;
+  }
+
+  .user-avatar span,
+  .wallet-btn {
+    display: none;
+  }
+
+  .option-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+}
+
+/* ≤ 400px (Small phones) */
+@media (max-width: 400px) {
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .desc,
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .welcome-label {
+    font-size: 1rem;
+  }
+
+  .option-btn {
+    font-size: 0.85rem;
+  }
+
+  .next-butn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+  }
 }

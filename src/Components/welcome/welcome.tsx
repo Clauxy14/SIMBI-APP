@@ -12,7 +12,7 @@ const steps = [
   {
     title: "Learning Preferences",
     description:
-      "We’ll tailor study sessions and reminders to fit your unique rhythm.",
+      "We'll tailor study sessions and reminders to fit your unique rhythm.",
     image: "/assets/icons/fluent.svg",
   },
   {
@@ -23,12 +23,20 @@ const steps = [
   },
 ];
 
+interface UserData {
+  name: string;
+  avatar?: string;
+  educationLevel?: string;
+  yearOfStudy?: string;
+  studyPreference?: string;
+  preferredTone?: string;
+}
+
 const Welcome: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(15);
-  const [user, setUser] = useState<{ name: string; avatar?: string } | null>(
-    null
-  );
+  const [user, setUser] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,17 +47,65 @@ const Welcome: React.FC = () => {
         name: parsed.name || parsed.given_name || "User",
         avatar:
           parsed.avatar ||
-          "https://api.dicebear.com/7.x/bottts/svg?seed=${encodedName}",
+          `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(
+            parsed.name || "User"
+          )}`,
       });
     }
   }, []);
+
+  const updateUserData = (field: keyof UserData, value: string) => {
+    setUser((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const sendDataToSimbiAI = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        "https://simbi-ai.onrender.com/api/ai/ask-simbi",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userData: user,
+            // You might need to include an API key or other required fields
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to send data to Simbi AI");
+      }
+
+      const data = await response.json();
+      // Handle the response data as needed
+      console.log("Simbi AI response:", data);
+
+      // Store the AI response if needed
+      localStorage.setItem("simbiAIResponse", JSON.stringify(data));
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error sending data to Simbi AI:", error);
+      // You might want to show an error message to the user
+      // or implement a retry mechanism
+      navigate("/dashboard"); // Still navigate even if API fails
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep((prev) => prev + 1);
       setProgress((progress) => progress + 30);
     } else {
-      navigate("/");
+      sendDataToSimbiAI();
     }
   };
 
@@ -118,19 +174,41 @@ const Welcome: React.FC = () => {
                   <label className="welcome-label">
                     What level of education are you currently in?
                   </label>
-                  <select>
-                    <option>Educational level</option>
-                    <option>High School</option>
-                    <option>University</option>
+                  <select
+                    className="select"
+                    value={user?.educationLevel || ""}
+                    onChange={(e) =>
+                      updateUserData("educationLevel", e.target.value)
+                    }
+                  >
+                    <option value="" className="first-option">
+                      Educational level
+                    </option>
+                    <option value="High School">High School</option>
+                    <option value="University">University</option>
                   </select>
 
                   <label className="welcome-label">
-                    Which subjects do you find most challenging?
+                    What year of study are you in?
                   </label>
-                  <select>
-                    <option>Select one or more</option>
-                    <option>Math</option>
-                    <option>Science</option>
+                  <select
+                    className="select"
+                    value={user?.yearOfStudy || ""}
+                    onChange={(e) =>
+                      updateUserData("yearOfStudy", e.target.value)
+                    }
+                  >
+                    <option value="" className="first-option">
+                      Select-option
+                    </option>
+                    <option value="Js 1-3">Js 1-3</option>
+                    <option value="Ss 1-3">Ss 1-3</option>
+                    <option value="100 level">100 level</option>
+                    <option value="200 level">200 level</option>
+                    <option value="300 level">300 level</option>
+                    <option value="400 level">400 level</option>
+                    <option value="500 level">500 level</option>
+                    <option value="600 level">600 level</option>
                   </select>
                 </>
               )}
@@ -140,9 +218,42 @@ const Welcome: React.FC = () => {
                   <label className="welcome-label">
                     How do you prefer to study?
                   </label>
-                  <button className="option-btn">Pomodoro style</button>
-                  <button className="option-btn">Long deep work blocks</button>
-                  <button className="option-btn">Random quick quizzes</button>
+                  <button
+                    className={`option-btnn ${
+                      user?.studyPreference === "Pomodoro style"
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      updateUserData("studyPreference", "Pomodoro style")
+                    }
+                  >
+                    Pomodoro style
+                  </button>
+                  <button
+                    className={`option-btnn ${
+                      user?.studyPreference === "Long deep work blocks"
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      updateUserData("studyPreference", "Long deep work blocks")
+                    }
+                  >
+                    Long deep work blocks
+                  </button>
+                  <button
+                    className={`option-btnn ${
+                      user?.studyPreference === "Random quick quizzes"
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      updateUserData("studyPreference", "Random quick quizzes")
+                    }
+                  >
+                    Random quick quizzes
+                  </button>
                 </>
               )}
 
@@ -151,15 +262,53 @@ const Welcome: React.FC = () => {
                   <label className="welcome-label">
                     Which tone do you prefer SIMBI to use?
                   </label>
-                  <button className="option-btn">Playful and funny</button>
-                  <button className="option-btn">Calm and supportive</button>
-                  <button className="option-btn">Straight to the point</button>
+                  <button
+                    className={`option-btnn ${
+                      user?.preferredTone === "Playful and funny"
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      updateUserData("preferredTone", "Playful and funny")
+                    }
+                  >
+                    Playful and funny
+                  </button>
+                  <button
+                    className={`option-btnn ${
+                      user?.preferredTone === "Calm and supportive"
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      updateUserData("preferredTone", "Calm and supportive")
+                    }
+                  >
+                    Calm and supportive
+                  </button>
+                  <button
+                    className={`option-btnn ${
+                      user?.preferredTone === "Straight to the point"
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      updateUserData("preferredTone", "Straight to the point")
+                    }
+                  >
+                    Straight to the point
+                  </button>
                 </>
               )}
-
-              <button className="next-butn" onClick={handleNext}>
-                Next
-              </button>
+              <div className="div-next-butn">
+                <button
+                  className="next-butn"
+                  onClick={handleNext}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Processing..." : "Next"}
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -61,11 +61,21 @@ input:focus {
   font-size: 0.9rem;
 }
 
-.google-signin-container div {
-  width: 100%;
+.google-signin-container {
+  /* width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center; */
+
+  width: 100%;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  cursor: pointer;
 }
 
 .signup-form input,
