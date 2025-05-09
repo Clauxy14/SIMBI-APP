@@ -12,6 +12,9 @@ import ConnectWallet from "./Components/Wallet/Wallet";
 import Welcome from "./Components/welcome/welcome";
 import Dashboard from "./Dashboard/Dashboard"; 
 import AcademicResources from "../src/Components/AcademicSupport"; 
+import AskSimbi from "./Components/AskSimbi/AskSimbi";
+import QuizPage from "./Components/Quiz/QuizPage";
+
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
         <Route path="/academic-resources" element={<AcademicResources />} />
 
     
+        <Route path="/askSimbi" element={<AskSimbi />} />
+        <Route path="/quizPage" element={<QuizPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
