@@ -1,7 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import _myNewImage from './assets/WELCOME, HAPPY.png';
-import { FaCheckCircle, FaRobot, FaQuestionCircle, FaSearch, FaBell, FaUserCircle } from 'react-icons/fa'; // Import necessary icons
+import React from "react";
+import styled from "styled-components";
+import myNewImage from "/assets/WELCOME, HAPPY.png";
+import {
+  FaCheckCircle,
+  FaRobot,
+  FaQuestionCircle,
+  FaSearch,
+  FaBell,
+  FaUserCircle,
+} from "react-icons/fa"; // Import necessary icons
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -13,7 +20,7 @@ const DashboardContainer = styled.div`
 const DashboardHeader = styled.div`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 15px 20px;
   margin-bottom: 20px;
   display: flex;
@@ -59,13 +66,13 @@ const NotificationIcon = styled(FaBell)`
 `;
 
 const UserAvatar = styled(FaUserCircle)`
-  color: #0047FF;
+  color: #0047ff;
   font-size: 1.5em;
   cursor: pointer;
 `;
 
 const ConnectWalletButton = styled.button`
-  background-color: #0047FF;
+  background-color: #0047ff;
   color: white;
   border: none;
   border-radius: 15px;
@@ -99,7 +106,7 @@ const RightSection = styled.div`
 const WelcomeCard = styled.div`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 25px;
   display: flex;
   align-items: center;
@@ -132,7 +139,7 @@ const WelcomeImage = styled.img`
 const DailyStreakCard = styled.div`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
 `;
 
@@ -160,14 +167,14 @@ const DayItem = styled.div`
   svg {
     font-size: 1.2em;
     margin-top: 5px;
-    color: #0047FF;
+    color: #0047ff;
   }
 `;
 
 const StudyPlanCard = styled.div`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
 `;
 
@@ -185,7 +192,7 @@ const StudyPlanTitle = styled.h3`
 `;
 
 const ViewAllLinkStyled = styled.a`
-  color: #0047FF;
+  color: #0047ff;
   font-weight: bold;
   text-decoration: none;
   font-size: 0.9em;
@@ -202,15 +209,15 @@ const StudyTasksGrid = styled.div`
 `;
 
 const TaskCard = styled.div`
-  background-color: #F0F8FF;
+  background-color: #f0f8ff;
   border-radius: 10px;
   padding: 15px;
-  border: 1px solid #E0EEFF;
+  border: 1px solid #e0eeff;
 
   strong {
     display: block;
     margin-bottom: 5px;
-    color: #0047FF;
+    color: #0047ff;
     font-size: 0.95em;
     font-weight: bold;
   }
@@ -224,7 +231,7 @@ const TaskCard = styled.div`
 const ProgressOverviewCard = styled.div`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -242,14 +249,14 @@ const CompletionRateCircle = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #E0EEFF;
+  background-color: #e0eeff;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 
   strong {
-    color: #0047FF;
+    color: #0047ff;
     font-size: 1.8em;
   }
 `;
@@ -283,7 +290,7 @@ const SubjectProgressList = styled.ul`
 const QuickActionsCard = styled.div`
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
 `;
 
@@ -295,8 +302,8 @@ const QuickActionsTitle = styled.h3`
 `;
 
 const QuickActionsButtonStyled = styled.button`
-  background-color: #E0EEFF;
-  color: #0047FF;
+  background-color: #e0eeff;
+  color: #0047ff;
   border: none;
   border-radius: 10px;
   padding: 12px 20px;
@@ -310,7 +317,7 @@ const QuickActionsButtonStyled = styled.button`
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background-color: #0047FF;
+    background-color: #0047ff;
     color: white;
   }
 `;
@@ -338,7 +345,10 @@ const Dashboard: React.FC<DashboardProps> = ({ welcomeImage }) => {
           <WelcomeCard>
             <WelcomeText>
               <h2>Hi, Tifechi!</h2>
-              <p>Ready to make today count? Let's hit those study goals — one step at a time</p>
+              <p>
+                Ready to make today count? Let's hit those study goals — one
+                step at a time
+              </p>
             </WelcomeText>
             <WelcomeImage src={welcomeImage} alt="Welcome Illustration" />
           </WelcomeCard>
@@ -368,7 +378,9 @@ const Dashboard: React.FC<DashboardProps> = ({ welcomeImage }) => {
               </TaskCard>
               <TaskCard>
                 <strong>Quiz: Tenses</strong>
-                <div>Practice Test on Present, Past and Present Continuous Tenses</div>
+                <div>
+                  Practice Test on Present, Past and Present Continuous Tenses
+                </div>
                 <div>3:30 pm - 4:00 pm</div>
               </TaskCard>
             </StudyTasksGrid>
@@ -390,10 +402,12 @@ const Dashboard: React.FC<DashboardProps> = ({ welcomeImage }) => {
                 <span style={{ backgroundColor: "#4682B4" }}></span> English 25%
               </li>
               <li style={{ color: "#3CB371" }}>
-                <span style={{ backgroundColor: "#3CB371" }}></span> Chemistry 43.75%
+                <span style={{ backgroundColor: "#3CB371" }}></span> Chemistry
+                43.75%
               </li>
               <li style={{ color: "#FFA07A" }}>
-                <span style={{ backgroundColor: "#FFA07A" }}></span> Biology 18.75%
+                <span style={{ backgroundColor: "#FFA07A" }}></span> Biology
+                18.75%
               </li>
             </SubjectProgressList>
           </ProgressOverviewCard>
