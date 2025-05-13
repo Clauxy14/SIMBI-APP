@@ -6,87 +6,128 @@ import "./QuizPage.css";
 const QuizPage: React.FC = () => {
   const navigate = useNavigate();
 
-  // ✅ Track state for difficulty (already done)
+  // Get user from localStorage
+  const storedUser = localStorage.getItem("simbiUser");
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  const userName = parsedUser?.name || parsedUser?.given_name || "User";
+
+  const [topic, setTopic] = useState("");
+  const [academicLevel, setAcademicLevel] = useState("");
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+  const [duration, setDuration] = useState("5");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
-  // ✅ (Optional): If you want to validate these too
-  // const [selectedSubject, setSelectedSubject] = useState("");
-  // const [selectedDuration, setSelectedDuration] = useState("");
-
-  const startQuiz = (e: React.FormEvent) => {
+  const startQuiz = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ Validate difficulty selection
     if (!selectedDifficulty) {
       alert("Please select a difficulty level.");
       return;
     }
 
-    console.log("Selected difficulty:", selectedDifficulty);
-    navigate("/quiz"); // ✅ Navigate only after validation
-  };
+    const quizData = {
+      topic,
+      academicLevel,
+      numberOfQuestions,
+      duration,
+      difficulty: selectedDifficulty,
+    };
 
-  const storedUser = localStorage.getItem("simbiUser");
-  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-  const userName = parsedUser?.name || parsedUser?.given_name || "User";
+    try {
+      const response = await fetch("http://localhost:5000/api/quiz/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(quizData),
+      });
+
+      if (!response.ok) throw new Error("Quiz generation failed");
+
+      const data = await response.json();
+
+      // Navigate to Quiz.tsx with questions and quizId
+      navigate("/quiz", { state: { questions: data.questions, quizId: data._id } });
+
+    } catch (error) {
+      console.error("Error generating quiz:", error);
+      alert("There was an error creating the quiz. Please try again.");
+    }
+  };
 
   return (
     <div className="quiz">
       <div className="navbar-container">
         <NavBar />
       </div>
-      <div className="quiz-form-container">
-        {/* ✅ Attach startQuiz to the form */}
-        <form onSubmit={startQuiz} className="quiz-form">
+
+      <div className="quiz-form">
+        <form onSubmit={startQuiz}>
           <div className="quiz-card">
             <img src="/assets/small-logo-blue.svg" className="quiz-logo" />
             <h1>{`Welcome ${userName}`}</h1>
             <p>
-              Did you know? With SIMBI by your side, you're 3x more likely to
-              stay on track with your study goals!
+              Did you know? With SIMBI by your side, you're 3x more likely to stay on track with your study goals!
             </p>
             <p>
-              Your AI Study Buddy isn't just smart — it's your secret weapon for
-              academic success.
+              Your AI Study Buddy isn't just smart — it's your secret weapon for academic success.
             </p>
           </div>
 
           <div className="quiz-selection">
-            {/* topic, academic level, no. of questions */}
-
-            {/* Subject Dropdown */}
             <div className="quiz-type">
-              <label className="quiz-label">Choose Quiz</label>
-              <br />
-              <select className="quiz-dropdown" required>
-                <option value="" disabled selected>
-                  Subject
-                </option>
-                <option value="English">English Language</option>
-                <option value="Biology">Biology</option>
-                <option value="Accounting">Accounting</option>
-                <option value="Mathematics">Mathematics</option>
-              </select>
+              <label>Choose Quiz</label><br />
+              <input
+                type="text"
+                placeholder="Enter a topic"
+                required
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                className="topic"
+              />
             </div>
 
-            {/* Difficulty Buttons */}
+            <div className="academic-level">
+              <label>Academic Level<br />
+                <select
+                  required
+                  value={academicLevel}
+                  onChange={(e) => setAcademicLevel(e.target.value)}
+                  className="quiz-dropdowns"
+                >
+                  <option value="" disabled>Select</option>
+                  <option value="secondary">Secondary School</option>
+                  <option value="university">University</option>
+                  <option value="personal">Personal Development</option>
+                </select>
+              </label>
+
+              <label>Number of Questions<br />
+                <select
+                  required
+                  value={numberOfQuestions}
+                  onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
+                  className="quiz-dropdowns"
+                >
+                  <option value="" disabled>Select</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                </select>
+              </label>
+            </div>
+
             <div className="difficulty">
-              <label className="quiz-label">Difficulty Level</label>
-              <br />
-              <div
-                className="difficulty-buttons"
-                role="radiogroup"
-                aria-label="Difficulty Level"
-              >
+              <label>Difficulty Level</label><br />
+              <div className="difficulty-buttons" role="radiogroup" aria-label="Difficulty Level">
                 {["easy", "medium", "hard"].map((level) => (
                   <button
                     type="button"
                     key={level}
                     role="radio"
                     aria-checked={selectedDifficulty === level}
-                    className={`difficulty-btn ${
-                      selectedDifficulty === level ? "active" : ""
-                    }`}
+                    className={`difficulty-btn ${selectedDifficulty === level ? "active" : ""}`}
                     onClick={() => setSelectedDifficulty(level)}
                   >
                     {level.charAt(0).toUpperCase() + level.slice(1)}
@@ -95,25 +136,25 @@ const QuizPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Duration Dropdown */}
             <div className="duration">
-              <label className="quiz-label">Duration</label>
-              <br />
-              <select className="quiz-dropdown" required>
-                <option value="" disabled selected>
-                  Select
-                </option>
-                <option value="15 Minutes">15 Minutes</option>
-                <option value="25 Minutes">25 Minutes</option>
-                <option value="30 Minutes">30 Minutes</option>
-                <option value="45 Minutes">45 Minutes</option>
+              <label>Duration</label><br />
+              <select
+                required
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                className="quiz-dropdown"
+              >
+                <option value="" disabled>Select</option>
+                <option value="5">5 Minutes</option>
+                <option value="10">10 Minutes</option>
+                <option value="15">15 Minutes</option>
+                <option value="20">20 Minutes</option>
               </select>
             </div>
 
-            {/* ✅ Submit button triggers form validation */}
             <div className="start-quiz">
               <button type="submit" className="start-button">
-                Next
+                Start Quiz
               </button>
             </div>
           </div>
