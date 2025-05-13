@@ -19,7 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, onSearch }) => {
     <div className="search-bar-container">
       <input
         type="text"
-        placeholder="&nbsp; &nbsp; &nbsp; Search"
+        placeholder="&nbsp; Search"
         value={value}
         onChange={onChange}
         onKeyDown={handleKeyDown}

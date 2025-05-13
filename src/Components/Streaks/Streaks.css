@@ -1,10 +1,11 @@
 
 
 .wrapper {
-    border: 1px solid rgba(238, 246, 255, 1);
+    border: none;
     border-radius: 16px;
     padding: 1rem;
     display: inline-block;
+    width: 100%;
 }
 
 .wrapper h2{
@@ -23,10 +24,18 @@
     gap: 20px;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(244, 246, 251, 1);
+    background-color: rgba(255, 255, 255, 1);
     padding: 2rem;
     margin-top: 1rem;
-    border-radius: 16px;
+    border-radius: 10px;
+    width: 100%;
+    font-family: Nunito;
+    font-weight: 400;
+    font-size: 24.12px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgba(74, 78, 105, 1);
 }
 
 .day {

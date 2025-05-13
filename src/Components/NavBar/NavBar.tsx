@@ -18,7 +18,7 @@ function NavBar() {
       <nav className={`sidebar ${sidebarOpen ? "show" : ""}`}>
         <ul className="sidebar-ul">
           <li className="sidebar-li">
-            <Link className="links" to="">
+            <Link className="links" to="/dashboard">
               <img
                 src="/assets/dashboard.svg"
                 style={{
@@ -44,7 +44,7 @@ function NavBar() {
             </Link>
           </li>
           <li>
-            <Link className="links" to="/QuizCard">
+            <Link className="links" to="/QuizPage">
               <img
                 src="/assets/quizzes.svg"
                 style={{

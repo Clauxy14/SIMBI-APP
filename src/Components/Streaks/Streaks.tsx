@@ -1,16 +1,15 @@
 import React from "react";
 import "./Streaks.css";
 
-const daysOfWeek = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thur", "Fri"];
+const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 // Mock data: task completion status for each day
-const taskCompletedThisWeek: boolean[] = [true, true, false, true, false, true, false];
+const taskCompletedThisWeek: boolean[] = [true, true, true, true, true, true, false];
 // This should be replaced with actual data from your state management or API
 
 const Streaks: React.FC = () => {
   return (
     <div className="wrapper">
-        <h2>Daily Streak</h2>
       <div className="week-container">
         {daysOfWeek.map((day, index) => (
           <div className="day" key={index}>

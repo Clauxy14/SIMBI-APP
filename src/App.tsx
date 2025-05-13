@@ -26,7 +26,7 @@ function App() {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/askSimbi" element={<AskSimbi />} />
-        <Route path="/quizPage" element={<QuizPage />} />
+        <Route path="/QuizPage" element={<QuizPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
