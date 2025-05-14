@@ -5,11 +5,11 @@ import {
   ArcElement,
   Tooltip
 } from "chart.js";
-import "./Progress.css";
+import "./ProgressOverview.css";
 
 ChartJS.register(ArcElement, Tooltip);
 
-const Progress = () => {
+const ProgressOverview = () => {
   const data = {
     labels: ["Maths", "English", "Chemistry", "Biology"],
     datasets: [
@@ -38,7 +38,7 @@ const Progress = () => {
       </div>
 
       <div className="chart-legend">
-        <div><span className="dot red" /> Maths <span className="percent">12.5%</span></div>
+        <div><span className="dot red" style={{color: "red", backgroundColor: "rgba(245, 245, 245, 1);"}}>.</span> Maths <span className="percent">12.5%</span></div>
         <div><span className="dot green" /> English <span className="percent">25%</span></div>
         <div><span className="dot blue" /> Chemistry <span className="percent">43.41%</span></div>
         <div><span className="dot yellow" /> Biology <span className="percent">12.5%</span></div>
@@ -47,4 +47,4 @@ const Progress = () => {
   );
 };
 
-export default Progress;
+export default ProgressOverview;

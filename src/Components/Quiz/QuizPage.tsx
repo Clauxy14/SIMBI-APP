@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "./QuizPage.css";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 const QuizPage: React.FC = () => {
   const navigate = useNavigate();
-
-  // Get user from localStorage
   const storedUser = localStorage.getItem("simbiUser");
   const parsedUser = storedUser ? JSON.parse(storedUser) : null;
   const userName = parsedUser?.name || parsedUser?.given_name || "User";
@@ -29,15 +29,23 @@ const QuizPage: React.FC = () => {
       topic,
       academicLevel,
       numberOfQuestions,
-      duration,
+      duration: Number(duration),
       difficulty: selectedDifficulty,
     };
 
+    const token = localStorage.getItem("authToken"); // Get token from localStorage
+
+    if (!token) {
+      alert("No token found, please log in.");
+      return;
+    }
+
     try {
-      const response = await fetch("http://localhost:5000/api/quiz/generate", {
+      const response = await fetch(`${API_BASE}/api/quiz/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Include the Bearer token in the headers
         },
         body: JSON.stringify(quizData),
       });
@@ -45,10 +53,9 @@ const QuizPage: React.FC = () => {
       if (!response.ok) throw new Error("Quiz generation failed");
 
       const data = await response.json();
-
-      // Navigate to Quiz.tsx with questions and quizId
-      navigate("/quiz", { state: { questions: data.questions, quizId: data._id } });
-
+      navigate("/quiz", {
+        state: { questions: data.questions, quizId: data._id, duration: quizData.duration },
+      });
     } catch (error) {
       console.error("Error generating quiz:", error);
       alert("There was an error creating the quiz. Please try again.");
@@ -66,12 +73,8 @@ const QuizPage: React.FC = () => {
           <div className="quiz-card">
             <img src="/assets/small-logo-blue.svg" className="quiz-logo" />
             <h1>{`Welcome ${userName}`}</h1>
-            <p>
-              Did you know? With SIMBI by your side, you're 3x more likely to stay on track with your study goals!
-            </p>
-            <p>
-              Your AI Study Buddy isn't just smart — it's your secret weapon for academic success.
-            </p>
+            <p>Did you know? With SIMBI by your side, you're 3x more likely to stay on track with your study goals!</p>
+            <p>Your AI Study Buddy isn't just smart — it's your secret weapon for academic success.</p>
           </div>
 
           <div className="quiz-selection">
@@ -153,9 +156,7 @@ const QuizPage: React.FC = () => {
             </div>
 
             <div className="start-quiz">
-              <button type="submit" className="start-button">
-                Start Quiz
-              </button>
+              <button type="submit" className="start-button">Start Quiz</button>
             </div>
           </div>
         </form>

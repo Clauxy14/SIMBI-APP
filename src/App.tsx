@@ -13,6 +13,9 @@ import Welcome from "./Components/welcome/welcome";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import AskSimbi from "./Components/AskSimbi/AskSimbi";
 import QuizPage from "./Components/Quiz/QuizPage";
+import Quiz from "./Components/Quiz/Quiz";
+import Result from "./Components/Quiz/Result";
+
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/askSimbi" element={<AskSimbi />} />
         <Route path="/QuizPage" element={<QuizPage />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/result" element={<Result />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

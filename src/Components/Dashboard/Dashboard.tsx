@@ -4,7 +4,7 @@ import SearchBar from "../Progress/SearchBar"; // Adjust if needed
 import Streaks from "../Streaks/Streaks";
 import "./Dashboard.css";
 import TaskCard from "../TaskCard/TaskCard";
-import Progress from "../Progress/Progress";
+import ProgressOverview from "../Progress/ProgressOverview";
 
 function Dashboard() {
     const storedUser = localStorage.getItem("simbiUser");
@@ -57,8 +57,8 @@ function Dashboard() {
                 </section>    
 
             </div>
-            <div className="progress">
-            <Progress />
+            <div className="progress-overview">
+            <ProgressOverview />
             </div>
         </>
     );
