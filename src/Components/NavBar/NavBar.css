@@ -20,15 +20,16 @@
   flex-direction: column;
   justify-content: space-evenly;
   gap: 2rem;
-  align-items: left;
-  padding-left: 1.1rem;
-  background: rgba(255, 255, 255, 1);
+  /* align-items: left; */
+  padding-left: 0.7rem;
+  /* background: rgba(255, 255, 255, 1); */
+  list-style: none;
 }
 
-.sidebar-li {
+/* .sidebar-li {
   list-style-type: none;
   background: rgba(255, 255, 255, 1);
-}
+} */
 
 .nav-logo {
   margin-bottom: 1rem;
@@ -40,7 +41,7 @@
   z-index: 1001;
   cursor: pointer;
   border: none;
-  background: rgba(255, 255, 255, 1);
+  /* background: rgba(255, 255, 255, 1); */
 }
 
 .links {
@@ -51,7 +52,7 @@
   line-height: 150%;
   letter-spacing: 0px;
   color: rgba(115, 115, 115, 1);
-  background: rgba(255, 255, 255, 1);
+  /* background: rgba(255, 255, 255, 1); */
 }
 
 .nav-links {
