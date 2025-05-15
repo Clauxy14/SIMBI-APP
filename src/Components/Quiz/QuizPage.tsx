@@ -40,26 +40,36 @@ const QuizPage: React.FC = () => {
       return;
     }
 
-    try {
-      const response = await fetch(`${API_BASE}/api/quiz/generate`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Include the Bearer token in the headers
-        },
-        body: JSON.stringify(quizData),
-      });
+try {
+  const response = await fetch(`${API_BASE}/api/quiz/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(quizData),
+  });
 
-      if (!response.ok) throw new Error("Quiz generation failed");
+  const data = await response.json(); // always parse JSON
 
-      const data = await response.json();
-      navigate("/quiz", {
-        state: { questions: data.questions, quizId: data._id, duration: quizData.duration },
-      });
-    } catch (error) {
-      console.error("Error generating quiz:", error);
-      alert("There was an error creating the quiz. Please try again.");
-    }
+  if (!response.ok) {
+    console.error("❌ Backend error response:", data);
+    throw new Error(data.message || "Quiz generation failed");
+  }
+
+  navigate("/quiz", {
+    state: { questions: data.questions, quizId: data._id, duration: quizData.duration },
+  });
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    console.error("❌ Error generating quiz:", error.message);
+    alert(error.message || "There was an error creating the quiz. Please try again.");
+  } else {
+    console.error("❌ Unknown error generating quiz:", error);
+    alert("An unknown error occurred. Please try again.");
+  }
+}
+
   };
 
   return (
@@ -99,9 +109,9 @@ const QuizPage: React.FC = () => {
                   className="quiz-dropdowns"
                 >
                   <option value="" disabled>Select</option>
-                  <option value="secondary">Secondary School</option>
+                  <option value="secondary school">Secondary School</option>
                   <option value="university">University</option>
-                  <option value="personal">Personal Development</option>
+                  <option value="personal development">Personal Development</option>
                 </select>
               </label>
 

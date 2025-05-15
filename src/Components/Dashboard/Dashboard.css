@@ -35,7 +35,7 @@
 
 .sidebar {
     width: 20%;
-    max-width: 200px;
+    max-width: 20rem;
     padding: 20px;
 }
 
@@ -163,11 +163,11 @@ h2 {
 .progress-overview{
     position: absolute;
     right: 0;
-    top: 25%;
+    top: 29%;
     width: 30%;
     background-color: rgba(245, 245, 245, 1);
     border-radius: 16px 0 0 16px;
-    padding: 3rem 5rem;
+    padding: 4rem 3rem;
     margin: 1rem;
     height: 100vh;
 }

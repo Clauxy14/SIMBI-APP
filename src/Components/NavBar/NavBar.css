@@ -1,6 +1,6 @@
 .sidebar {
   width: 20%;
-  max-width: 200px;
+  max-width: 20rem;
   height: 100vh;
   background: rgba(255, 255, 255, 1);
   position: fixed;
@@ -11,10 +11,11 @@
   overflow: hidden;
   transition: transform 0.3s ease;
   z-index: 999;
+  /* overflow: auto; */
 }
 
 .sidebar-ul {
-  padding-top: 6rem;
+  padding-top: 4.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -57,6 +58,48 @@
 
 .nav-links {
   padding: auto;
+}
+
+.telegram-link{
+  background-color: rgba(238, 246, 255, 1);
+  border-radius: 16px;
+  padding: 3rem 1rem;
+  width: 100%;
+  margin: 2rem auto 2rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.telegram-link h2{
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgba(115, 115, 115, 1);
+  margin-top: 0;
+
+}
+
+.telegram-connect{
+  all: unset;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--Primary-Electric-Blue-200, rgba(188, 219, 255, 1));
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(30, 41, 59, 1);
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  border-radius: 16px;
+}
+.telegram-connect:hover{
+  background-color: #3a86ff;
+  color: rgba(255, 255, 255, 1);
 }
 
 @media (max-width: 1024px) {

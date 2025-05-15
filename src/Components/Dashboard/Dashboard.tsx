@@ -26,6 +26,7 @@ function Dashboard() {
                 <Navbar />       
             </div>
 
+
             <div className="dashboard">
 
                 <SearchBar

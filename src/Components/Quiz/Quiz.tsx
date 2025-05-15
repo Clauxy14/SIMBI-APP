@@ -30,7 +30,9 @@ export default function Quiz() {
   const state = location.state || {};
 
   const [quizId, setQuizId] = useState<string>(state.quizId || "");
-  const [questions, setQuestions] = useState<Question[]>(state.questions || []);
+  const [questions, setQuestions] = useState<Question[]>(
+    Array.isArray(state.questions) ? state.questions : []
+  );
   const [answers, setAnswers] = useState<string[]>([]);
   const [progress, setProgress] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState((state.duration || 5) * 60);
@@ -40,7 +42,6 @@ export default function Quiz() {
   const [isTimeUp, setIsTimeUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Get auth token
   const getAuthToken = () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -51,7 +52,7 @@ export default function Quiz() {
     return token;
   };
 
-  // Fallback quiz generation if accessed directly
+  // Fallback quiz generation
   useEffect(() => {
     if (!state.questions || !state.quizId) {
       const generateQuiz = async () => {
@@ -62,13 +63,13 @@ export default function Quiz() {
         try {
           const res = await fetch(`${API_BASE}/generate`, {
             method: "POST",
-            headers: { 
+            headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
               topic: "General",
-              academicLevel: "secondary school",
+              academicLevel: "secondary",
               numberOfQuestions: 5,
               duration: 5,
               difficulty: "medium",
@@ -82,7 +83,8 @@ export default function Quiz() {
           }
 
           if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            const errorText = await res.text();
+            throw new Error(`Error ${res.status}: ${errorText}`);
           }
 
           const data: QuizData = await res.json();
@@ -125,8 +127,8 @@ export default function Quiz() {
     const token = getAuthToken();
     if (!token) return;
 
+    const correct = questions[currentIndex]?.correct_answer;
     setSelectedOption(option);
-    const correct = questions[currentIndex].correct_answer;
     setCorrectAnswer(correct);
 
     const updatedAnswers = [...answers];
@@ -139,9 +141,9 @@ export default function Quiz() {
     try {
       const response = await fetch(`${API_BASE}/${quizId}/answer`, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           questionIndex: currentIndex,
@@ -180,16 +182,15 @@ export default function Quiz() {
     if (!token) return;
 
     try {
-      // Optional: Send final completion status to backend
       await fetch(`${API_BASE}/${quizId}/complete`, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           completed: true,
-          finalProgress: progress
+          finalProgress: progress,
         }),
       });
     } catch (error) {
@@ -206,7 +207,8 @@ export default function Quiz() {
   };
 
   if (isLoading) return <div className="loading-message">Loading quiz...</div>;
-  if (!questions.length) return <div className="loading-message">No questions available</div>;
+  if (!Array.isArray(questions) || !questions.length)
+    return <div className="loading-message">No questions available</div>;
 
   const question = questions[currentIndex];
   const progressPercent = ((currentIndex + 1) / questions.length) * 100;
@@ -241,9 +243,9 @@ export default function Quiz() {
       </div>
 
       <div className="quiz-footer">
-        <button 
-          onClick={handleNext} 
-          className="next-btn" 
+        <button
+          onClick={handleNext}
+          className="next-btn"
           disabled={!selectedOption && !isTimeUp}
         >
           {currentIndex === questions.length - 1 ? "Finish" : "Next"}

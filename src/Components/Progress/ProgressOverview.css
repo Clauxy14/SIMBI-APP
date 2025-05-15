@@ -6,6 +6,37 @@
     flex-direction: column;
 }
 
+.dot{
+    display: inline-block; /* or block */
+    width: 11px;
+    height: 11px;
+    /* background-color: hotpink; */
+    border-radius: 50% / 50%;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    margin-top: 0.4rem;
+}
+
+.progress-chart-container {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 2px 20px 0px rgba(151, 151, 151, 0.1);
+  border-radius: 16px;
+  padding: 1rem 2.5rem;
+}
+
+.progress-text{
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  color: rgba(10, 10, 10, 1);
+  margin-bottom: 1rem;
+
+}
+
 
 .progress-title{
     font-family: Nunito;
@@ -35,7 +66,6 @@
   position: relative;
   width: 150px;
   height: 150px;
-  margin: 1rem auto;
 }
 
 .doughnut-container canvas {
@@ -43,6 +73,7 @@
   top: 0;
   left: 0;
 }
+
 
 .chart-center {
   position: absolute;
@@ -54,22 +85,107 @@
   color: #000;
 }
 
+.chart-legend{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  color: rgba(23, 23, 23, 1);
+
+}
+
+.percent{
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgba(115, 115, 115, 1);
+}
+
 .chart-wrapper {
   width: 8rem;   /* was 180px */
   height: 8rem;
-  margin: 0 auto;
+  margin: 2rem auto;
   position: relative;
 }
 
 .chart-title {
   font-family: Nunito;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgba(115, 115, 115, 1);
+
+}
+
+.quick-actions{
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-actions h3{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 24px;
   line-height: 150%;
   letter-spacing: 0px;
   color: rgba(10, 10, 10, 1);
-  text-align: center;
+
 }
 
 
+.quick-btn-ask{
+  all: unset;
+  padding: 0.5rem 1rem;
+  background-color: rgba(58, 134, 255, 1);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 1);
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.quick-btn-ask:hover{
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(58, 134, 255, 1);
+}
 
+
+.quick-btn-quiz{
+  all: unset;
+  padding: 0.5rem 1rem;
+  background-color: rgba(238, 246, 255, 1);
+  border: 1px solid var(--Primary-Electric-Blue-200, rgba(188, 219, 255, 1));
+  border-radius: 16px;
+  color: rgba(30, 41, 59, 1);
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+}
+.quick-btn-quiz:hover{
+  background-color: rgba(30, 41, 59, 1);
+  color: rgba(238, 246, 255, 1);
+}

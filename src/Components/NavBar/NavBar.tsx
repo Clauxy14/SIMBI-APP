@@ -96,7 +96,18 @@ function NavBar() {
             </Link>
           </li>
         </ul>
+
+        <div className="telegram-link">
+        <h2>Web3</h2>
+        <button
+          className="telegram-connect"
+          onClick={() => window.location.href = "https://telegram.com"}>
+          Connect to Telegram
+        </button>
+      </div>
+      
       </nav>
+
     </div>
   );
 }

@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Streaks.css";
 
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-// Mock data: task completion status for each day
-const taskCompletedThisWeek: boolean[] = [true, true, true, true, true, true, false];
-// This should be replaced with actual data from your state management or API
-
 const Streaks: React.FC = () => {
+  const [taskCompletedThisWeek, setTaskCompletedThisWeek] = useState<boolean[]>([false, false, false, false, false, false, false]);
+
+  useEffect(() => {
+    // Get today's day index (0 for Monday, 6 for Sunday in our setup)
+    const today = new Date().getDay(); // JS: 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const adjustedIndex = today === 0 ? 6 : today - 1; // Convert JS Sunday to 6 for our array
+
+    setTaskCompletedThisWeek((prev) => {
+      const updated = [...prev];
+      updated[adjustedIndex] = true; // Mark today as complete
+      return updated;
+    });
+  }, []);
+
   return (
     <div className="wrapper">
       <div className="week-container">
