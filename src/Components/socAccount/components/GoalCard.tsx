@@ -41,52 +41,59 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, partners, onUpdateGoal }) => 
     return 'needs attention';
   };
 
+  // Badge color
+  const badgeColor =
+    goal.status === 'on track'
+      ? 'bg-green-100 text-green-700'
+      : goal.status === 'ahead of schedule'
+      ? 'bg-blue-100 text-blue-700'
+      : 'bg-yellow-100 text-yellow-700';
+
   return (
-    <div className="goal-card">
-      <div className="goal-header">
-        <h3>{goal.title}</h3>
-        <p>{goal.description}</p>
+    <div className="bg-white rounded-lg shadow p-5 overflow-hidden">
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold mb-1">{goal.title}</h3>
+        <p className="text-gray-500 text-sm mb-2">{goal.description}</p>
       </div>
 
-      <div className="goal-progress">
-        <div className="progress-info">
-          <span>Progress: {goal.progress}%</span>
-          <span className={`status-badge ${goal.status.replace(/\s+/g, '-')}`}>
-            {goal.status}
-          </span>
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm">Progress: {goal.progress}%</span>
+          <span className={`px-2 py-1 rounded text-xs font-semibold ${badgeColor}`}>{goal.status}</span>
         </div>
-        <div className="progress-bar-container">
+        <div className="w-full h-2 bg-gray-200 rounded">
           <div 
-            className="progress-bar" 
+            className="h-2 bg-indigo-500 rounded transition-all duration-300"
             style={{ width: `${goal.progress}%` }}
           />
         </div>
-        <div className="goal-partners">
+        <div className="mt-2 text-xs text-gray-600">
           <span>👥 {goalPartners.length} accountability partners</span>
         </div>
       </div>
 
-      <div className="goal-actions">
-        <button className="secondary-button">
-          <i className="share-icon">🔄</i> Share Update
+      <div className="flex flex-wrap gap-2 mt-4">
+        <button className="bg-gray-100 text-gray-700 rounded px-3 py-1 text-sm font-medium flex items-center gap-1 hover:bg-gray-200 transition">
+          <i>🔄</i> Share Update
         </button>
         {isUpdating ? (
-          <div className="update-progress-controls">
+          <div className="flex flex-col md:flex-row gap-2 items-center w-full md:w-auto">
             <input 
               type="range" 
               min="0" 
               max="100" 
               value={progress} 
               onChange={handleProgressChange} 
+              className="w-full md:w-32 accent-indigo-500"
             />
             <button 
-              className="primary-button"
+              className="bg-indigo-600 text-white rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-indigo-700"
               onClick={handleUpdateProgress}
             >
               Save
             </button>
             <button 
-              className="secondary-button"
+              className="bg-gray-100 text-gray-700 rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-gray-200"
               onClick={() => setIsUpdating(false)}
             >
               Cancel
@@ -94,7 +101,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, partners, onUpdateGoal }) => 
           </div>
         ) : (
           <button 
-            className="primary-button"
+            className="bg-indigo-600 text-white rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-indigo-700"
             onClick={() => setIsUpdating(true)}
           >
             Update Progress

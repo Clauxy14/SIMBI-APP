@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
 import { AppState, Goal, Partner, Stats } from './types';
-import './index.css';
 
 const SocialAccountability: React.FC = () => {
   // Initial state
@@ -96,7 +95,7 @@ const SocialAccountability: React.FC = () => {
   };
 
   return (
-    <div className="social-accountability-container">
+    <div className="max-w-6xl mx-auto px-5 text-gray-800 font-sans">
       <Dashboard 
         state={state}
         onTabChange={handleTabChange}

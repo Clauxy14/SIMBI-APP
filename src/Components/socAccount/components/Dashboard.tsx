@@ -27,18 +27,18 @@ const Dashboard: React.FC<DashboardProps> = ({
   onUpdateGoal
 }) => {
   return (
-    <div className="dashboard">
-      <div className="dashboard-header">
-        <div className="dashboard-logo">
-          <i className="learn-icon">📚</i>
+    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-md">
+      <div className="flex justify-between items-center p-5 bg-white border-b border-gray-200 mb-2">
+        <div className="flex items-center font-semibold text-lg text-indigo-600">
+          <i className="mr-2">📚</i>
           <span>LearnTogether</span>
         </div>
-        <div className="dashboard-actions">
-          <button className="icon-button">
-            <i className="notification-icon">🔔</i>
+        <div className="flex gap-2">
+          <button className="bg-transparent border-none cursor-pointer text-xl p-1 rounded-full flex items-center justify-center transition hover:bg-gray-100">
+            <i>🔔</i>
           </button>
-          <button className="icon-button">
-            <i className="message-icon">💬</i>
+          <button className="bg-transparent border-none cursor-pointer text-xl p-1 rounded-full flex items-center justify-center transition hover:bg-gray-100">
+            <i>💬</i>
           </button>
         </div>
       </div>
@@ -51,11 +51,11 @@ const Dashboard: React.FC<DashboardProps> = ({
       />
 
       {state.currentTab === 'goals' ? (
-        <div className="goals-section">
-          <div className="section-header">
-            <h2>Current Learning Goals</h2>
+        <div>
+          <div className="flex justify-between items-center p-5">
+            <h2 className="m-0 text-lg font-semibold">Current Learning Goals</h2>
             <button 
-              className="primary-button"
+              className="bg-indigo-600 text-white rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-indigo-700"
               onClick={onToggleAddGoalModal}
             >
               + Add Goals
@@ -68,11 +68,11 @@ const Dashboard: React.FC<DashboardProps> = ({
           />
         </div>
       ) : (
-        <div className="partners-section">
-          <div className="section-header">
-            <h2>Your Accountability Network</h2>
+        <div>
+          <div className="flex justify-between items-center p-5">
+            <h2 className="m-0 text-lg font-semibold">Your Accountability Network</h2>
             <button 
-              className="primary-button"
+              className="bg-indigo-600 text-white rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-indigo-700"
               onClick={onToggleAddPartnerModal}
             >
               + Add Partner

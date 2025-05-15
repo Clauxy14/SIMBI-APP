@@ -9,7 +9,6 @@ import Signup from "./Components/Signup/Signup";
 import Login from "./Components/Login/Login";
 import ConnectWallet from "./Components/Wallet/Wallet";
 import Welcome from "./Components/welcome/welcome";
-import Dashboard from "./Dashboard/Dashboard";
 // import AcademicResources from "../src/Components/AcademicSupport";
 import SocialAccountability from "./Components/socAccount";
 import AskSimbi from "./Components/AskSimbi/AskSimbi";
@@ -30,10 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/connect-wallet" element={<ConnectWallet />} />
         <Route path="/welcome" element={<Welcome />} />
-         <Route
-          path="/dashboard"
-          element={<Dashboard welcomeImage="./assets/WELCOME, HAPPY.png" />}
-        />
+         
         /* Adjust the path to your image if needed */
          {/* <Route path="/academic-resources" element={<AcademicResources />} />  */}
         <Route path="/SocialAccountability" element={<SocialAccountability />} />

@@ -7,15 +7,15 @@ interface TabNavigationProps {
 
 const TabNavigation: React.FC<TabNavigationProps> = ({ currentTab, onTabChange }) => {
   return (
-    <div className="tab-navigation">
+    <div className="flex px-5 border-b border-gray-200 bg-white">
       <button
-        className={`tab-button ${currentTab === 'goals' ? 'active' : ''}`}
+        className={`px-5 py-3 text-sm font-semibold focus:outline-none transition border-b-2 ${currentTab === 'goals' ? 'text-indigo-600 border-indigo-600 bg-gray-50' : 'text-gray-600 border-transparent hover:bg-gray-100'}`}
         onClick={() => onTabChange('goals')}
       >
         My Goals
       </button>
       <button
-        className={`tab-button ${currentTab === 'partners' ? 'active' : ''}`}
+        className={`px-5 py-3 text-sm font-semibold focus:outline-none transition border-b-2 ${currentTab === 'partners' ? 'text-indigo-600 border-indigo-600 bg-gray-50' : 'text-gray-600 border-transparent hover:bg-gray-100'}`}
         onClick={() => onTabChange('partners')}
       >
         Accountability Partner

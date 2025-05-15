@@ -42,16 +42,16 @@ const AddPartnerModal: React.FC<AddPartnerModalProps> = ({ onClose, onAddPartner
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <div className="modal-header">
-          <h2>Add Accountability Partner</h2>
-          <button className="close-button" onClick={onClose}>×</button>
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-lg mx-2">
+        <div className="flex justify-between items-center border-b border-gray-200 p-4">
+          <h2 className="text-lg font-semibold">Add Accountability Partner</h2>
+          <button className="text-2xl text-gray-400 hover:text-gray-600" onClick={onClose}>×</button>
         </div>
         
-        <form onSubmit={handleSubmit} className="modal-form">
-          <div className="form-group">
-            <label htmlFor="name">Partner Name *</label>
+        <form onSubmit={handleSubmit} className="p-4 space-y-4">
+          <div>
+            <label htmlFor="name" className="block font-medium mb-1">Partner Name *</label>
             <input
               type="text"
               id="name"
@@ -59,11 +59,12 @@ const AddPartnerModal: React.FC<AddPartnerModalProps> = ({ onClose, onAddPartner
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe"
               required
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="email">Email Address *</label>
+          <div>
+            <label htmlFor="email" className="block font-medium mb-1">Email Address *</label>
             <input
               type="email"
               id="email"
@@ -71,38 +72,40 @@ const AddPartnerModal: React.FC<AddPartnerModalProps> = ({ onClose, onAddPartner
               onChange={(e) => setEmail(e.target.value)}
               placeholder="john.doe@example.com"
               required
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
           </div>
 
-          <div className="form-group">
-            <label>Choose Avatar</label>
-            <div className="avatar-selection">
+          <div>
+            <label className="block font-medium mb-1">Choose Avatar</label>
+            <div className="flex gap-3 flex-wrap">
               {avatarOptions.map((avatar, index) => (
                 <div 
                   key={index} 
-                  className={`avatar-option ${selectedAvatar === avatar ? 'selected' : ''}`}
+                  className={`relative cursor-pointer border-2 rounded-full p-1 transition ${selectedAvatar === avatar ? 'border-indigo-500' : 'border-gray-200'}`}
                   onClick={() => setSelectedAvatar(avatar)}
                 >
-                  <img src={avatar} alt={`Avatar option ${index + 1}`} />
-                  {selectedAvatar === avatar && <div className="check-icon">✓</div>}
+                  <img src={avatar} alt={`Avatar option ${index + 1}`} className="w-12 h-12 rounded-full object-cover" />
+                  {selectedAvatar === avatar && <div className="absolute top-0 right-0 bg-indigo-500 text-white text-xs rounded-full px-1">✓</div>}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Additional Information</label>
+          <div>
+            <label className="block font-medium mb-1">Additional Information</label>
             <textarea
               placeholder="Write a short description about how you know this person or why you want them as an accountability partner..."
               rows={3}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
           </div>
 
-          <div className="modal-actions">
-            <button type="button" className="secondary-button" onClick={onClose}>
+          <div className="flex justify-end gap-2 pt-2">
+            <button type="button" className="bg-gray-100 text-gray-700 rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-gray-200" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="primary-button">
+            <button type="submit" className="bg-indigo-600 text-white rounded-md px-4 py-2 font-semibold text-sm transition hover:bg-indigo-700">
               Add Partner
             </button>
           </div>
