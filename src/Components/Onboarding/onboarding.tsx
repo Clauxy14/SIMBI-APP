@@ -15,21 +15,21 @@ const slides = [
     description:
       "I break down complex stuff into the language you will understand. Academic jargon is allowed here.",
     image: "/assets/Cut-bluff.svg",
-    imageStyle: { maxWidth: "42%" },
+    imageStyle: { maxWidth: "40%" },
   },
   {
     title: "Tough Love",
     description:
       "Procrastination again? I will call you out. See me as your friend who will never let you slack.",
     image: "/assets/tough-love.png",
-    imageStyle: { maxWidth: "42%" },
+    imageStyle: { maxWidth: "40%" },
   },
   {
     title: "Brain Hacks",
     description:
       "I learn how your brain works and adapt. The more we study, the smarter we both get.",
     image: "/assets/brain.png",
-    imageStyle: { maxWidth: "33%" },
+    imageStyle: { maxWidth: "31%" },
   },
 ];
 

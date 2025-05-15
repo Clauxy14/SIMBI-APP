@@ -5,6 +5,19 @@
   padding: 1rem;
 }
 
+.welcome-header-mobile {
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.7rem;
+}
+
+.bell-icon-img {
+  width: 70%;
+}
+
 .welcome-title-content-mobile {
   text-align: center;
   padding: 1rem;
@@ -16,6 +29,16 @@
   color: #333;
 }
 
+.wallet-btn-btn {
+  padding: 4px 8px;
+  border: 1px solid #bcdbff;
+  border-radius: 16px;
+  background: #eef6ff;
+  color: #1e293b;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 9px;
+}
 .subtitle-mobile {
   font-weight: 500;
   color: #666;
