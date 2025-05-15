@@ -98,20 +98,6 @@ const QuizPage: React.FC = () => {
                   placeholder="Input Topic"
                   onChange={(e) => setSelectedSubject(e.target.value)}
                 />
-                {/* <select
-                  className="quiz-dropdown"
-                  required
-                  value={selectedSubject}
-                  onChange={(e) => setSelectedSubject(e.target.value)}
-                >
-                  <option value="" disabled>
-                    Subject
-                  </option>
-                  <option value="English">English Language</option>
-                  <option value="Biology">Biology</option>
-                  <option value="Accounting">Accounting</option>
-                  <option value="Mathematics">Mathematics</option>
-                </select> */}
               </div>
 
               {/* Difficulty Buttons */}
