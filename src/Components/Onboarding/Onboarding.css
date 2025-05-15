@@ -9,6 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 }
 
 .onboarding-container {
@@ -26,19 +27,6 @@ body {
   align-items: center;
   padding-top: 15px;
 }
-/* .language-fixed {
-  margin-right: 30px;
-}
-.language-site {
-  color: #979797;
-  font-family: "Inter", sans-serif;
-}
-
-.Language-english {
-  margin-left: 10px;
-  color: #3a86ff;
-  font-family: "Inter", sans-serif;
-} */
 
 .slide {
   display: flex;

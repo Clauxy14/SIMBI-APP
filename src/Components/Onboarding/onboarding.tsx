@@ -41,12 +41,12 @@ const Onboarding: React.FC = () => {
     if (currentIndex < slides.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     } else {
-      navigate("/get-started");
+      navigate("/landingpage");
     }
   };
 
   const skipOnboarding = () => {
-    navigate("/get-started");
+    navigate("/landingpage");
   };
 
   return (
@@ -60,23 +60,6 @@ const Onboarding: React.FC = () => {
               className="logo"
             />
           </div>
-
-          {/* <div className="language-fixed">
-            <p className="language-site">
-              SITE LANGUAGE{" "}
-              <span className="Language-english">
-                ENGLISH{" "}
-                <span>
-                  <img
-                    src="/assets/icons/Flag-US.png"
-                    alt="US-logo"
-                    width={"18px"}
-                    height={"12px"}
-                  />
-                </span>
-              </span>
-            </p>
-          </div> */}
         </header>
 
         <div className="slide">

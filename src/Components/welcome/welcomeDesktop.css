@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.welcome-header {
+.welcome-header-Desktop {
   background: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -15,7 +15,7 @@
 .user-info {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
 }
 
 .bell-icon {
@@ -27,15 +27,15 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  padding: 4px 8px;
+  border: 1px solid #96aad7;
+  border-radius: 16px;
+  padding: 6px 14px;
 }
 
 .user-avatar img {
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
 }
 
 .username {
@@ -44,9 +44,9 @@
 }
 
 .user-info .wallet-btn {
-  padding: 6px 14px;
+  padding: 10px 18px;
   border: 1px solid #bcdbff;
-  border-radius: 20px;
+  border-radius: 16px;
   background: #eef6ff;
   color: #1e293b;
   cursor: pointer;
@@ -241,6 +241,9 @@
 
 /* ≤ 1024px (Tablet landscape) */
 @media (max-width: 1024px) {
+  .welcome-header {
+    display: flex;
+  }
   .welcome-title-content {
     padding: 1rem 2rem;
   }
@@ -264,6 +267,10 @@
 /* ≤ 780px (Tablet portrait) */
 @media (max-width: 780px) {
   .welcome-header {
+    display: flex;
+  }
+
+  .welcome-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -284,7 +291,11 @@
 }
 
 /* ≤ 600px (Large phones / small tablets) */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
+  .welcome-header {
+    display: flex;
+  }
+
   .welcome-title-content {
     padding: 1rem;
   }
@@ -307,10 +318,14 @@
     font-size: 0.95rem;
     padding: 0.6rem;
   }
-}
+} */
 
 /* ≤ 400px (Small phones) */
-@media (max-width: 400px) {
+/* @media (max-width: 400px) {
+  .welcome-header {
+    display: flex;
+  }
+
   .welcome-title {
     font-size: 1.5rem;
   }
@@ -332,4 +347,5 @@
     padding: 0.6rem 1.5rem;
     font-size: 0.95rem;
   }
-}
+} */
+/*  */
