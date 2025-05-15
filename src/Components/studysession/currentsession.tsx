@@ -1,11 +1,11 @@
 import React from "react";
-import "./CurrentSession.css";
+import "./currentsession.css";
 
 interface CurrentSessionProps {
   minutes: number;
   seconds: number;
   sessionType: string;
-  progress: number; // value from 0 to 100
+  progress: number;
   onReset: () => void;
   onPause: () => void;
   onCancel: () => void;
@@ -52,7 +52,7 @@ const CurrentSession: React.FC<CurrentSessionProps> = ({
             fill="transparent"
             strokeWidth={stroke}
             strokeLinecap="round"
-            strokeDasharray={`${circumference} ${circumference}`} // ✅ Valid in TSX
+            strokeDasharray={`${circumference} ${circumference}`}
             strokeDashoffset={strokeDashoffset}
             r={normalizedRadius}
             cx={radius}

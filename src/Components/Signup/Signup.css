@@ -144,15 +144,12 @@ input:focus {
   .signup-content {
     margin: auto;
     width: 65%;
-    /* gap: 3rem; */
+
     box-shadow: 2px 2px 5px 2px #151a206c;
     border-radius: 10px;
   }
 
   .signup-form h2 {
-    /* font-size: 2rem;
-    font-weight: 700;
-    color: #1e293b; */
     margin-top: 0;
   }
 
