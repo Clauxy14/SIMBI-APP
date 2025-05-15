@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./welcomeMobile.css"
 
 const steps = [
   {
@@ -110,18 +111,25 @@ export default function WelcomeMobile() {
 
   return (
     <div className="welcome-wrapper-mobile">
-      <header className="welcome-header-Desktop">
-        <img
-          src="/assets/icons/Simbi-logo.png"
-          alt="Simbi Logo"
-          className="logo"
-        />
+      <header className="welcome-header-mobile">
+        <div>
+          <img
+            src="/assets/icons/Simbi-logo.svg"
+            alt="Simbi Logo"
+            // className="logo"
+          />
+        </div>
+
         <div className="user-info">
           <span className="bell-icon">
-            <img src="/assets/icons/notification-icon.svg" alt="notification" />
+            <img
+              src="/assets/icons/notification-icon.svg"
+              alt="notification"
+              className="bell-icon-img"
+            />
           </span>
 
-          <button className="wallet-btn">Connect Wallet</button>
+          <button className="wallet-btn-btn">Connect Wallet</button>
         </div>
       </header>
       <div className="welcome-title-content-mobile">
@@ -129,7 +137,7 @@ export default function WelcomeMobile() {
           Welcome to{" "}
           <img
             className="welcome-simbi-mobile"
-            src="/simbi-icon.svg"
+            src="/assets/icons/Simbi-logo.png"
             alt="Simbi"
           />
         </h2>

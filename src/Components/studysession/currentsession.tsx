@@ -1,15 +1,15 @@
-// import React from "react";
-// import "./CurrentSession.css";
+import React from "react";
+import "./currentsession.css";
 
-// interface CurrentSessionProps {
-//   minutes: number;
-//   seconds: number;
-//   sessionType: string;
-//   progress: number; // value from 0 to 100
-//   onReset: () => void;
-//   onPause: () => void;
-//   onCancel: () => void;
-// }
+interface CurrentSessionProps {
+  minutes: number;
+  seconds: number;
+  sessionType: string;
+  progress: number;
+  onReset: () => void;
+  onPause: () => void;
+  onCancel: () => void;
+}
 
 // const CurrentSession: React.FC<CurrentSessionProps> = ({
 //   minutes,
@@ -37,37 +37,37 @@
 //         <div className="tag">{sessionType}</div>
 //       </div>
 
-//       <div className="timer-circle">
-//         <svg height={radius * 2} width={radius * 2}>
-//           <circle
-//             stroke="#ddd"
-//             fill="transparent"
-//             strokeWidth={stroke}
-//             r={normalizedRadius}
-//             cx={radius}
-//             cy={radius}
-//           />
-//           <circle
-//             stroke="#1a3fc8"
-//             fill="transparent"
-//             strokeWidth={stroke}
-//             strokeLinecap="round"
-//             strokeDasharray={`${circumference} ${circumference}`} // ✅ Valid in TSX
-//             strokeDashoffset={strokeDashoffset}
-//             r={normalizedRadius}
-//             cx={radius}
-//             cy={radius}
-//             transform={`rotate(-90 ${radius} ${radius})`}
-//           />
-//         </svg>
-//         <div className="timer-text">
-//           <span className="time">
-//             {pad(minutes)}:{pad(seconds)}{" "}
-//             <span className="mins-label">mins</span>
-//           </span>
-//           <span className="left-label">left</span>
-//         </div>
-//       </div>
+      <div className="timer-circle">
+        <svg height={radius * 2} width={radius * 2}>
+          <circle
+            stroke="#ddd"
+            fill="transparent"
+            strokeWidth={stroke}
+            r={normalizedRadius}
+            cx={radius}
+            cy={radius}
+          />
+          <circle
+            stroke="#1a3fc8"
+            fill="transparent"
+            strokeWidth={stroke}
+            strokeLinecap="round"
+            strokeDasharray={`${circumference} ${circumference}`}
+            strokeDashoffset={strokeDashoffset}
+            r={normalizedRadius}
+            cx={radius}
+            cy={radius}
+            transform={`rotate(-90 ${radius} ${radius})`}
+          />
+        </svg>
+        <div className="timer-text">
+          <span className="time">
+            {pad(minutes)}:{pad(seconds)}{" "}
+            <span className="mins-label">mins</span>
+          </span>
+          <span className="left-label">left</span>
+        </div>
+      </div>
 
 //       <div className="controls">
 //         <button onClick={onReset} title="Reset">
