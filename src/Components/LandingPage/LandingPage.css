@@ -95,6 +95,10 @@ nav a {
   width: 150px;
 }
 
+.lp-media-logos {
+  display: flex;
+  justify-content: space-evenly;
+}
 .lp-media-logos img {
   height: 40px;
   margin: 0 1rem;

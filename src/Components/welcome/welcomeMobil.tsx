@@ -52,9 +52,9 @@ const steps = [
     content: (
       <>
         <label className="welcome-label">What tone do you prefer to use?</label>
-        <button className="option-btnn">Playful & Funny</button>
-        <button className="option-btnn">Calm & Supportive</button>
-        <button className="option-btnn">Straight to the point</button>
+        <button className="option-btnn">Playful & Funny.</button>
+        <button className="option-btnn">Calm & Supportive.</button>
+        <button className="option-btnn">Straight to the point.</button>
       </>
     ),
     progress: 75,
