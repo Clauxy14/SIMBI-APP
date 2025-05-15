@@ -76,10 +76,6 @@ export default function WelcomeMobile() {
           headers: {
             "Content-Type": "application/json",
           },
-          //   body: JSON.stringify({
-          //     userData: user,
-          //     // You might need to include an API key or other required fields
-          //   }),
         }
       );
 
@@ -125,10 +121,7 @@ export default function WelcomeMobile() {
           <span className="bell-icon">
             <img src="/assets/icons/notification-icon.svg" alt="notification" />
           </span>
-          {/* <div className="user-avatar">
-            <img src={user?.avatar} alt="Avatar" />
-            <span className="username">{user?.name}</span>
-          </div> */}
+
           <button className="wallet-btn">Connect Wallet</button>
         </div>
       </header>

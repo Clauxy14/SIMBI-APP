@@ -117,7 +117,7 @@ function AboutUs() {
             </div>
             <div className="value">
               <div>
-                <img src="public/assets/icons/chart.svg" alt="" />
+                <img src="/assets/icons/chart.svg" alt="" />
               </div>
               <div>
                 <h4>Progress, Not perfection</h4>

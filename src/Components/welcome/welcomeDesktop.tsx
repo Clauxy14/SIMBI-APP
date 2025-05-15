@@ -92,7 +92,7 @@ const WelcomeDesktop: React.FC = () => {
       navigate("/askSimbi");
     } catch (error) {
       console.error("Error sending data to Simbi AI:", error);
-      navigate("/askSimbi"); // Still navigate even if API fails
+      navigate("/askSimbi");
     } finally {
       setIsLoading(false);
     }
