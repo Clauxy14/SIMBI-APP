@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import WelcomeMobile from "./welcomeMobil";
 import WelcomeDesktop from "./welcomeDesktop";
 
