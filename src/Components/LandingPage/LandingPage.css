@@ -1,98 +1,125 @@
-/* body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #fff;
-  color: #1e1e1e;
-} */
-
-.lp-navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 2rem;
-  align-items: center;
-  background-color: white;
+.lp-wrapper {
+  width: 100%;
 }
 
-nav a {
+.lp-container {
+  max-width: 1440px;
+  height: 100vh;
+  margin: auto;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;  */
+}
+
+.lp-navbar {
+  /* position: fixed; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem 1rem;
+  align-items: center;
+  background-color: #ffffff;
+  position: fixed;
+}
+
+.nav-a a {
   margin-right: 1.5rem;
   text-decoration: none;
   color: #333;
+  font-size: 20px;
+}
+
+.nav-a a:hover {
+  color: #2d74ff;
 }
 
 .lp-sign-in {
   background-color: #2d74ff;
-  color: white;
+  color: #ffffff;
   border: none;
-  padding: 0.5rem 1rem;
-  width: 200px;
-  height: 50px;
+  padding: 0.6rem 2rem;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .lp-simbikick {
+  background-color: #fff;
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 6rem 2rem 2rem;
   gap: 4rem;
 }
 
 .lp-simbikick-text {
   max-width: 60%;
-  padding-right: 2rem;
+  /* padding-right: 2rem; */
 }
 
 .lp-simbikick-text h1 {
-  font-size: 2.5rem;
+  font-size: 4rem;
   color: #2d74ff;
-  margin-bottom: 1rem;
-}
-
-.lp-simbikick-text h1 span {
-  color: #2d74ff;
+  /* margin-bottom: 1rem; */
+  line-height: 110%;
 }
 
 .lp-simbikick-text p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-bottom: 2rem;
   max-width: 70%;
-  color: #555;
+  line-height: 150%;
+  color: #404040;
+  margin-top: 1rem;
 }
 
+.lp-hero-buttons {
+  display: flex;
+  gap: 10px;
+}
 .lp-hero-buttons .get-started {
   background-color: #2d74ff;
   color: white;
   padding: 0.75rem 1.5rem;
+  font-size: 1rem;
   border: none;
   width: 200px;
   height: 43px;
   border-radius: 10px;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   cursor: pointer;
 }
 
 .lp-hero-buttons .have-account {
-  border: 1px solid #ccc;
+  border: 1px solid #2d74ff;
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
-  color: #1e1e1e;
-  background: white;
+  font-size: 1rem;
+  color: #2d74ff;
+  background: #eef6ff;
   cursor: pointer;
 }
 
 .lp-hero-image img {
-  width: 300px;
-  max-width: 100%;
+  width: 70%;
+  /* max-width: 100%; */
 }
 
 .lp-media-section {
   text-align: center;
   color: #2d74ff;
   background-color: #fff8e6;
-  padding: 2rem 1rem;
+  padding: 1rem 0.5rem;
 }
-.lp-media-section img {
-  width: 150px;
+.lp-media-section p {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+}
+.lp-media-logos img {
+  width: 60%;
 }
 
 .lp-media-logos {
@@ -109,8 +136,8 @@ nav a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4rem 2rem;
-  gap: 10rem;
+  padding: 3rem;
+  background-color: #fff;
 }
 .lp-feature {
   display: flex;
@@ -121,6 +148,7 @@ nav a {
 
 .lp-feature h4 {
   color: #2d74ff;
+  font-size: 1.5rem;
 }
 
 .lp-feature img {
@@ -128,8 +156,7 @@ nav a {
 }
 
 .lp-features-character img {
-  width: 400px;
-  max-width: 100%;
+  width: 80%;
 }
 
 .lp-features-list {
@@ -140,11 +167,14 @@ nav a {
 .lp-feats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .lp-features-list h2 {
   color: #2d74ff;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  margin-right: 4rem;
 }
 
 .lp-features-list ul {
@@ -156,57 +186,69 @@ nav a {
   margin-bottom: 1.5rem;
 }
 
+.how-it-works {
+  background-color: #f1f8ff;
+}
+
 .how-it-works h2 {
   text-align: center;
-  color: #2d74ff;
-  font-size: 40px;
-  margin-bottom: 4rem;
+  color: #3a86ff;
+  font-size: 3rem;
+  margin-bottom: 0;
+  padding-top: 2rem;
 }
 
 .works {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+}
+
+.iphone-15 {
+  margin-bottom: 0;
+  width: 500px;
 }
 .works .sim-talk img {
   width: 750px;
 }
 
-.jsimbi {
-  background-color: #2d74ff;
+.jsimbii {
+  background-color: #3a86ff;
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   border: none;
-  width: 300px;
-  height: 48px;
+  font-size: 1.2rem;
   border-radius: 10px;
-  margin-right: 1rem;
   cursor: pointer;
   margin-top: 3rem;
 }
 
 .testimonials-section {
-  padding: 4rem 2rem;
-  background-color: white;
+  padding: 3rem 2rem;
+  background-color: #fff;
   text-align: center;
 }
 
 .testimonials-heading {
-  color: #2d74ff;
-  font-size: 2rem;
+  color: #3a86ff;
+  font-size: 3rem;
   margin-bottom: 2.5rem;
 }
 
 .testimonials-container {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
+  justify-content: space-around;
+
   flex-wrap: wrap;
 }
 
 .testimonial-card {
-  background: linear-gradient(135deg, #f5f7ff, #eef4ff);
+  background: linear-gradient(135deg, #f8efff1a, #eff6ff);
   padding: 2rem;
   border-radius: 16px;
-  max-width: 320px;
+  max-width: 350px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   text-align: left;
 }
@@ -216,7 +258,6 @@ nav a {
 }
 
 .testimonial-card h4 {
-  margin: 0 0 1rem;
   font-size: 1.1rem;
   font-weight: 600;
 }
@@ -229,9 +270,9 @@ nav a {
 }
 
 .author {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  color: #555;
+  color: #555555af;
 }
 
 .faq-container {
@@ -273,39 +314,47 @@ nav a {
 
 /* Tablets (768px - 1024px) */
 @media screen and (max-width: 1024px) {
-  .lp-simbikick {
-    flex-direction: column;
-    text-align: center;
-  }
+  /* .lp-simbikick {
+     padding: 2rem 4rem;
+  } */
 
   .lp-simbikick-text,
   .lp-hero-image {
     max-width: 100%;
     padding: 0;
   }
+  .lp-simbikick-text{
+    width: 50%;
+  }
+  .lp-simbikick-text h1{
+    font-size: 2.5rem;
+  }
 
   .lp-simbikick-text p {
     max-width: 100%;
-    margin: 0 auto 2rem;
+    margin: 1rem auto 2rem;
   }
 
-  .lp-features {
+  /* .lp-features {
     flex-direction: column;
     gap: 3rem;
-  }
+  } */
 
   .lp-feature {
-    width: 100%;
+    /* width: 100%; */
     justify-content: center;
     text-align: center;
+    margin: auto;
   }
 
   .lp-features-character img {
-    width: 100%;
+    display: none;
+    
   }
 
+
   .works {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
   }
 
@@ -314,22 +363,24 @@ nav a {
     max-width: 100%;
   }
 
-  .lp-feats {
+  /* .lp-feats {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
+  } */
 
-  .lp-hero-buttons {
+  /* .lp-hero-buttons {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-  }
+  } */
 
   .lp-hero-buttons .get-started,
   .lp-hero-buttons .have-account {
     margin-bottom: 1rem;
+    padding: 0;
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
   }
 
   .jsimbi {
@@ -339,7 +390,7 @@ nav a {
 }
 
 /* Phones (<768px) */
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
   .lp-navbar {
     display: flex;
     gap: 2rem;
@@ -422,4 +473,4 @@ nav a {
     width: 80%;
     max-width: 100%;
   }
-}
+} */

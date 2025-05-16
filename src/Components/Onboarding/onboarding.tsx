@@ -15,7 +15,7 @@ const slides = [
     description:
       "I break down complex stuff into the language you will understand. Academic jargon is allowed here.",
     image: "/assets/Cut-bluff.svg",
-    imageStyle: { maxWidth: "40%" },
+    imageStyle: { maxWidth: "38%" },
   },
   {
     title: "Tough Love",
@@ -51,45 +51,46 @@ const Onboarding: React.FC = () => {
 
   return (
     <div className="onboarding-wrapper">
+      <header className="onboarding-header">
+        <img
+          src="/assets/icons/Simbi-logo.png"
+          alt="Simbi Logo"
+          className="logo"
+        />
+      </header>
       <div className="onboarding-container">
-        <header className="onboarding-header">
-          <div className="logo">
+        <div className="slide-container">
+          <div className="slide">
             <img
-              src="/assets/icons/Simbi-logo.png"
-              alt="Simbi Logo"
-              className="logo"
+              src={slides[currentIndex].image}
+              alt="slide visual"
+              className="slide-image"
+              style={slides[currentIndex].imageStyle}
             />
-          </div>
-        </header>
-
-        <div className="slide">
-          <img
-            src={slides[currentIndex].image}
-            alt="slide visual"
-            className="slide-image"
-            style={slides[currentIndex].imageStyle}
-          />
-          <div className="slide-text">
-            <h1>{slides[currentIndex].title}</h1>
-            <p>{slides[currentIndex].description}</p>
-            <div className="progress">
-              {slides.map((_, index) => (
-                <span
-                  key={index}
-                  className={`dot ${index === currentIndex ? "active" : "dot"}`}
-                ></span>
-              ))}
-            </div>
-            <div className="button-group">
-              <button className="next" onClick={nextSlide}>
-                Next
-              </button>
-
-              {currentIndex < slides.length - 1 && (
-                <button className="skip" onClick={skipOnboarding}>
-                  Skip
+            <div className="slide-text">
+              <h1>{slides[currentIndex].title}</h1>
+              <p>{slides[currentIndex].description}</p>
+              <div className="progress">
+                {slides.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`dot ${
+                      index === currentIndex ? "active" : "dot"
+                    }`}
+                  ></span>
+                ))}
+              </div>
+              <div className="button-group">
+                <button className="onboarding-next" onClick={nextSlide}>
+                  Next
                 </button>
-              )}
+
+                {currentIndex < slides.length - 1 && (
+                  <button className="skip" onClick={skipOnboarding}>
+                    Skip
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

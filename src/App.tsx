@@ -8,13 +8,14 @@ import Onboarding from "./Components/Onboarding/onboarding";
 import Signup from "./Components/Signup/Signup";
 import Login from "./Components/Login/Login";
 import ConnectWallet from "./Components/Wallet/Wallet";
-import Welcome from "./Components/welcome/welcome";
+// import Welcome from "./Components/welcome/welcome";
 import AskSimbi from "./Components/AskSimbi/AskSimbi";
 import QuizPage from "./Components/Quiz/QuizPage";
 import STUDYPLAAAN from "./Components/studyplaaan/studyplaaan";
 import StudySession from "./Components/studysession/studysession";
 import LandingPage from "./Components/LandingPage/LandingPage";
 import AboutUs from "./Components/LandingPage/AboutUs";
+import WelcomePage from "./Components/welcome/welcome";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/connect-wallet" element={<ConnectWallet />} />
-        <Route path="/welcome" element={<Welcome />} />
+        {/* <Route path="/welcome" element={<Welcome />} /> */}
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/askSimbi" element={<AskSimbi />} />
         <Route path="/quizPage" element={<QuizPage />} />
         <Route path="/studyPage" element={<STUDYPLAAAN />} />
