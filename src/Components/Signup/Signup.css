@@ -3,6 +3,7 @@
   height: 100vh;
   padding: 1rem 2rem;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
 .signup-content {
@@ -29,7 +30,7 @@ input:focus {
 }
 
 .signup-form h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #1e293b;
   margin: 0;
@@ -62,11 +63,6 @@ input:focus {
 }
 
 .google-signin-container {
-  /* width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
-
   width: 100%;
   display: flex;
   align-items: center;
@@ -90,8 +86,8 @@ input:focus {
   position: relative;
 }
 
-.password-input-wrapper input {
-  width: 95%;
+.sign-password-input-wrapper {
+  width: 100%;
 }
 
 .toggle-password-icon {
@@ -148,15 +144,12 @@ input:focus {
   .signup-content {
     margin: auto;
     width: 65%;
-    /* gap: 3rem; */
+
     box-shadow: 2px 2px 5px 2px #151a206c;
     border-radius: 10px;
   }
 
   .signup-form h2 {
-    /* font-size: 2rem;
-    font-weight: 700;
-    color: #1e293b; */
     margin-top: 0;
   }
 
@@ -244,4 +237,4 @@ input:focus {
   .password-input-wrapper input {
     width: 93.5%;
   }
-}
+} 

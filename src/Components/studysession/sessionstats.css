@@ -1,0 +1,70 @@
+.stats-container {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 320px;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 24px;
+}
+
+.stats-boxes {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.stats-box {
+  background-color: #eef4ff;
+  border-radius: 16px;
+  padding: 16px;
+  flex: 1;
+  text-align: center;
+}
+
+.center-box {
+  background-color: #eef4ff;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.stats-label {
+  font-size: 14px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.stats-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+.break-button {
+  background-color: #2962ff;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.break-button:hover {
+  background-color: #0039cb;
+}

@@ -30,7 +30,7 @@ function NavBar() {
               &nbsp;&nbsp;&nbsp;Dashboard
             </Link>
           </li>
-          <li>
+          <li className="sidebar-li">
             <Link className="links" to="/AskSimbi">
               <img
                 src="/assets/tiny-logo-icon.svg"
@@ -83,7 +83,7 @@ function NavBar() {
             </Link>
           </li>
           <li>
-            <Link className="links" to="">
+            <Link className="links" to="/studyPage">
               <img
                 src="/assets/study-plan.svg"
                 style={{

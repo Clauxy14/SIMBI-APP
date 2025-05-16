@@ -15,21 +15,21 @@ const slides = [
     description:
       "I break down complex stuff into the language you will understand. Academic jargon is allowed here.",
     image: "/assets/Cut-bluff.svg",
-    imageStyle: { maxWidth: "42%" },
+    imageStyle: { maxWidth: "38%" },
   },
   {
     title: "Tough Love",
     description:
       "Procrastination again? I will call you out. See me as your friend who will never let you slack.",
     image: "/assets/tough-love.png",
-    imageStyle: { maxWidth: "42%" },
+    imageStyle: { maxWidth: "40%" },
   },
   {
     title: "Brain Hacks",
     description:
       "I learn how your brain works and adapt. The more we study, the smarter we both get.",
     image: "/assets/brain.png",
-    imageStyle: { maxWidth: "33%" },
+    imageStyle: { maxWidth: "31%" },
   },
 ];
 
@@ -41,72 +41,56 @@ const Onboarding: React.FC = () => {
     if (currentIndex < slides.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     } else {
-      navigate("/get-started");
+      navigate("/landingpage");
     }
   };
 
   const skipOnboarding = () => {
-    navigate("/get-started");
+    navigate("/landingpage");
   };
 
   return (
     <div className="onboarding-wrapper">
+      <header className="onboarding-header">
+        <img
+          src="/assets/icons/Simbi-logo.png"
+          alt="Simbi Logo"
+          className="logo"
+        />
+      </header>
       <div className="onboarding-container">
-        <header className="onboarding-header">
-          <div className="logo">
+        <div className="slide-container">
+          <div className="slide">
             <img
-              src="/assets/icons/Simbi-logo.png"
-              alt="Simbi Logo"
-              className="logo"
+              src={slides[currentIndex].image}
+              alt="slide visual"
+              className="slide-image"
+              style={slides[currentIndex].imageStyle}
             />
-          </div>
-
-          {/* <div className="language-fixed">
-            <p className="language-site">
-              SITE LANGUAGE{" "}
-              <span className="Language-english">
-                ENGLISH{" "}
-                <span>
-                  <img
-                    src="/assets/icons/Flag-US.png"
-                    alt="US-logo"
-                    width={"18px"}
-                    height={"12px"}
-                  />
-                </span>
-              </span>
-            </p>
-          </div> */}
-        </header>
-
-        <div className="slide">
-          <img
-            src={slides[currentIndex].image}
-            alt="slide visual"
-            className="slide-image"
-            style={slides[currentIndex].imageStyle}
-          />
-          <div className="slide-text">
-            <h1>{slides[currentIndex].title}</h1>
-            <p>{slides[currentIndex].description}</p>
-            <div className="progress">
-              {slides.map((_, index) => (
-                <span
-                  key={index}
-                  className={`dot ${index === currentIndex ? "active" : "dot"}`}
-                ></span>
-              ))}
-            </div>
-            <div className="button-group">
-              <button className="next" onClick={nextSlide}>
-                Next
-              </button>
-
-              {currentIndex < slides.length - 1 && (
-                <button className="skip" onClick={skipOnboarding}>
-                  Skip
+            <div className="slide-text">
+              <h1>{slides[currentIndex].title}</h1>
+              <p>{slides[currentIndex].description}</p>
+              <div className="progress">
+                {slides.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`dot ${
+                      index === currentIndex ? "active" : "dot"
+                    }`}
+                  ></span>
+                ))}
+              </div>
+              <div className="button-group">
+                <button className="onboarding-next" onClick={nextSlide}>
+                  Next
                 </button>
-              )}
+
+                {currentIndex < slides.length - 1 && (
+                  <button className="skip" onClick={skipOnboarding}>
+                    Skip
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

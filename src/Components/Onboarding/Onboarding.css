@@ -1,54 +1,30 @@
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
-}
 
 .onboarding-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  padding: 2rem 3rem;
+  background-color: #fff;
 }
 
 .onboarding-container {
-  width: 95%;
+  max-width: 1400px;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
+
 }
 
-.onboarding-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 15px;
-}
-/* .language-fixed {
-  margin-right: 30px;
-}
-.language-site {
-  color: #979797;
-  font-family: "Inter", sans-serif;
-}
-
-.Language-english {
-  margin-left: 10px;
-  color: #3a86ff;
-  font-family: "Inter", sans-serif;
-} */
 
 .slide {
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 7rem;
-  margin-top: 4rem;
+  gap: 8rem;
 }
 
 .slide-text {
-  max-width: 39%;
+  width: 39%;
 }
 
 .slide-text h1 {
@@ -72,7 +48,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  /* margin: 0; */
   margin-bottom: 50px;
   padding-right: 22px;
 }
@@ -97,7 +72,7 @@ body {
   width: 95%;
 }
 
-button {
+.onboarding-next, .skip {
   background-color: #3a86ff;
   color: white;
   padding: 17px 150px;
@@ -108,16 +83,15 @@ button {
 }
 
 button:hover {
-  background-color: #1c5bbf;
+  background-color: #3a85ffc2;
 }
 
 button:active {
   transform: scale(0.8);
-  background-color: #1c5bbfab;
 }
 
 button.skip {
-  background-color: transparent;
+  background-color: #EEF6FF;
   color: #3a86ff;
   border: 1px solid #3a86ff;
   margin-top: 15px;
@@ -132,10 +106,6 @@ button.skip:hover {
 @media screen and (max-width: 1024px) {
   .onboarding-container {
     width: 80%;
-  }
-
-  .language-fixed {
-    display: none;
   }
 
   .slide {
@@ -165,8 +135,9 @@ button.skip:hover {
   .button-group {
     align-items: center;
   }
-  button {
-    width: 75%;
+  .onboarding-next,
+   .skip {
+    width: 70%;
     font-size: 1rem;
   }
 
@@ -201,7 +172,8 @@ button.skip:hover {
     width: 55%;
   }
 
-  button {
+  .onboarding-next,
+   .skip {
     font-size: 1rem;
   }
 }
@@ -216,7 +188,7 @@ button.skip:hover {
   }
 
   .slide-text {
-    max-width: 100%;
+    width: 100%;
     text-align: center;
   }
 
@@ -231,18 +203,12 @@ button.skip:hover {
   .dot.active {
     width: 55%;
   }
-  button {
-    padding: 15px 10px;
-    font-size: 0.9rem;
-  }
+  
 }
 
 /* Very Small Devices (below 400px) */
 @media screen and (max-width: 400px) {
-  /* .onboarding-container {
-    width: 95%;
-  } */
-
+  
   .slide {
     margin: 0px;
   }
@@ -257,8 +223,8 @@ button.skip:hover {
     margin-bottom: 30px;
   }
 
-  button {
-    margin-top: 0;
+  .onboarding-next, 
+  .skip {
     padding: 12px 20px;
     font-size: 0.8rem;
     width: 100%;
