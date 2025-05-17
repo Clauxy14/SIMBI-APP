@@ -33,7 +33,7 @@ const Footer = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
               <p>Copyright ©2025 CalmMind. All rights reserved</p>
               <div className="ftr-icons">
                 <img src="/assets/icons/insta.svg" alt="" />
-                <img src="/assets/icons/facebook.svg" alt="" />
+                <img src="/assets/icons/facebook.svg" alt=""  className="facebook"/>
                 <img src="/assets/icons/proicons_x-twitter.svg" alt="" />
                 <img src="/assets/icons/Linkedin.svg" alt="" />
               </div>

@@ -8,28 +8,28 @@ const slides = [
     description:
       "Not your boring study tool. I am the AI buddy who will keep you awake.",
     image: "/assets/meet-simbi.svg",
-    imageStyle: { maxWidth: "21%" },
+    imageStyle: { width: "21%" },
   },
   {
     title: "Cut the Bluff!",
     description:
       "I break down complex stuff into the language you will understand. Academic jargon is allowed here.",
     image: "/assets/Cut-bluff.svg",
-    imageStyle: { maxWidth: "38%" },
+    imageStyle: { width: "38%" },
   },
   {
     title: "Tough Love",
     description:
       "Procrastination again? I will call you out. See me as your friend who will never let you slack.",
     image: "/assets/tough-love.png",
-    imageStyle: { maxWidth: "40%" },
+    imageStyle: { width: "40%" },
   },
   {
     title: "Brain Hacks",
     description:
       "I learn how your brain works and adapt. The more we study, the smarter we both get.",
     image: "/assets/brain.png",
-    imageStyle: { maxWidth: "31%" },
+    imageStyle: { width: "31%" },
   },
 ];
 

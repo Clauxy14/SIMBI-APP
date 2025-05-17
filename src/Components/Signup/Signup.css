@@ -7,8 +7,11 @@
 }
 
 .signup-content {
+  max-width: 1440px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin: auto;
   gap: 5rem;
 }
 
@@ -167,8 +170,9 @@ input:focus {
 @media (max-width: 768px) {
   .signup-content {
     width: 80%;
-    flex-direction: column;
+    margin-top: 5rem;
     align-items: center;
+    justify-content: center;
   }
 
   .logo {
@@ -196,6 +200,8 @@ input:focus {
 @media (max-width: 600px) {
   .signup-content {
     width: 90%;
+    margin-top: 5rem;
+    align-items: center;
     box-shadow: 0 0 0;
     border: 0;
     padding: 10px 20px;

@@ -13,8 +13,11 @@
 }
 
 .login-content {
+  max-width: 1440px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin: auto;
   gap: 8rem;
 }
 

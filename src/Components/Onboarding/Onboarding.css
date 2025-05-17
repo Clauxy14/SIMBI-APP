@@ -1,20 +1,19 @@
 
 .onboarding-wrapper {
   width: 100%;
+  height: 100vh;
   padding: 2rem 3rem;
   background-color: #fff;
 }
 
 .onboarding-container {
   max-width: 1400px;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
 
 }
-
 
 .slide {
   width: 100%;
@@ -26,6 +25,7 @@
 .slide-text {
   width: 39%;
 }
+
 
 .slide-text h1 {
   font-size: 4rem;
@@ -104,32 +104,37 @@ button.skip:hover {
 
 /* Tablets (768px - 1024px) */
 @media screen and (max-width: 1024px) {
-  .onboarding-container {
+  /* .onboarding-container {
     width: 80%;
+  } */
+
+  .onboarding-container{
+    margin-top: 8rem;
   }
 
   .slide {
     flex-direction: column;
     align-items: center;
     gap: 4rem;
+    margin: auto;
   }
 
   .slide-text {
-    max-width: 80%;
+    width: 80%;
     text-align: center;
   }
 
   .slide-text h1 {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   .slide-text p {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .slide-image {
-    width: 75%;
-    height: auto;
+    width: 450px;
+    
   }
 
   .button-group {
@@ -154,7 +159,7 @@ button.skip:hover {
 /* Small tablets and large phones (600px - 768px) */
 @media screen and (max-width: 768px) {
   .slide-text {
-    width: 90%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -167,7 +172,10 @@ button.skip:hover {
   .slide-text p {
     font-size: 1.6rem;
   }
-
+  .slide-image {
+    max-width: 60%;
+    
+  }
   .dot.active {
     width: 55%;
   }
@@ -188,7 +196,7 @@ button.skip:hover {
   }
 
   .slide-text {
-    width: 100%;
+    width: 70%;
     text-align: center;
   }
 
@@ -207,11 +215,15 @@ button.skip:hover {
 }
 
 /* Very Small Devices (below 400px) */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 440px) {
   
   .slide {
-    margin: 0px;
+    margin: 0;
   }
+  .slide-text{
+    width: 80%;
+  }
+
   .slide-text h1 {
     font-size: 1.5rem;
     margin-bottom: 8px;
