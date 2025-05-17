@@ -26,12 +26,10 @@
   list-style: none;
 }
 
-/* .sidebar-li {
-  list-style-type: none;
-  background: rgba(255, 255, 255, 1);
-} */
 
-.nav-logo {
+.nav-logoo {
+  display: flex;
+    gap: 5px;
   margin-bottom: 1rem;
   width: 8rem;
   height: 40px;
@@ -41,6 +39,7 @@
   z-index: 1001;
   cursor: pointer;
   border: none;
+ 
   /* background: rgba(255, 255, 255, 1); */
 }
 
@@ -58,6 +57,42 @@
 .nav-links {
   padding: auto;
 }
+
+.sidebar-web3-card {
+margin-top:2rem;
+  background-color: #EEF6FF;
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+ 
+}
+
+.sidebar-web3-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #737373;
+  margin-bottom: 20px;
+}
+
+.sidebar-telegram-btn {
+  background-color: #FFFFFF;
+  color: #1E293B;
+  border: 1.5px solid #BCDBFF;
+  font-weight: 600;
+ width: 100%;
+ padding: 0.6rem 0.5rem;
+  border-radius: 16px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Segoe UI",sans-serif;
+}
+
+.sidebar-telegram-btn:hover {
+  background-color: #e6f3ff;
+  border-color: #91caff;
+}
+
 
 @media (max-width: 1024px) {
   html {

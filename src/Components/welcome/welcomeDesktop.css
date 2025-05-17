@@ -55,6 +55,9 @@
 }
 
 .welcome-title-content {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
   padding: 1rem 4rem;
   text-align: center;
 }
@@ -75,12 +78,12 @@
   font-weight: 500;
   color: #666;
   font-size: 1.1rem;
-  margin-top: 0.3rem;
+  margin-top: 0.2rem;
 }
 
 .desc {
   margin-top: 0.3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #888;
   font-size: 0.95rem;
 }
@@ -117,13 +120,15 @@
   background-color: #d6d6d6;
   padding: 8px 8px 2px 8px;
   border-radius: 50%;
+  margin-top: 1.5rem;
 }
 .image-icon img {
   width: 22px;
 }
 .label strong {
   display: block;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.7rem;
   font-weight: 600;
   color: #333;
 }
@@ -131,6 +136,10 @@
 .label span {
   font-size: 0.9rem;
   color: #777;
+}
+
+.label p{
+  padding-bottom: 0.7rem;
 }
 
 .form-section {
@@ -162,7 +171,7 @@
 .progress-percent {
   position: absolute;
   right: 35px;
-  top: 35px;
+  top: 44px;
   font-size: 0.9rem;
   color: #969696;
 }
@@ -252,11 +261,18 @@
     flex-direction: column;
     align-items: center;
   }
-
+.welcome-sidebar{
+  width: 75%;
+ 
+}
   .sidebar,
   .form-section {
     width: 100%;
     max-width: 700px;
+  }
+
+  .bell-icon img{
+    width: 2rem;
   }
 
   .option-btnn {
@@ -268,6 +284,7 @@
 @media (max-width: 780px) {
   .welcome-header {
     display: flex;
+
   }
 
   .welcome-header {
@@ -282,6 +299,7 @@
 
   .welcome-title {
     font-size: 2rem;
+    
   }
 
   .sidebar,

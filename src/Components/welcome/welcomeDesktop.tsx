@@ -161,7 +161,7 @@ const WelcomeDesktop: React.FC = () => {
             <div className="progress-bar">
               <div
                 className="progresss"
-                style={{ width: `${progress}% `}}
+                style={{ width:` ${progress}%` }}
               ></div>
             </div>
             <p className="progress-percent">{progress}%</p>

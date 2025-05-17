@@ -4,6 +4,7 @@ import CreateGroupForm from './CreateGroupForm';
 // Update the path below to the correct relative path if needed
 import { StudyGroup } from '../../types/telegram';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function StudyDashboard({ user }: { user: any }) {
   const [groups, setGroups] = useState<StudyGroup[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);

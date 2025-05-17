@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./welcomeMobile.css"
 
@@ -66,6 +66,23 @@ export default function WelcomeMobile() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+   const stored = localStorage.getItem("simbiUser");
+   let simbiUser = null;
+
+try {
+  if (stored && stored !== "undefined") {
+    const parsed = JSON.parse(stored);
+    const name = parsed?.name || parsed?.given_name || "Guest";
+    const avatar =
+      parsed?.avatar ||
+     ` https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+    simbiUser = { name, avatar };
+  }
+} catch (e) {
+  console.error("Error parsing simbiUser from localStorage", e);
+}
+
+
   const sendDataToSimbiAI = async () => {
     setIsLoading(true);
     try {
@@ -128,6 +145,13 @@ export default function WelcomeMobile() {
               className="bell-icon-img"
             />
           </span>
+        <div className="user-avatar">
+  <img
+    src={simbiUser?.avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=Guest"}
+    alt="Avatar"
+  />
+  <span className="username">{simbiUser?.name || "Guest"}</span>
+</div>
 
           <button className="wallet-btn-btn">Connect Wallet</button>
         </div>
@@ -151,7 +175,7 @@ export default function WelcomeMobile() {
         <div className="progress-bar-mobile">
           <div
             className="progresss-mobile"
-            style={{ width: `${progress}%` }}
+            style={{ width:` ${progress}%` }}
           ></div>
         </div>
         <div className="progress-percent-mobile">{progress}%</div>

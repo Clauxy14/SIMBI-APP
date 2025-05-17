@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import StudyDashboard from './StudyDashboard';
 import useTelegramAuth from '../../Hooks/useTelegramAuth';

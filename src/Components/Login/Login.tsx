@@ -4,6 +4,8 @@ import "./Login.css";
 
 import invisibleIcon from "/assets/icons/visibility-off.svg";
 import visibleIcon from "/assets/icons/eye.svg";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -17,12 +19,33 @@ const Login: React.FC = () => {
   const [googleError, setGoogleError] = useState<string | null>(null);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+   const [, setError] = useState<string | null>(null);
 
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleGoogleSuccess = (credentialResponse: any) => {
+      try {
+        if (!credentialResponse.credential) {
+          throw new Error("No credential received");
+        }
+  
+        const userObject = jwtDecode(credentialResponse.credential);
+        localStorage.setItem("simbiUser", JSON.stringify(userObject));
+        navigate("/welcome");
+      } catch (error) {
+        console.error("Google sign-in error:", error);
+        setError("Failed to sign in with Google. Please try again.");
+      }
+    };
+  
+    const handleGoogleFailure = () => {
+      setError("Google sign-in was unsuccessful. Please try again.");
+    };
+    
   // Redirect if user is already logged in
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
-      navigate("/welcome");
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -73,9 +96,20 @@ const Login: React.FC = () => {
       localStorage.setItem("authToken", token);
 
       // Optionally store user info if available
+      // if (resData.data.user) {
+      //   localStorage.setItem("user", JSON.stringify(resData.data.user.name));
+      // }
       if (resData.data.user) {
-        localStorage.setItem("user", JSON.stringify(resData.data.user));
-      }
+  const user = resData.data.user;
+  const simbiUser = {
+    name: user.name || user.firstName || "User",
+    avatar: user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.name || "User")}`,
+    // Include more fields if needed
+  };
+  localStorage.setItem("simbiUser", JSON.stringify(simbiUser));
+  console.log(user)
+}
+
 
       navigate("/welcome");
     } catch (error) {
@@ -115,7 +149,19 @@ const Login: React.FC = () => {
               Registration successful! Please log in to continue.
             </div>
           )}
-
+          <div className="google-signin-container">
+            <GoogleOAuthProvider clientId="6846893560-imp57m3r6aft7c9lpu4c7sor3tuf1oid.apps.googleusercontent.com">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleFailure}
+                useOneTap
+                text="signup_with"
+                shape="pill"
+                // width="450"
+                logo_alignment="center"
+              />
+            </GoogleOAuthProvider>
+          </div>
           {googleError && <div className="error-message">{googleError}</div>}
 
           <div className="divider-line">
