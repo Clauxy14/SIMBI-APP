@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import "./welcomeDesktop.css";
 import HeadBar from "../headBar/headBar";
+
 
 const desktopSteps = [
   {
@@ -300,9 +302,12 @@ const WelcomeDesktop: React.FC = () => {
 
               <div className="div-next-butn">
                 {currentStep < desktopSteps.length - 1 && (
-                  <button className="skip-welcome" onClick={skipWelcomes}>
-                    Skip
-                  </button>
+                  <div className="skipcontainer">
+                    <button className="skip-welcome" onClick={skipWelcomes}>
+                      Skip
+                    </button>
+                    <IoIosArrowForward />
+                  </div>
                 )}
 
                 <button

@@ -229,16 +229,28 @@
 .div-next-butn {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.skipcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #347dff;
+  padding-top: 20px;
+
 }
 
 .skip-welcome {
-  border: none;
   color: #347dff;
-  font-size: 24px;
+  border: none;
+  font-size: 20px;
   background-color: transparent;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
 }
 
-.skip-welcome:hover{
+.skip-welcome:hover {
   background-color: transparent;
 }
 

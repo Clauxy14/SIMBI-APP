@@ -1,4 +1,5 @@
 import {  useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import "./welcomeMobile.css"
 
@@ -198,11 +199,15 @@ try {
         {content}
 
         <div className="div-next-butn-mobile">
-          {stepIndex < steps.length - 1 && (
-            <button className="skip-welcome" onClick={skipWelcome}>
-              Skip
-            </button>
-          )}
+         {stepIndex < steps.length - 1 && (
+                           <div className="skipcontainer">
+                             <button className="skip-welcome" onClick={skipWelcome}>
+                               Skip
+                             </button>
+                             <IoIosArrowForward />
+                           </div>
+                         )}
+         
           
           <button
             className="next-butn-mobile"
