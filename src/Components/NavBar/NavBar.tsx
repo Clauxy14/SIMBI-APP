@@ -68,7 +68,7 @@ function NavBar() {
                   marginBottom: "-0.5rem",
                 }}
               />
-              &nbsp;&nbsp;&nbsp;Progress
+              &nbsp;&nbsp;&nbsp;Accountability
             </Link>
           </li>
           <li>
