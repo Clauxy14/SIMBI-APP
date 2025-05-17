@@ -13,20 +13,22 @@ body {
 
 .studyplan-container {
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
   /* padding: 20px;
   max-width: 900px;
   margin: auto; */
 }
 
 .studyplan-navbar {
-  width: 240px;
+width: 20%;
 }
 
 .studyplan-content {
   flex: 1;
   margin-top: 2rem;
   margin-right: 6rem;
+
+
 }
 
 .studyplan-header {
@@ -58,6 +60,7 @@ body {
 
 .studyplan-ask-btn {
   background-color: #3a86ff;
+  color: #fff;
   border: none;
   padding: 10px 16px;
   border-radius: 8px;
@@ -92,7 +95,7 @@ body {
   align-items: flex-end;
 }
 
-.session-card-2 {
+.session-card-tomorrow {
   background-color: #f5e9f7;
   padding: 15px;
   border-radius: 12px;
@@ -102,7 +105,26 @@ body {
   justify-content: space-between;
   align-items: flex-end;
 }
-
+.session-card-missed{
+   background-color: #FFF7ED;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.session-card-all{
+     background-color: #88caee;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 .session-card strong {
   font-size: 16px;
   color: #0f172a;
@@ -121,6 +143,12 @@ body {
 
 .studyplan-arrow {
   width: 100px;
+}
+
+.delete-div{
+  display: flex;
+  justify-content: space-around;
+ 
 }
 
 /* Modal */
@@ -204,4 +232,66 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   z-index: 20;
   font-size: 14px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .studyplan-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .studyplan-navbar {
+    width: 100%;
+  }
+
+  .studyplan-content {
+    margin: 0;
+  }
+
+  .session-card-1,
+  .session-card-tomorrow,
+  .session-card-missed,
+  .session-card-all {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .session-card-1 > div,
+  .session-card-tomorrow > div,
+  .session-card-missed > div,
+  .session-card-all > div {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .delete-div {
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .studyplan-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2.5rem;
+    gap: 1rem;
+  }
+
+  .studyplan-header-button {
+    width: 70%;
+    flex-direction:row;
+    gap: 0.5rem;
+  }
+
+  .studyplan-add-btn,
+  .studyplan-ask-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding: 1.2rem;
+  }
 }

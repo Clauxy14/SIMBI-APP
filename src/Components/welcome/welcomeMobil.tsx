@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./welcomeMobile.css"
 
@@ -22,10 +22,15 @@ const steps = [
           Which of these subjects do you find most challenging?
         </label>
         <select className="dropdown">
-          <option className="first-option">Select one or more</option>
-          <option>Mathematics</option>
-          <option>Science</option>
-          <option>Literature</option>
+          <option className="first-option">Select-option</option>
+          <option value="Js 1-3">Junior Secondary</option>
+          <option value="Ss 1-3">Senior Secondary</option>
+          <option value="100 level">100 level</option>
+          <option value="200 level">200 level</option>
+          <option value="300 level">300 level</option>
+          <option value="400 level">400 level</option>
+          <option value="500 level">500 level</option>
+          <option value="600 level">600 level</option>
         </select>
       </>
     ),
@@ -65,6 +70,23 @@ export default function WelcomeMobile() {
   const [stepIndex, setStepIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+   const stored = localStorage.getItem("simbiUser");
+   let simbiUser = null;
+
+try {
+  if (stored && stored !== "undefined") {
+    const parsed = JSON.parse(stored);
+    const name = parsed?.name || parsed?.given_name || "Guest";
+    const avatar =
+      parsed?.avatar ||
+     ` https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+    simbiUser = { name, avatar };
+  }
+} catch (e) {
+  console.error("Error parsing simbiUser from localStorage", e);
+}
+
 
   const sendDataToSimbiAI = async () => {
     setIsLoading(true);
@@ -107,6 +129,10 @@ export default function WelcomeMobile() {
     }
   };
 
+  const skipWelcome = () => {
+    navigate("/askSimbi");
+  };
+
   const { label, description, content, progress } = steps[stepIndex];
 
   return (
@@ -128,6 +154,16 @@ export default function WelcomeMobile() {
               className="bell-icon-img"
             />
           </span>
+          <div className="user-avatar">
+            <img
+              src={
+                simbiUser?.avatar ||
+                "https://api.dicebear.com/7.x/bottts/svg?seed=Guest"
+              }
+              alt="Avatar"
+            />
+            <span className="username">{simbiUser?.name || "Guest"}</span>
+          </div>
 
           <button className="wallet-btn-btn">Connect Wallet</button>
         </div>
@@ -151,10 +187,10 @@ export default function WelcomeMobile() {
         <div className="progress-bar-mobile">
           <div
             className="progresss-mobile"
-            style={{ width: `${progress}%` }}
+            style={{ width: ` ${progress}%` }}
           ></div>
         </div>
-        <div className="progress-percent-mobile">{progress}%</div>
+        <div className="progress-percent-mobile">{progress}</div>
 
         <h3 className="welcome-label-mobile">{label}</h3>
         <p className="desc">{description}</p>
@@ -162,6 +198,12 @@ export default function WelcomeMobile() {
         {content}
 
         <div className="div-next-butn-mobile">
+          {stepIndex < steps.length - 1 && (
+            <button className="skip-welcome" onClick={skipWelcome}>
+              Skip
+            </button>
+          )}
+          
           <button
             className="next-butn-mobile"
             onClick={nextStep}

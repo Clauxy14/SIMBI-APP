@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Loading from "./loading";
+import WelcomePage from "./Components/welcome/welcome";
 // import AcademicResources from "../src/Components/AcademicSupport";
 
 // Lazy load your pages
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/connect-wallet" element={<ConnectWallet />} />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/welcome" element={<WelcomePage />} />
          
           /* Adjust the path to your image if needed */
            {/* <Route path="/academic-resources" element={<AcademicResources />} />  */}

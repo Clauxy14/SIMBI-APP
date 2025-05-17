@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   border-bottom: 1px solid #e6e6e6;
 }
 
@@ -18,7 +18,7 @@
   gap: 0.6rem;
 }
 
-.bell-icon {
+/* .bell-icon {
   cursor: pointer;
   margin-top: 8px;
 }
@@ -41,9 +41,9 @@
 .username {
   font-weight: 500;
   font-size: 14px;
-}
+} */
 
-.user-info .wallet-btn {
+/* .user-info .wallet-btn {
   padding: 10px 18px;
   border: 1px solid #bcdbff;
   border-radius: 16px;
@@ -52,9 +52,12 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
-}
+} */
 
 .welcome-title-content {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
   padding: 1rem 4rem;
   text-align: center;
 }
@@ -75,12 +78,12 @@
   font-weight: 500;
   color: #666;
   font-size: 1.1rem;
-  margin-top: 0.3rem;
+  margin-top: 0.2rem;
 }
 
 .desc {
   margin-top: 0.3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #888;
   font-size: 0.95rem;
 }
@@ -117,13 +120,15 @@
   background-color: #d6d6d6;
   padding: 8px 8px 2px 8px;
   border-radius: 50%;
+  margin-top: 1.5rem;
 }
 .image-icon img {
   width: 22px;
 }
 .label strong {
   display: block;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.7rem;
   font-weight: 600;
   color: #333;
 }
@@ -131,6 +136,10 @@
 .label span {
   font-size: 0.9rem;
   color: #777;
+}
+
+.label p {
+  padding-bottom: 0.7rem;
 }
 
 .form-section {
@@ -162,7 +171,7 @@
 .progress-percent {
   position: absolute;
   right: 35px;
-  top: 35px;
+  top: 44px;
   font-size: 0.9rem;
   color: #969696;
 }
@@ -219,8 +228,20 @@
 
 .div-next-butn {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
 }
+
+.skip-welcome {
+  border: none;
+  color: #347dff;
+  font-size: 24px;
+  background-color: transparent;
+}
+
+.skip-welcome:hover{
+  background-color: transparent;
+}
+
 .next-butn {
   width: 30%;
   margin-top: 2rem;
@@ -252,11 +273,17 @@
     flex-direction: column;
     align-items: center;
   }
-
+  .welcome-sidebar {
+    width: 75%;
+  }
   .sidebar,
   .form-section {
     width: 100%;
     max-width: 700px;
+  }
+
+  .bell-icon img {
+    width: 2rem;
   }
 
   .option-btnn {
@@ -289,63 +316,3 @@
     padding: 1.5rem;
   }
 }
-
-/* ≤ 600px (Large phones / small tablets) */
-/* @media (max-width: 600px) {
-  .welcome-header {
-    display: flex;
-  }
-
-  .welcome-title-content {
-    padding: 1rem;
-  }
-
-  .welcome-title {
-    font-size: 1.8rem;
-  }
-
-  .sidebar,
-  .form-section {
-    padding: 1rem;
-  }
-
-  .user-avatar span,
-  .wallet-btn {
-    display: none;
-  }
-
-  .option-btn {
-    font-size: 0.95rem;
-    padding: 0.6rem;
-  }
-} */
-
-/* ≤ 400px (Small phones) */
-/* @media (max-width: 400px) {
-  .welcome-header {
-    display: flex;
-  }
-
-  .welcome-title {
-    font-size: 1.5rem;
-  }
-
-  .desc,
-  .subtitle {
-    font-size: 0.85rem;
-  }
-
-  .welcome-label {
-    font-size: 1rem;
-  }
-
-  .option-btn {
-    font-size: 0.85rem;
-  }
-
-  .next-butn {
-    padding: 0.6rem 1.5rem;
-    font-size: 0.95rem;
-  }
-} */
-/*  */

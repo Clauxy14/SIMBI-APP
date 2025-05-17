@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
 import "./studyplaaan.css";
 
 interface Session {
@@ -21,14 +22,31 @@ const formatDate = (dateStr: string) => {
   });
 };
 
-const BEARER_TOKEN =
-  localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
+const calculateDaysRemaining = (sessionDate: string): number => {
+  const session = new Date(sessionDate);
+  const now = new Date();
+  const diffTime = session.getTime() - now.getTime();
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+};
 
-console.log("Token:", BEARER_TOKEN);
+const formatTimeRange = (time: string, duration: number): string => {
+  const [hours, minutes] = time.split(":").map(Number);
+  const start = new Date();
+  start.setHours(hours, minutes, 0, 0);
 
-if (!BEARER_TOKEN) {
-  console.warn("Auth token not found. User might not be logged in.");
-}
+  const end = new Date(start.getTime() + duration * 60000);
+
+  const options: Intl.DateTimeFormatOptions = {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  };
+
+  return `${start.toLocaleTimeString([], options)} - ${end.toLocaleTimeString(
+    [],
+    options
+  )}`;
+};
 
 const STUDYPLAAAN: React.FC = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
@@ -43,26 +61,41 @@ const STUDYPLAAAN: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
 
+  const getToken = (): string | null => {
+    return (
+      localStorage.getItem("authToken") || sessionStorage.getItem("authToken")
+    );
+  };
+
   const fetchSessions = async () => {
+    const token = getToken();
+
+    if (!token) {
+      alert("You're not logged in. Please log in again.");
+      navigate("/login");
+      return;
+    }
+
     try {
       const res = await fetch("https://simbi-ai.onrender.com/api/sessions", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${BEARER_TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (!res.ok) {
         if (res.status === 401) {
           alert("Session expired or unauthorized. Please log in again.");
-          throw new Error("401 Unauthorized");
+          localStorage.removeItem("authToken");
+          navigate("/login");
+          return;
         }
         const errorText = await res.text();
         throw new Error(`Error ${res.status}: ${errorText}`);
       }
 
       const data = await res.json();
-      console.log("Fetched sessions data:", data);
 
       if (Array.isArray(data)) {
         setSessions(data);
@@ -81,16 +114,24 @@ const STUDYPLAAAN: React.FC = () => {
   }, []);
 
   const addSession = async () => {
+    const token = getToken();
+
+    if (!token) {
+      alert("You're not logged in. Please log in again.");
+      navigate("/login");
+      return;
+    }
+
     try {
-      console.log("Posting form data:", formData);
       const res = await fetch("https://simbi-ai.onrender.com/api/sessions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${BEARER_TOKEN}`,
+          Authorization: ` Bearer ${token} `,
         },
         body: JSON.stringify(formData),
       });
+
       if (res.ok) {
         setFormData({
           subject: "",
@@ -122,12 +163,93 @@ const STUDYPLAAAN: React.FC = () => {
     );
   };
 
-  const formattedToday = new Date().toLocaleDateString(undefined, {
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  const formattedToday = today.toLocaleDateString(undefined, {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
+  // const deleteSession = async (id?: number) => {
+  //   if (!id) return;
+
+  //   const token = getToken();
+  //   if (!token) {
+  //     alert("You're not logged in. Please log in again.");
+  //     navigate("/login");
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await fetch(
+  //       `https://simbi-ai.onrender.com/api/sessions/${id}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (res.ok) {
+  //       setSessions((prev) => prev.filter((session) => session.id !== id));
+  //     } else {
+  //       const errorText = await res.text();
+  //       console.error("Failed to delete session:", errorText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting session:", error);
+  //   }
+  // };
+
+  const deleteSession = async (id?: number) => {
+    if (!id) return;
+    console.log("🗑️ Attempting to delete session with ID:", id);
+
+    const token = getToken();
+    if (!token) {
+      alert("You're not logged in. Please log in again.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://simbi-ai.onrender.com/api/sessions/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (res.ok) {
+        console.log("✅ Delete successful");
+        setSessions((prev) => {
+          const updated = prev.filter(
+            (session) => String(session.id) !== String(id)
+          );
+          console.log("📦 Updated sessions list:", updated);
+          return updated;
+        });
+
+        // OPTIONAL: Re-fetch sessions from backend to be 100% sure
+        // const updatedSessions = await fetchSessions();
+        // setSessions(updatedSessions);
+      } else {
+        const errorText = await res.text();
+        console.error("❌ Failed to delete session:", errorText);
+      }
+    } catch (error) {
+      console.error("🔥 Error deleting session:", error);
+    }
+  };
+  
 
   return (
     <div className="studyplan-container">
@@ -152,13 +274,13 @@ const STUDYPLAAAN: React.FC = () => {
             </button>
           </div>
         </header>
-
+        {/* Today */}
         <div className="section">
           <h2>Today</h2>
           <p>{formattedToday}</p>
 
           {sessions
-            .filter((s) => isSameDay(s.date, new Date().toISOString()))
+            .filter((s) => isSameDay(s.date, today.toISOString()))
             .map((s, i) => (
               <div
                 key={s.id || i}
@@ -168,35 +290,149 @@ const STUDYPLAAAN: React.FC = () => {
                 <div>
                   <strong>{s.subject}</strong>
                   <p>{s.topic}</p>
-                  <span>
-                    {formatDate(s.date)} at {s.time} ({s.duration} minutes)
-                  </span>
+                  <span>{formatDate(s.date)}</span>
                 </div>
-                <div>→</div>
+                <div>
+                  <div className="delete-div">
+                    <div>→</div>
+                    <MdDelete
+                      onClick={(e) => {
+                        e.stopPropagation(); // prevent navigating to /studySession
+                        deleteSession(s.id);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "red",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                  </div>
+                  <span>{formatTimeRange(s.time, s.duration)}</span>
+                </div>
               </div>
             ))}
         </div>
+        <div className="section">
+          <h2>Tomorrow</h2>
 
+          {sessions
+            .filter((s) => isSameDay(s.date, tomorrow.toISOString()))
+            .map((s, i) => (
+              <div
+                key={s.id || i}
+                className="session-card-1"
+                onClick={() => navigate("/studySession")}
+              >
+                <div>
+                  <strong>{s.subject}</strong>
+                  <p>{s.topic}</p>
+                  <span style={{ color: "red", fontSize: "14px" }}>
+                    Deadline in {calculateDaysRemaining(s.date)} day
+                    {calculateDaysRemaining(s.date) !== 1 ? "s" : ""}
+                  </span>
+                  <p>{formatDate(tomorrow.toISOString())}</p>
+                </div>
+                <div>
+                  <div
+                    className="delete-div"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <div>→</div>
+                    <MdDelete
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent card click
+                        console.log("🗑️ Clicked delete for ID:", s.id);
+                        deleteSession(s.id);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "red",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                  </div>
+                  <span>{formatTimeRange(s.time, s.duration)}</span>
+                </div>
+              </div>
+            ))}
+        </div>
+        {/* Missed Sessions */}
+        <div className="section">
+          <h2 style={{ color: "#C2402E" }}>Missed Session</h2>
+
+          {sessions
+            .filter((s) => new Date(s.date) < today)
+            .map((s, i) => (
+              <div
+                key={s.id || i}
+                className="session-card-missed"
+                onClick={() => navigate("/studySession")}
+              >
+                <div>
+                  <strong>{s.subject}</strong>
+                  <p>{s.topic}</p>
+                </div>
+                <div>
+                  <div className="delete-div">
+                    <div>→</div>
+                    <MdDelete
+                      onClick={(e) => {
+                        e.stopPropagation(); // prevent navigating to /studySession
+                        deleteSession(s.id);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "red",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                  </div>
+                  <span>{formatTimeRange(s.time, s.duration)}</span>
+                </div>
+              </div>
+            ))}
+        </div>
+        All Sessions
         <div className="section">
           <h2>All Scheduled Sessions</h2>
           {sessions.map((s, i) => (
             <div
               key={s.id || i}
-              className="session-card-2"
+              className="session-card-all"
               onClick={() => navigate("/studySession")}
             >
               <div>
                 <strong>{s.subject}</strong>
                 <p>{s.topic}</p>
                 <span>
-                  {formatDate(s.date)} at {s.time} ({s.duration} minutes)
+                  {formatDate(s.date)} at {formatTimeRange(s.time, s.duration)}
                 </span>
               </div>
-              <div>→</div>
+              <div>
+                <div className="delete-div">
+                  <div>→</div>
+                  <MdDelete
+                    onClick={(e) => {
+                      e.stopPropagation(); // prevent navigating to /studySession
+                      deleteSession(s.id);
+                    }}
+                    style={{
+                      cursor: "pointer",
+                      color: "red",
+                      fontSize: "1.5rem",
+                    }}
+                  />
+                </div>
+                <span>{formatTimeRange(s.time, s.duration)}</span>
+              </div>
             </div>
           ))}
         </div>
-
+        {/* Add Session Modal */}
         {showModal && (
           <div className="modal">
             <div className="modal-content">
@@ -232,7 +468,10 @@ const STUDYPLAAAN: React.FC = () => {
               <select
                 value={formData.duration}
                 onChange={(e) =>
-                  setFormData({ ...formData, duration: Number(e.target.value) })
+                  setFormData({
+                    ...formData,
+                    duration: Number(e.target.value),
+                  })
                 }
               >
                 <option value={30}>30 minutes</option>
@@ -248,7 +487,7 @@ const STUDYPLAAAN: React.FC = () => {
             </div>
           </div>
         )}
-
+        {/* Success Message */}
         {showSuccess && (
           <div className="success-popup">
             Your session has been added to your schedule successfully

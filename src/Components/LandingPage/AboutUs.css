@@ -1,3 +1,7 @@
+.AboutUs{
+  background-color: #fff;
+}
+
 .abt {
   background-color: rgba(254, 249, 194, 1);
   min-height: 600px;
@@ -16,22 +20,18 @@
   text-align: center;
 }
 .abt-container h2 {
-  font-size: 40px;
-  color: rgba(58, 134, 255, 1);
+  font-size: 3rem;
+  color:#3A86FF;
+  line-height: 130%;
+  font-family: 700;
 }
 
-.jsimbi {
-  background-color: #2d74ff;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  width: 300px;
-  height: 48px;
-  border-radius: 10px;
-  margin-right: 1rem;
-  cursor: pointer;
-  margin-top: 3rem;
+.abt-container p{
+  font-size: 1.5rem;
+  margin-top: 1rem;
 }
+
+
 .story {
   position: relative;
 }
@@ -43,18 +43,20 @@
   padding: 0rem 2rem;
 }
 .story-img img:first-child {
-  width: 340px;
+  padding-left: 25px;
 }
 .our-story {
-  min-height: 400px;
+  /* min-height: 400px; */
   padding: 10rem 4rem 4rem;
 }
 .our-story h1 {
-  color: rgba(58, 134, 255, 1);
-  font-size: 40px;
+  margin: 3rem 0 1.5rem 0;
+  color: #3A86FF;
+  font-size: 3rem;
+  font-weight: 700;
 }
 .p {
-  display: flex;
+  display: flex;  
   gap: 3rem;
 }
 
@@ -62,13 +64,20 @@
   text-align: center;
 }
 .value-p h2 {
-  color: rgba(58, 134, 255, 1);
-  font-size: 40px;
+  color: #3A86FF;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.value-p p{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 .values {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 2rem 2rem 0rem 8rem;
+  gap: 1.5rem;
 }
 
 .value {
@@ -83,19 +92,25 @@
 .our-value {
   padding-bottom: 4rem;
 }
-.value-media {
+
+.value-media h2{
   text-align: center;
   color: #2d74ff;
+  font-size: 3rem;
+  margin-top: 0;
+  
+}
+.value-media {
   background-color: #fff8e6;
-  padding: 3rem 1rem;
+padding-bottom: 0.9rem;
 }
 .value-media img {
-  width: 150px;
+  width: 60%;
 }
 
 .value-logos {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .value-logos img {
@@ -104,8 +119,166 @@
   vertical-align: middle;
 }
 
+@media (max-width: 1024px) {
+  /* Navbar adjustments */
+  .abt-navbar {
+    padding: 2rem 1.5rem;
+  }
+
+  .abt-navbar img {
+    width: 120px;
+  }
+
+  .nav-a {
+    gap: 1.6rem;
+  }
+
+  .nav-a a, .nav-a Link, .lp-sign-in {
+    font-size: 1rem;
+  }
+
+  /* Hero section */
+  .abt-container {
+    padding: 2rem 5rem;
+  }
+
+  .abt-container h2 {
+    font-size: 3rem;
+  }
+
+  .abt-container p {
+    font-size: 1.7rem;
+  }
+
+  .abt-container img {
+    width: 35px;
+  }
+
+  .jsimbii {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+  }
+
+  /* Story section */
+  .story-img {
+    gap: 0.75rem;
+    top: -6rem;
+    padding: 0 1.5rem;
+    width: 80%;
+  }
+
+  .story-img img {
+    width: 34%;
+  }
+
+  /* .our-story {
+    padding: 8rem 2rem 3rem;
+  } */
+
+  .our-story h1 {
+    font-size: 2.2rem;
+  }
+
+  /* .p {
+    flex-direction: column;
+    gap: 2rem;
+  } */
+
+  .p p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  /* Values section */
+  .value-p h2 {
+    font-size: 2.4rem;
+  }
+
+  .value-p p {
+    font-size: 1.2rem;
+  }
+
+  .values {
+    padding: 1rem 3.5rem;
+  }
+
+  .value {
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .value img {
+    width: 40px;
+  }
+
+  .value h4 {
+    font-size: 1.1rem;
+  }
+
+  .value p {
+    font-size: 0.95rem;
+  }
+
+  /* Media logos section */
+  .value-media h2 {
+    font-size: 2.4rem;
+  }
+
+  .value-logos {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .value-logos img {
+    height: 30px;
+  }
+
+  .value-media img {
+    width: 50%;
+  }
+
+  /* Footer (from previously shared Footer.css) */
+  .footer {
+    padding: 2rem 1.5rem 0 1.5rem;
+  }
+
+  .ftr {
+    padding: 0 1rem;
+    gap: 5rem;
+  }
+
+  .ftr1 img {
+    width: 120px;
+  }
+
+  .ftr1 h4 {
+    font-size: 1rem;
+  }
+
+  .ftr2 h2 {
+    font-size: 1rem;
+  }
+
+  .ftr2 p {
+    font-size: 0.9rem;
+  }
+
+  .ftr-icons img {
+    width: 20px;
+  }
+
+  .ftr-btn .str-btn,
+  .ftr-btn .alr-btn {
+    width: 240px;
+    height: 44px;
+    font-size: 0.95rem;
+  }
+}
+
 /* Tablet (max-width: 1024px) */
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .abt-container {
     padding: 2rem 5rem;
   }
@@ -148,10 +321,10 @@
     width: 100%;
     max-width: 300px;
   }
-}
+} */
 
 /* Phone (max-width: 767px) */
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
   .abt-container {
     padding: 2rem 1rem;
   }
@@ -214,4 +387,4 @@
   .jsimbi {
     width: 100%;
   }
-}
+} */

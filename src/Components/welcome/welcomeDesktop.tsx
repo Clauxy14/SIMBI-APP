@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./welcomeDesktop.css";
+import HeadBar from "../headBar/headBar";
 
 const desktopSteps = [
   {
@@ -41,16 +42,24 @@ const WelcomeDesktop: React.FC = () => {
 
   useEffect(() => {
     const stored = localStorage.getItem("simbiUser");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setUser({
-        name: parsed.name || parsed.given_name || "User",
-        avatar:
-          parsed.avatar ||
-          `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(
-            parsed.name || "User"
-          )}`,
-      });
+
+    if (stored && stored !== "undefined") {
+      try {
+        const parsed = JSON.parse(stored);
+        setUser({
+          name: parsed.name || parsed.given_name || "User",
+          avatar:
+            parsed.avatar ||
+            `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(
+              parsed.name || "User"
+            )}`,
+        });
+      } catch (error) {
+        console.error("Failed to parse simbiUser:", error);
+        localStorage.removeItem("simbiUser");
+      }
+    } else {
+      console.warn("simbiUser is not set or is invalid in localStorage.");
     }
   }, []);
 
@@ -71,10 +80,7 @@ const WelcomeDesktop: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            userData: user,
-            // You might need to include an API key or other required fields
-          }),
+          body: JSON.stringify({ userData: user }),
         }
       );
 
@@ -83,12 +89,7 @@ const WelcomeDesktop: React.FC = () => {
       }
 
       const data = await response.json();
-      // Handle the response data as needed
-      console.log("Simbi AI response:", data);
-
-      // Store the AI response if needed
       localStorage.setItem("simbiAIResponse", JSON.stringify(data));
-
       navigate("/askSimbi");
     } catch (error) {
       console.error("Error sending data to Simbi AI:", error);
@@ -107,6 +108,11 @@ const WelcomeDesktop: React.FC = () => {
     }
   };
 
+    const skipWelcomes = () => {
+      navigate("/askSimbi");
+    
+  };
+
   return (
     <div className="welcome-wrapper">
       <header className="welcome-header-Desktop">
@@ -116,14 +122,7 @@ const WelcomeDesktop: React.FC = () => {
           className="logo"
         />
         <div className="user-info">
-          <span className="bell-icon">
-            <img src="/assets/icons/notification-icon.svg" alt="notification" />
-          </span>
-          <div className="user-avatar">
-            <img src={user?.avatar} alt="Avatar" />
-            <span className="username">{user?.name}</span>
-          </div>
-          <button className="wallet-btn">Connect Wallet</button>
+          <HeadBar />
         </div>
       </header>
 
@@ -161,7 +160,7 @@ const WelcomeDesktop: React.FC = () => {
             <div className="progress-bar">
               <div
                 className="progresss"
-                style={{ width: `${progress}%` }}
+                style={{ width: ` ${progress}%` }}
               ></div>
             </div>
             <p className="progress-percent">{progress}%</p>
@@ -199,8 +198,8 @@ const WelcomeDesktop: React.FC = () => {
                     <option value="" className="first-option">
                       Select-option
                     </option>
-                    <option value="Js 1-3">Js 1-3</option>
-                    <option value="Ss 1-3">Ss 1-3</option>
+                    <option value="Js 1-3">Junior Secondary</option>
+                    <option value="Ss 1-3">Senior Secondary</option>
                     <option value="100 level">100 level</option>
                     <option value="200 level">200 level</option>
                     <option value="300 level">300 level</option>
@@ -298,7 +297,14 @@ const WelcomeDesktop: React.FC = () => {
                   </button>
                 </>
               )}
+
               <div className="div-next-butn">
+                {currentStep < desktopSteps.length - 1 && (
+                  <button className="skip-welcome" onClick={skipWelcomes}>
+                    Skip
+                  </button>
+                )}
+
                 <button
                   className="next-butn"
                   onClick={handleNext}

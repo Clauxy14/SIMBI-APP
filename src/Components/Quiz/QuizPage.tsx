@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "./QuizPage.css";
+import HeadBar from "../headBar/headBar";
 
 const QuizPage: React.FC = () => {
   const navigate = useNavigate();
@@ -54,17 +55,8 @@ const QuizPage: React.FC = () => {
         <NavBar />
       </div>
 
-      <div className="user-info-wrapper">
-        <div className="user-info">
-          <span className="bell-icon">
-            <img src="/assets/icons/notification-icon.svg" alt="notification" />
-          </span>
-          <div className="user-avatar">
-            <img src={user?.avatar} alt="Avatar" />
-            <span className="username">{user?.name}</span>
-          </div>
-          <button className="wallet-btn">Connect Wallet</button>
-        </div>
+      <div className="user-info-wrapper">       
+          <HeadBar/>
       </div>
 
       <div className="quiz-form-wrapper">
