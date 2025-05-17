@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import WelcomeMobile from "./welcomeMobil";
-import WelcomeDesktop from "./welcomeDesktop";
+import WelcomeDesktop  from "./welcomeDesktop";
 
 const WelcomePage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);

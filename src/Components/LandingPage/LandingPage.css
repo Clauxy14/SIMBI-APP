@@ -1,19 +1,17 @@
 .lp-wrapper {
   width: 100%;
+  background-color: #fff;
 }
 
 .lp-container {
   max-width: 1440px;
+  width: 100%;
   height: 100vh;
   margin: auto;
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;  */
+
 }
 
 .lp-navbar {
-  /* position: fixed; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -55,7 +53,7 @@
 
 .lp-simbikick-text {
   max-width: 60%;
-  /* padding-right: 2rem; */
+  
 }
 
 .lp-simbikick-text h1 {
@@ -240,7 +238,6 @@
 .testimonials-container {
   display: flex;
   justify-content: space-around;
-
   flex-wrap: wrap;
 }
 
@@ -312,7 +309,6 @@
   font-size: 14px;
 }
 
-/* Tablets (768px - 1024px) */
 @media screen and (max-width: 1024px) {
   /* .lp-simbikick {
      padding: 2rem 4rem;
@@ -352,6 +348,17 @@
     
   }
 
+  .testimonials-container{
+    display: flex;
+     justify-content: space-between;
+
+    flex-wrap: nowrap;
+  }
+
+  .testimonial-card{
+    max-width: 250px;
+    
+  }
 
   .works {
     flex-direction: column-reverse;
@@ -383,48 +390,59 @@
     max-width: 250px;
   }
 
-  .jsimbi {
+  .jsimbii {
     width: 100%;
     max-width: 300px;
   }
+
+  .arrow img{
+    width: 24px;
+  }
+
 }
 
-/* Phones (<768px) */
-/* @media screen and (max-width: 767px) {
-  .lp-navbar {
+/* Phones (<768px)  */
+ @media screen and (max-width: 760px) {
+
+
+  .lp-wrapper{
+   max-width:  100%;
+  }
+  /* .lp-navbar {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
+  } */
+
+  .nav-a a{
+    font-size: 12px;
   }
+
+.lp-sign-in {
+  padding: 0.3rem 0.8rem;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
   .lp-logo img {
     width: 70px;
   }
   nav {
     display: flex;
-    gap: 2rem;
     align-items: center;
     text-align: center;
-    padding: 1rem 1rem;
+    /* padding: 1rem 1rem; */
   }
 
   nav a {
-    font-size: 13px;
+    font-size: 16px;
   }
 
-  .lp-sign-in {
-    width: 100%;
-    min-width: 50px;
-    max-height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 2rem;
-  }
 
-  .lp-simbikick {
+  /* .lp-simbikick {
     gap: 2rem;
-    padding: 1rem;
-  }
+    
+  } */
   .lp-hero-buttons {
     display: flex;
     flex-direction: row;
@@ -434,12 +452,17 @@
     font-size: 2rem;
   }
 
-  .lp-media-logos img {
-    height: 30px;
-    width: 100px;
+  .lp-simbikick-text p {
+    font-size: 1.1rem;
   }
+
+  .lp-hero-buttons .have-account{
+    font-size: 10px;
+  }
+
+  
   .lp-features-character img {
-    width: 200px;
+    width: 20%;
   }
 
   .sim-talk {
@@ -447,6 +470,7 @@
     flex-direction: column;
     align-items: center;
   }
+
 
   .lp-features {
     padding: 2rem 1rem;
@@ -467,10 +491,196 @@
   .testimonials-container {
     flex-direction: column;
     align-items: center;
+    gap: 4rem;
+    
   }
 
   .testimonial-card {
-    width: 80%;
+    width: 55%;
     max-width: 100%;
   }
-} */
+} 
+
+/* Phones (≤600px) */
+@media screen and (max-width: 600px) {
+  .lp-navbar {
+    padding: 1rem ;
+    padding-top: 2rem;
+   
+  }
+
+  .nav-a a {
+    font-size: 12px;
+    /* margin-right: 0.5rem; */
+  }
+
+  .lp-simbikick-text p {
+    width: 70%;
+  }
+
+  .lp-simbikick {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem 1rem 0 1rem;
+  }
+
+  .lp-simbikick-text {
+    padding-top: 3.5rem;
+    max-width: 100%;
+    text-align: center;
+    width: 100%;
+  }
+
+  .lp-simbikick-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .lp-simbikick-text p {
+    font-size: 1rem;
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+
+  .lp-hero-buttons {
+    padding-top: 20px;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+    
+  }
+
+  .lp-hero-buttons .get-started,
+  .lp-hero-buttons .have-account {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .lp-hero-buttons .have-account{
+    font-size: 1rem;
+    padding: 0.9rem 0.7rem;
+  }
+  .lp-hero-image img{
+    display: none;
+  }
+
+  .lp-media-section p {
+    font-size: 1.5rem;
+  }
+
+  .lp-media-logos img{
+    width: 55%;
+  }
+
+  .lp-feats {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .lp-feature h4 {
+    font-size: 1.2rem;
+  }
+
+  .lp-features {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+  }
+
+  .lp-features-character img {
+    display: none;
+  }
+
+  .lp-features-list h2{
+    font-size: 2.5rem;
+    margin-right: 0;
+  }
+
+  .works {
+    flex-direction: column-reverse;
+    padding: 1rem;
+  }
+
+  .iphone-15 {
+    width: 70%;
+    padding-top: 1.5rem;
+  }
+
+  .works .sim-talk img {
+    width: 100%;
+  }
+
+  .jsimbii {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+  }
+
+  .testimonial-card {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+
+/* Extra Small Devices (≤400px) */
+@media screen and (max-width: 400px) {
+  .lp-simbikick-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .lp-simbikick-text p {
+    font-size: 0.95rem;
+  }
+
+  .lp-hero-buttons .get-started,
+  .lp-hero-buttons .have-account {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-a a {
+    font-size: 11px;
+  }
+
+  .lp-sign-in {
+    font-size: 12px;
+    padding: 0.3rem 1rem;
+  }
+
+  .lp-media-section p {
+    font-size: 1.5rem;
+  }
+
+  .lp-feature h4 {
+    font-size: 1rem;
+  }
+
+  .testimonials-heading {
+    font-size: 2rem;
+  }
+
+  .faq-title {
+    font-size: 22px;
+  }
+
+  .faq-question {
+    font-size: 14px;
+  }
+
+  .faq-answer {
+    font-size: 12px;
+  }
+
+  .jsimbii {
+    font-size: 1rem;
+    width: 90%;
+  }
+
+  .arrow img {
+    width: 20px;
+  }
+
+  .testimonial-card {
+    padding: 1.25rem;
+  }
+}
+

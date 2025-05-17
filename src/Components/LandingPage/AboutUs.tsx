@@ -20,14 +20,14 @@ function AboutUs() {
           <div className="lp-logo">
             <img src="/assets/icons/Simbi-logo.svg" alt="" />
           </div>
-          <nav>
+          <nav className="nav-a">
             <a onClick={scrollToFooter} style={{ cursor: "pointer" }}>
               Contact Us
             </a>
             <Link to="/landingpage">Home</Link>
-            <Link to="/signup" className="lp-sign-in">
+            <button className="lp-sign-in" onClick={() => navigate("/signup")}>
               Sign In
-            </Link>
+            </button>
           </nav>
         </div>
         <section className="abt-container">
@@ -41,7 +41,7 @@ function AboutUs() {
             Born from late-night cramming and a love for tech, Simbi is designed
             to help every student thrive — one smart study session at a time.
           </p>
-          <button className="jsimbi" onClick={() => navigate("/signup")}>
+          <button className="jsimbii" onClick={() => navigate("/signup")}>
             Join Simbi Today
           </button>
         </section>
