@@ -1,25 +1,31 @@
 import React from 'react';
+import { useAccountability } from '../contexts/AccountabilityContexts';
 
 interface TabNavigationProps {
-  currentTab: 'goals' | 'partners';
-  onTabChange: (tab: 'goals' | 'partners') => void;
+  tabs: Array<{
+    id: 'goals' | 'partners';
+    label: string;
+  }>;
 }
 
-const TabNavigation: React.FC<TabNavigationProps> = ({ currentTab, onTabChange }) => {
+const TabNavigation: React.FC<TabNavigationProps> = ({ tabs }) => {
+  const { activeTab, setActiveTab } = useAccountability();
+
   return (
-    <div className="flex px-5 border-b border-gray-200 bg-white">
-      <button
-        className={`px-5 py-3 text-sm font-semibold focus:outline-none transition border-b-2 ${currentTab === 'goals' ? 'text-indigo-600 border-indigo-600 bg-gray-50' : 'text-gray-600 border-transparent hover:bg-gray-100'}`}
-        onClick={() => onTabChange('goals')}
-      >
-        My Goals
-      </button>
-      <button
-        className={`px-5 py-3 text-sm font-semibold focus:outline-none transition border-b-2 ${currentTab === 'partners' ? 'text-indigo-600 border-indigo-600 bg-gray-50' : 'text-gray-600 border-transparent hover:bg-gray-100'}`}
-        onClick={() => onTabChange('partners')}
-      >
-        Accountability Partner
-      </button>
+    <div className="flex mb-4 sm:mb-[20px] gap-2 sm:gap-[6px] p-1 sm:p-[3px]">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          className={`py-[6px] sm:py-[8px] px-[8px] sm:px-[8px] font-[500] text-[18px] sm:text-[18px] rounded-[7px] border-none ${
+            activeTab === tab.id
+              ? 'bg-[#D9EAFF] text-gray-700'
+              : 'bg-[#EFF6FF] text-gray-500'
+          }`}
+          onClick={() => setActiveTab(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
     </div>
   );
 };
