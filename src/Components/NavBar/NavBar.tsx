@@ -10,13 +10,14 @@ function NavBar() {
   };
 
   return (
-    <div className="navbar">
+  
+    <div className="general-navbar">
       <div className="nav-logoo" onClick={toggleSidebar}>
         <img src="/assets/icons/Simbi-logo.svg" className="nav-logo" />
         <img src="/assets/icons/cuida_sidebar.svg" alt="collapse" width="25%" />
       </div>
 
-      <nav className={`sidebar ${sidebarOpen ? "show" : ""}`}>
+      <div className={`sidebars ${sidebarOpen ? "show" : ""}`}>
         <ul className="sidebar-ul">
           <li className="sidebar-li">
             <Link className="links" to="/dashboard">
@@ -101,7 +102,7 @@ function NavBar() {
           <h3 className="sidebar-web3-title">Web3</h3>
           <button className="sidebar-telegram-btn">Connect to Telegram</button>
         </div>
-      </nav>
+      </div>
     </div>
   );
 }
