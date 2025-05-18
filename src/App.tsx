@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Loading from "./loading";
 import WelcomePage from "./Components/welcome/welcome";
+
 // import AcademicResources from "../src/Components/AcademicSupport";
 
 // Lazy load your pages
@@ -38,10 +39,12 @@ function App() {
           <Route path="/connect-wallet" element={<ConnectWallet />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/welcome" element={<WelcomePage />} />
-         
           /* Adjust the path to your image if needed */
-           {/* <Route path="/academic-resources" element={<AcademicResources />} />  */}
-          <Route path="/SocialAccountability" element={<SocialAccountability />} />
+          {/* <Route path="/academic-resources" element={<AcademicResources />} />  */}
+          <Route
+            path="/SocialAccountability"
+            element={<SocialAccountability />}
+          />
           <Route path="/askSimbi" element={<AskSimbi />} />
           <Route path="/quizPage" element={<QuizPage />} />
           <Route path="/studyPage" element={<STUDYPLAAAN />} />
@@ -49,6 +52,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+
     </Router>
   );
 }
