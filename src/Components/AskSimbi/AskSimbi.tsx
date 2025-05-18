@@ -152,8 +152,12 @@ const AskSimbi: React.FC = () => {
         }
       );
 
-      const aiText =
-        res.data.choices?.[0]?.message?.content ?? "No response received.";
+      // Define the expected response type
+      interface MistralResponse {
+        choices?: { message?: { content?: string } }[];
+      }
+      
+      const aiText = (res.data as MistralResponse).choices?.[0]?.message?.content ?? "No response received.";
       const aiMessage: Message = { sender: "ai", text: aiText };
       setMessages((prev) => [...prev, aiMessage]);
 

@@ -1,0 +1,82 @@
+
+
+.daily-tasks-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid rgba(238, 246, 255, 1);
+    border-radius: 16px;
+}
+
+.task-card {
+  padding: 1.5rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.task-icon {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 10px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.task-info p {
+  margin: 0.25rem 0;
+  font-weight: 500;
+}
+
+.task-tags {
+  margin-top: 0.5rem;
+  color: #1e1e1e;
+  font-size: 0.9rem;
+}
+
+.task-tags span {
+  margin-right: 10px;
+  color: #1e1e1e;
+}
+
+.task-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.continue-btn,
+.skip-btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.continue-btn {
+  background: #e4ecf7;
+  color: #1e1e1e;
+}
+
+.skip-btn {
+  background: #3b82f6;
+  color: white;
+}

@@ -1,0 +1,148 @@
+/* .search-bar {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 13rem;
+  max-width: 250px;
+  margin: 1rem auto;
+  display: block;
+  background-color: #f1f5f9;
+  transition: box-shadow 0.2s ease;
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 0 2px #3b82f6;
+} */
+
+/* .search-bar-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 15rem;
+  height: 1.5rem;
+  padding: 0.75rem 1rem;
+  max-width: 250px;
+  margin: 0 auto 1rem;
+  
+} */
+
+.search-bar-line{
+  display: flex;
+  height: 5rem;
+  padding: 0.75rem 1rem;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.28rem;
+
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  margin-bottom: 2rem;
+  height: 8rem;
+}
+
+.connect-wallet-btn {
+  /* all: unset; */
+  height: 3rem;
+  padding: 0.6rem 1.3rem;
+  border-radius: 16px;
+  background-color: rgba(238, 246, 255, 1);
+  border: 1px solid rgba(188, 219, 255, 1);
+  color: rgba(30, 41, 59, 1);
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.connect-wallet-btn:hover {
+  background-color: rgba(30, 41, 59, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.token-bal-btn {
+  height: 3rem;
+  padding: 0.6rem 1.3rem;
+  border-radius: 16px;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 1);
+  border: none;
+  color: rgba(97, 95, 255, 1);
+  font-family: Nunito;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  
+}
+
+.token-bal-btn:hover {
+  background-color: rgba(97, 95, 255, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.user-details{
+  height: 3rem;
+  border: 1px solid rgba(150, 170, 215, 1);
+  padding: 0.6rem 1.3rem;
+  border-radius: 16px;
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 1);
+  width: 100%;
+  height: 100%;
+  max-width: 450px;
+}
+
+.search-bar-container {
+  position: relative;
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+  padding-left: 2.5rem;
+  font-size: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  border-radius: 16px;
+  width: 26rem;
+  height: 3rem;
+  max-width: 450px;
+  margin: 1rem auto;
+  margin-bottom: 5rem;
+  margin-left: 0;
+  display: block;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 1);
+  transition: box-shadow 0.2s ease;
+}
+
+
+ .search-bar:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.search-icon:hover {
+  color: #3b82f6;
+}
+
