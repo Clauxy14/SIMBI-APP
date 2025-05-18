@@ -200,10 +200,10 @@ const TrophyRoom = () => {
               <img src= "/assets/Frame-1707479062.png" alt="Quiz Conqueror" />
             </div>
             <div className="trophy-card">
-              <img src= "/assets/Frame 1707479063.png" alt="Streak Scholar" />
+              <img src= "/assets/Fram-1707479063.png" alt="Streak Scholar" />
             </div>
             <div className="trophy-card">
-              <img src= "/assets/Frame 1707479060.png" alt="Study Group Leader" />
+              <img src= "/assets/Frame-1707479060.png" alt="Study Group Leader" />
             </div>
             <div className="trophy-card">
               <img src= "/assets/Frame 1707479065.png" alt="Subject Expert" />
