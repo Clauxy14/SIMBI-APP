@@ -1,160 +1,168 @@
+LOGIN.CSS
+
+
 *{
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+
+.login-wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: 1rem 2rem;
   box-sizing: border-box;
-  padding: 0;
+  background-color: #fff;
+}
+
+.login-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.login-content {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: auto;
+  gap: 8rem;
+}
+
+.login-illustration {
+  max-width: 37.7%;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+  gap: 16px;
+
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #2a7ce16c;
+}
+
+.remember-me{
+  display: flex;
+  gap: 6px;
+}
+.login-form h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e293b;
   margin: 0;
+  margin-top: 15px;
+}
+.divider-line-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.line-login {
+  border-top: 1px solid #d9dedc;
+  width: 130px;
+}
+.divider-login {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #b6bbb2;
+}
+
+.login-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.account-alert {
+  color: #e90c34;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.password-input-wrappers {
+  position: relative;
+}
+
+.sign-password-input-wrapper {
+  width: 100%;
+}
+
+.toggle-password-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.login-button,
+.wallet-connect {
+  background-color: #2a7de1;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.wallet-connect {
+  background-color: #fff;
+  border: 1px solid #2a7de1;
+  color: #2a7de1;
+}
+
+.wallet-connect:hover {
+  color: #fff;
+}
+
+.redirect-signup {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #666;
+}
+
+.redirect-signup span {
+  color: #3a86ff;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+
+
+@media (max-width: 768px) {
+  .login-wrapper{
+    padding: 1rem;
   }
-  
-  .login-wrapper {
-    width: 100%;
-    height: 100vh;
-    padding: 1rem 2rem;
-    box-sizing: border-box;
-    background-color: #fff;
-  }
-  
-  .login-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
   .login-content {
-    max-width: 1440px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    margin: auto;
-    gap: 8rem;
-  }
-  
-  .login-illustration {
-    max-width: 37.7%;
-  }
-  
-  .login-form {
-    display: flex;
     flex-direction: column;
-    max-width: 400px;
-    width: 100%;
-    gap: 16px;
-  
-  }
-  
-  .remember-me{
-    display: flex;
-    gap: 6px;
-  }
-  .login-form h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0;
-    margin-top: 15px;
-  }
-  .divider-line-login {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
   }
-  .line-login {
-    border-top: 1px solid #d9dedc;
-    width: 130px;
+    .login-illustration {
+    display: none;
   }
-  .divider-login {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #b6bbb2;
-  }
-  
-  .login-form input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  .account-alert {
-    color: #e90c34;
-    margin: 0;
-    font-size: 0.95rem;
-  }
-  
-  .password-input-wrappers {
-    position: relative;
-  }
-  
-  .sign-password-input-wrapper {
+
+  .login-form {
     width: 100%;
+    padding: 10px 20px;
   }
-  
-  .toggle-password-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+
+  .login-form h2 {
+    font-size: 1.7rem;
+   
   }
-  
-  .login-button,
-  .wallet-connect {
-    background-color: #2a7de1;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .wallet-connect {
-    background-color: #fff;
-    border: 1px solid #2a7de1;
-    color: #2a7de1;
-  }
-  
-  .wallet-connect:hover {
-    color: #fff;
-  }
-  
-  .redirect-signup {
-    font-size: 0.9rem;
-    text-align: center;
-    color: #666;
-  }
-  
-  .redirect-signup span {
-    color: #3a86ff;
-    cursor: pointer;
-    margin-left: 6px;
-  }
-  
-  
-  
-  @media (max-width: 768px) {
-    .login-wrapper{
-      padding: 1rem;
-    }
-    .login-content {
-      width: 100%;
-      flex-direction: column;
-      align-items: center;
-    }
-      .login-illustration {
-      display: none;
-    }
-  
-    .login-form {
-      width: 100%;
-      padding: 10px 20px;
-    }
-  
-    .login-form h2 {
-      font-size: 1.7rem;
-     
-    }
-  }
+}

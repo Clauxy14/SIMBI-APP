@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Login.css";
@@ -157,16 +158,17 @@ const Login: React.FC = () => {
                 useOneTap
                 text="signup_with"
                 shape="pill"
+                // width="450"
                 logo_alignment="center"
               />
             </GoogleOAuthProvider>
           </div>
           {googleError && <div className="error-message">{googleError}</div>}
 
-          <div className="divider-line">
-            <span className="line"></span>
-            <span className="divider">or with email</span>
-            <span className="line"></span>
+          <div className="divider-line-login">
+            <span className="line-login"></span>
+            <span className="divider-login">or with email</span>
+            <span className="line-login"></span>
           </div>
 
           <input
