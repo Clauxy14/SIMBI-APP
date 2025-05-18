@@ -92,7 +92,7 @@ function NavBar() {
             </Link>
           </li>
           <li>
-            <Link className="links" to="">
+            <Link className="links" to="/trophy-room">
               <img
                 src="/assets/trophy.svg"
                 style={{
