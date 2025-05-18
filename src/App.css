@@ -1,0 +1,75 @@
+/* ===== Telegram Theme Variables ===== */
+:root {
+  /* Light theme defaults */
+  --tg-theme-bg-color: #ffffff;
+  --tg-theme-text-color: #000000;
+  --tg-theme-button-color: #2481cc;
+  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-hint-color: #707579;
+  --tg-theme-link-color: #2481cc;
+  --tg-theme-secondary-bg-color: #f4f4f5;
+}
+
+/* Dark theme variants */
+.tg-theme-dark {
+  --tg-theme-bg-color: #0f0f0f;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-button-color: #2ea6ff;
+  --tg-theme-hint-color: #aaaaaa;
+  --tg-theme-secondary-bg-color: #181818;
+}
+
+/* ===== Utility Classes ===== */
+.tg-bg {
+  background-color: var(--tg-theme-bg-color) !important;
+}
+
+.tg-text {
+  color: var(--tg-theme-text-color) !important;
+}
+
+.tg-button {
+  background-color: var(--tg-theme-button-color) !important;
+  color: var(--tg-theme-button-text-color) !important;
+}
+
+.tg-hint {
+  color: var(--tg-theme-hint-color) !important;
+}
+
+.tg-link {
+  color: var(--tg-theme-link-color) !important;
+}
+
+.tg-secondary-bg {
+  background-color: var(--tg-theme-secondary-bg-color) !important;
+}
+
+/* ===== Dynamic Theme Switching ===== */
+body {
+  background: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ===== NEWLY ADDED STYLES BELOW ===== */
+
+/* Spinner animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Transition effects */
+.transition-colors {
+  transition-property: background-color, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Dark mode specific backgrounds */
+.bg-tg-dark-bg {
+  background-color: var(--tg-theme-secondary-bg-color);
+}

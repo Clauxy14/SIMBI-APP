@@ -1,13 +1,15 @@
-.sidebar {
-  width: 20%;
-  max-width: 20rem;
+.sidebars {
+  max-width: 200px;
+  width: 100%;
   height: 100vh;
   background: rgba(255, 255, 255, 1);
   position: fixed;
   top: 0;
   left: 0;
   /* z-index: 100; */
-  padding: none;
+  padding-top: 6rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
   overflow: hidden;
   transition: transform 0.3s ease;
   z-index: 999;
@@ -20,19 +22,18 @@
   flex-direction: column;
   justify-content: space-evenly;
   gap: 2rem;
-  align-items: left;
-  padding-left: 1.1rem;
-  background: rgba(255, 255, 255, 1);
-  list-style-type: none;
+  /* align-items: left; */
+  padding-left: 0.7rem;
+  list-style: none;
 }
 
-
-.sidebar-li {
-  list-style-type: none;
-  background: rgba(255, 255, 255, 1);
+.sidebar-ul .links:hover{
+  color:#1b58dd ;
 }
 
-.nav-logo {
+.nav-logoo {
+  display: flex;
+  gap: 5px;
   margin-bottom: 1rem;
   width: 8rem;
   height: 40px;
@@ -42,7 +43,6 @@
   z-index: 1001;
   cursor: pointer;
   border: none;
-  background: rgba(255, 255, 255, 1);
 }
 
 .links {
@@ -53,76 +53,70 @@
   line-height: 150%;
   letter-spacing: 0px;
   color: rgba(115, 115, 115, 1);
-  background: rgba(255, 255, 255, 1);
+  /* background: rgba(255, 255, 255, 1); */
 }
 
 .nav-links {
   padding: auto;
 }
 
-.telegram-link{
-  background-color: rgba(238, 246, 255, 1);
+.sidebar-web3-card {
+margin-top:2rem;
+  background-color: #EEF6FF;
   border-radius: 16px;
-  padding: 3rem 1rem;
-  width: 100%;
-  margin: 2rem auto 2rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-}
-.telegram-link h2{
-  font-family: Nunito;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 150%;
-  letter-spacing: 0px;
+  padding: 20px 0;
   text-align: center;
-  color: rgba(115, 115, 115, 1);
-  margin-top: 0;
-
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+ 
 }
 
-.telegram-connect{
-  all: unset;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--Primary-Electric-Blue-200, rgba(188, 219, 255, 1));
-  background-color: rgba(255, 255, 255, 1);
-  color: rgba(30, 41, 59, 1);
-  font-family: Nunito;
+.sidebar-web3-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #737373;
+  margin-bottom: 20px;
+}
+
+.sidebar-telegram-btn {
+  background-color: #FFFFFF;
+  color: #1E293B;
+  border: 1.5px solid #BCDBFF;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0px;
+ /* width: 100%; */
+ padding: 0.5rem 0.5rem;
   border-radius: 16px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Segoe UI",sans-serif;
 }
-.telegram-connect:hover{
-  background-color: #3a86ff;
-  color: rgba(255, 255, 255, 1);
+
+.sidebar-telegram-btn:hover {
+  background-color: #e6f3ff;
+  border-color: #91caff;
 }
+
 
 @media (max-width: 1024px) {
   html {
     font-size: 14px;
   }
 
-  .sidebar {
+  .sidebars {
     transform: translateX(-100%);
     padding-top: 6rem;
-    width: 40%;
-    max-width: 200px;
+    width: 100%;
+    max-width: 180px;
   }
 
-  .sidebar.show {
+  .sidebars.show {
     transform: translateX(0);
   }
 
-  .nav-logo {
+  /* .nav-logoo {
     display: block;
     margin-bottom: 1rem;
     width: 8rem;
-  }
+  } */
 
   ul img {
     width: 18px;

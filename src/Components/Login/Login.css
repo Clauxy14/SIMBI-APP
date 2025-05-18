@@ -3,6 +3,7 @@
   height: 100vh;
   padding: 1rem 2rem;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
 .login-header {
@@ -12,8 +13,11 @@
 }
 
 .login-content {
+  max-width: 1440px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin: auto;
   gap: 8rem;
 }
 
@@ -31,7 +35,7 @@
 }
 
 .login-form h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #1e293b;
   margin: 0;
@@ -55,8 +59,8 @@
   position: relative;
 }
 
-.password-input-wrappers input {
-  width: 93%;
+.sign-password-input-wrapper {
+  width: 100%;
 }
 
 .toggle-password-icon {

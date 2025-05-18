@@ -18,6 +18,7 @@ const Signup: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleGoogleSuccess = (credentialResponse: any) => {
     try {
       if (!credentialResponse.credential) {
@@ -134,9 +135,10 @@ const Signup: React.FC = () => {
                 onSuccess={handleGoogleSuccess}
                 onError={handleGoogleFailure}
                 useOneTap
-                // text="signup_with"
+                text="signup_with"
                 shape="pill"
-                // size="large"
+                // width="50%"
+                logo_alignment="center"
               />
             </GoogleOAuthProvider>
           </div>
@@ -165,6 +167,7 @@ const Signup: React.FC = () => {
           />
           <div className="password-input-wrapper">
             <input
+              className="sign-password-input-wrapper"
               type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
               value={password}

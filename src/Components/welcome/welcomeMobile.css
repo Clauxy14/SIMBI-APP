@@ -1,0 +1,144 @@
+/* Base layout */
+.welcome-wrapper-mobile {
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.welcome-header-mobile {
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.7rem;
+}
+
+.bell-icon-img {
+  width: 30%;
+}
+
+.welcome-title-content-mobile {
+  text-align: center;
+  padding: 1rem;
+}
+
+.welcome-title-mobile {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.wallet-btn-btn {
+  padding: 4px 8px;
+  border: 1px solid #bcdbff;
+  border-radius: 16px;
+  background: #eef6ff;
+  color: #1e293b;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 9px;
+}
+.subtitle-mobile {
+  font-weight: 500;
+  color: #666;
+  font-size: 1rem;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.form-section-mobile {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+  position: relative;
+}
+
+/* Progress bar */
+.progress-bar-mobile {
+  height: 6px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progresss-mobile {
+  background: #00d39f;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-percent-mobile {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #969696;
+  margin-bottom: 1rem;
+}
+
+/* Inputs and buttons */
+.welcome-label-mobile {
+  display: block;
+  font-weight: 600;
+  color: #222;
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.dropdown-mobile {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  color: #696969;
+  margin-bottom: 1rem;
+}
+
+.first-option-mobile {
+  color: #9b9b9ba4;
+}
+
+.option-btnn-mobile {
+  width: 100%;
+  margin: 0.4rem 0;
+  padding: 0.8rem;
+  background: #edf3ff;
+  border: 1px solid #d0def5;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #2945c5;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.option-btnn:focus {
+  background-color: #2a6fd8;
+  color: #fff;
+}
+
+.div-next-butn-mobile {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.next-butn-mobile {
+  background: #347dff;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.next-butn-mobile:hover {
+  background: #2a6fd8;
+}

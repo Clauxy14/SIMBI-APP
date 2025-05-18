@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 import "./Login.css";
 
 import invisibleIcon from "/assets/icons/visibility-off.svg";
 import visibleIcon from "/assets/icons/eye.svg";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
@@ -18,39 +19,47 @@ const Login: React.FC = () => {
   const [googleError, setGoogleError] = useState<string | null>(null);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+   const [, setError] = useState<string | null>(null);
 
-  // Check for registration success state from signup redirect
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleGoogleSuccess = (credentialResponse: any) => {
+      try {
+        if (!credentialResponse.credential) {
+          throw new Error("No credential received");
+        }
+  
+        const userObject = jwtDecode(credentialResponse.credential);
+        localStorage.setItem("simbiUser", JSON.stringify(userObject));
+        navigate("/welcome");
+      } catch (error) {
+        console.error("Google sign-in error:", error);
+        setError("Failed to sign in with Google. Please try again.");
+      }
+    };
+  
+    const handleGoogleFailure = () => {
+      setError("Google sign-in was unsuccessful. Please try again.");
+    };
+    
+  // Redirect if user is already logged in
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  // Check for registration success from signup redirect
   useEffect(() => {
     if (location.state?.registrationSuccess) {
       setRegistrationSuccess(true);
       if (location.state?.registeredEmail) {
         setEmail(location.state.registeredEmail);
       }
-      // Clear the state to prevent showing the message on refresh
+      // Clear the state to prevent message on refresh
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
-
-  const handleGoogleSuccess = (credentialResponse: any) => {
-    try {
-      if (!credentialResponse.credential) {
-        throw new Error("No credential received");
-      }
-
-      const userObject = jwtDecode(credentialResponse.credential);
-      localStorage.setItem("simbiUser", JSON.stringify(userObject));
-      navigate("/welcome");
-    } catch (error) {
-      console.error("Google sign-in error:", error);
-      setGoogleError("Failed to sign in with Google. Please try again.");
-    }
-  };
-
-  const handleGoogleFailure = () => {
-    setGoogleError(
-      "Google sign-in was unsuccessful. Please try again or use another method."
-    );
-  };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -60,6 +69,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     setAccountError(false);
     setIsLoading(true);
+    setGoogleError(null);
 
     try {
       const response = await fetch(
@@ -73,19 +83,33 @@ const Login: React.FC = () => {
         }
       );
 
-      const data = await response.json();
+      const resData = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Login failed");
+        throw new Error(resData.message || "Login failed");
       }
 
-      // Store user data and token
-      localStorage.setItem("simbiUser", JSON.stringify(data.user));
-      if (keepLoggedIn) {
-        localStorage.setItem("authToken", data.token);
-      } else {
-        sessionStorage.setItem("authToken", data.token);
-      }
+      // Extract token from response data
+      const token = resData.data.token;
+
+      // Store token as plain string (no JSON.stringify)
+      localStorage.setItem("authToken", token);
+
+      // Optionally store user info if available
+      // if (resData.data.user) {
+      //   localStorage.setItem("user", JSON.stringify(resData.data.user.name));
+      // }
+      if (resData.data.user) {
+  const user = resData.data.user;
+  const simbiUser = {
+    name: user.name || user.firstName || "User",
+    avatar: user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.name || "User")}`,
+    // Include more fields if needed
+  };
+  localStorage.setItem("simbiUser", JSON.stringify(simbiUser));
+  console.log(user)
+}
+
 
       navigate("/welcome");
     } catch (error) {
@@ -125,21 +149,19 @@ const Login: React.FC = () => {
               Registration successful! Please log in to continue.
             </div>
           )}
-
-          {/* Google Sign-In Button */}
           <div className="google-signin-container">
             <GoogleOAuthProvider clientId="6846893560-imp57m3r6aft7c9lpu4c7sor3tuf1oid.apps.googleusercontent.com">
               <GoogleLogin
                 onSuccess={handleGoogleSuccess}
                 onError={handleGoogleFailure}
                 useOneTap
-                // text="signin_with"
+                text="signup_with"
                 shape="pill"
-                // size="large"
+                // width="450"
+                logo_alignment="center"
               />
             </GoogleOAuthProvider>
           </div>
-
           {googleError && <div className="error-message">{googleError}</div>}
 
           <div className="divider-line">
@@ -158,6 +180,7 @@ const Login: React.FC = () => {
 
           <div className="password-input-wrappers">
             <input
+              className="sign-password-input-wrapper"
               type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
               value={password}
@@ -196,6 +219,7 @@ const Login: React.FC = () => {
           )}
 
           <button
+            type="button"
             className="wallet-connect"
             onClick={() => navigate("/connect-wallet")}
           >

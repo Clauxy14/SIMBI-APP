@@ -3,11 +3,15 @@
   height: 100vh;
   padding: 1rem 2rem;
   box-sizing: border-box;
+  background-color: #fff;
 }
 
 .signup-content {
+  max-width: 1440px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin: auto;
   gap: 5rem;
 }
 
@@ -29,7 +33,7 @@ input:focus {
 }
 
 .signup-form h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #1e293b;
   margin: 0;
@@ -62,11 +66,6 @@ input:focus {
 }
 
 .google-signin-container {
-  /* width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
-
   width: 100%;
   display: flex;
   align-items: center;
@@ -90,8 +89,8 @@ input:focus {
   position: relative;
 }
 
-.password-input-wrapper input {
-  width: 95%;
+.sign-password-input-wrapper {
+  width: 100%;
 }
 
 .toggle-password-icon {
@@ -148,15 +147,12 @@ input:focus {
   .signup-content {
     margin: auto;
     width: 65%;
-    /* gap: 3rem; */
+
     box-shadow: 2px 2px 5px 2px #151a206c;
     border-radius: 10px;
   }
 
   .signup-form h2 {
-    /* font-size: 2rem;
-    font-weight: 700;
-    color: #1e293b; */
     margin-top: 0;
   }
 
@@ -174,8 +170,9 @@ input:focus {
 @media (max-width: 768px) {
   .signup-content {
     width: 80%;
-    flex-direction: column;
+    margin-top: 5rem;
     align-items: center;
+    justify-content: center;
   }
 
   .logo {
@@ -203,6 +200,8 @@ input:focus {
 @media (max-width: 600px) {
   .signup-content {
     width: 90%;
+    margin-top: 5rem;
+    align-items: center;
     box-shadow: 0 0 0;
     border: 0;
     padding: 10px 20px;
@@ -244,4 +243,4 @@ input:focus {
   .password-input-wrapper input {
     width: 93.5%;
   }
-}
+} 
