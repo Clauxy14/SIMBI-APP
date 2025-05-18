@@ -9,6 +9,22 @@ function NavBar() {
     setSidebarOpen(!sidebarOpen);
   };
 
+  // Updated Telegram redirect function with better error handling
+  const redirectToTelegram = () => {
+    const botUsername = "SimbiStudyBot"; // No @ symbol
+    const miniAppPath = "https://simbi-app.vercel.app/telegram"; // The route where your Mini App lives
+
+    // First try the direct mobile app link
+    const mobileLink = `tg://resolve?domain=${botUsername}&startapp=${miniAppPath}`;
+    window.location.href = mobileLink;
+
+    // If mobile link fails (or on desktop), fallback to web
+    setTimeout(() => {
+      const webLink = `https://t.me/${botUsername}/${miniAppPath}`;
+      window.open(webLink, "_blank");
+    }, 100);
+  };
+
   return (
   
     <div className="general-navbar">
@@ -100,7 +116,12 @@ function NavBar() {
         </ul>
         <div className="sidebar-web3-card">
           <h3 className="sidebar-web3-title">Web3</h3>
-          <button className="sidebar-telegram-btn">Connect to Telegram</button>
+          <button 
+            className="sidebar-telegram-btn" 
+            onClick={redirectToTelegram}
+          >
+            Connect to Telegram
+          </button>
         </div>
       </div>
     </div>
