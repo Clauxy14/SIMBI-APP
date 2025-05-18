@@ -206,9 +206,14 @@ export default function Quiz() {
     }
   };
 
-  if (isLoading) return <div className="loading-message">Loading quiz...</div>;
-  if (!Array.isArray(questions) || !questions.length)
-    return <div className="loading-message">No questions available</div>;
+  if (isLoading) {
+  return <div className="loading-message">Loading quiz...</div>;
+}
+
+if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
+  return <div className="loading-message">No questions available</div>;
+}
+
 
   const question = questions[currentIndex];
   const progressPercent = ((currentIndex + 1) / questions.length) * 100;

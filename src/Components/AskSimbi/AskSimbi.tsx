@@ -59,17 +59,6 @@ const AskSimbi: React.FC = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-<<<<<<< HEAD
-  // Suggestions array
-  const suggestions = [
-    "Give me a study tip",
-    "Quiz me now",
-    "Motivate me!",
-  ];
-
-  const handleSendQuestion = async (text: string) => {
-    if (!text.trim()) return;  // Prevent empty input from being sent
-=======
   useEffect(() => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -130,7 +119,6 @@ const AskSimbi: React.FC = () => {
 
   const handleSendQuestion = async (text: string) => {
     if (!text.trim()) return;
->>>>>>> upstream/main
 
     const userMessage: Message = { sender: "user", text };
     const updatedMessages = [...messages, userMessage];
@@ -215,22 +203,6 @@ const AskSimbi: React.FC = () => {
 
   return (
     <div className="chat-container">
-<<<<<<< HEAD
-      {messages.length === 0 && (
-        <div className="suggestions">
-          <img src="/assets/askSimbi-image.svg" className="askSimbi-image" alt="Logo" style={{ width: "9.5rem", height: "3rem" }} />
-          <p className="greeting">Hi {userName} 👋!</p>
-          <h6>How can I help you?</h6>
-          <div className="suggestionBox">
-            {suggestions.map((suggestion, idx) => (
-              <button
-                key={idx}
-                className="suggestion-button"
-                onClick={() => handleSendQuestion(suggestion)}
-              >
-                {suggestion}
-              </button>
-=======
       <div className="chat-wrapper">
         <div
           className="sidebar-toggle"
@@ -265,7 +237,6 @@ const AskSimbi: React.FC = () => {
                   ))}
                 </ul>
               </div>
->>>>>>> upstream/main
             ))}
           </aside>
         )}
@@ -385,51 +356,6 @@ const AskSimbi: React.FC = () => {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-      )}
-
-      <div className="chat-box">
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`chat-bubble ${msg.sender === "user" ? "right" : "left"}`}
-          >
-            {msg.text}
-          </div>
-        ))}
-        {loading && <div className="chat-bubble left">Typing...</div>}
-        <div ref={bottomRef} />
-      </div>
-
-      <div className="input-area">
-        <textarea
-          ref={textareaRef} // Attach the ref
-          rows={1}
-          maxLength={500}
-          value={questionInput}
-          onChange={handleTextareaChange}
-          placeholder="Ask SIMBI anything"
-          className="chat-input"
-        />
-      </div>
-
-      <div className="input-buttons">
-        <button
-          onClick={() => navigate("/dashboard")} // Adjust to your actual dashboard route
-          className="cancel-button"
-        >
-          Cancel
-        </button>
-
-        <button
-          onClick={() => handleSendQuestion(questionInput)}
-          disabled={loading}
-          className="send-button"
-        >
-          {loading ? "Asking..." : "Ask SIMBI"}
-        </button>
-=======
->>>>>>> upstream/main
       </div>
     </div>
   );
