@@ -26,10 +26,9 @@ function NavBar() {
   };
 
   return (
-  
     <div className="general-navbar">
       <div className="nav-logoo" onClick={toggleSidebar}>
-        <img src="/assets/icons/Simbi-logo.svg" className="nav-logo" />
+        <img src="/assets/icons/Simbi-logo.svg" className="logo" />
         <img src="/assets/icons/cuida_sidebar.svg" alt="collapse" width="25%" />
       </div>
 
