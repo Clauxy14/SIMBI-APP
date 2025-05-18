@@ -223,7 +223,7 @@ const AskSimbi: React.FC = () => {
           <aside className="chat-history">
             <div className="cancel-button-div">
               <button
-                onClick={() => navigate("/quizPage")}
+                onClick={() => navigate("/dashboard")}
                 className="cancel-button"
               >
                 Dashboard

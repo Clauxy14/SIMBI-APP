@@ -68,3 +68,10 @@
 .break-button:hover {
   background-color: #0039cb;
 }
+
+
+@media screen and (max-width: 768px) {
+  .stats-container {
+    width: 100%;
+  }
+}

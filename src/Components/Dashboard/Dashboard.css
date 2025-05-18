@@ -1,155 +1,46 @@
-
-
-.dashboard {
+.dashboard-container {
     display: flex;
-    flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    color: #333;
-    background-color: rgba(248, 248, 248, 1);
-    justify-content: space-between;
-    width: 80%;
-    padding: 2.5rem;
-    position: absolute;
-    right: 0;
-   
-    border-radius: 8px;
+    min-height: 100vh;
+    background-color: #F5F5F5;
 }
 
-.sidebar {
-    width: 20%;
-    max-width: 20rem;
-    padding: 20px;
+.dashboard-navbar {
+    width: 250px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-content {
-    display: flex;
-    justify-content: space-between;
-
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
 }
 
-.welcome {
-    background: rgba(255, 255, 255, 1);
-    height: auto;
-   
-    padding: 3.13rem;
-    padding-left: 1.5rem;
-    border-radius: 16px;
-    margin-bottom: 1.5rem;
-    width: 65%;
-    max-width: 580px;
-    position: relative;
-
+.dashboard-header {
+    margin-bottom: 2rem;
 }
-.welcome h1 {
-    font-family: Nunito;
-    font-weight: 600;
+
+.dashboard-header h1 {
     font-size: 2rem;
-    line-height: 150%;
-    letter-spacing: 0px;
-    color: rgba(10, 10, 10, 1);
-    text-align: left;
-}
-
-.welcome p {
-    font-family: Nunito;
-    font-weight: 600;
-    font-size: 0.9rem;
-    line-height: 150%;
-    letter-spacing: 0px;
-    color: rgba(82, 82, 82, 1);
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.welcome-logo{
-    position: absolute;
-    right: 1.5rem;
-    bottom: 0;
-}
-
-h2 {
-    font-size: 18px;
-    margin: 20px 0 10px 0;
-    color: #444;
-}
-
-
-.popular-courses ul,
-.tasks-section ul,
-.contact-section ul {
-    list-style-type: none;
-    padding: 0;
+    color: #333;
     margin: 0;
 }
 
-.popular-courses li,
-.tasks-section li,
-.contact-section li {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
+.dashboard-main {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.popular-courses strong,
-.tasks-section strong,
-.contact-section strong {
-    margin-right: 8px;
+.no-sessions {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.course-tag {
-    background-color: #e0e0ff;
-    color: #4444ff;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.divider {
-    border: none;
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 20px 0;
-}
-
-.contact-section {
-    margin-top: 20px;
-}
-
-.daily-streak{
-    width: 65%;
-    max-width: 580px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-}
-
-.dashboard h2{
-    font-family: Nunito;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 150%;
-    letter-spacing: 0px;
-    padding: 0.5rem;
-
-}
-
-.tasks{
-    display: flex;
-    width: 65%;
-    max-width: 580px;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.progress-overview{
-    position: absolute;
-    right: 0;
-    top: 29%;
-    width: 30%;
-    background-color: rgba(245, 245, 245, 1);
-    border-radius: 16px 0 0 16px;
-    padding: 4rem 3rem;
-    margin: 1rem;
-    height: 100vh;
+.no-sessions p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
 }

@@ -1,5 +1,13 @@
+*{
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+
+
 .studysession-container {
   display: flex;
+    background-color: #f7f7f7;
 }
 
 .studysesion-Navbar {
@@ -13,6 +21,8 @@
 .studysession-wrapper {
   display: flex;
   gap: 10px;
+  margin-top: 5rem;
+
 }
 
 .studysession-wrapper1 {
@@ -80,4 +90,36 @@
   font-size: 16px;
   border-radius: 12px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+
+  .studysession-wrapper{
+    display: flex;
+    flex-direction: column;
+    
+    margin-top: 6rem;
+  }
+      
+  .studysesion-Navbar {
+    width: 100%;
+    }
+.studysession-content {
+ width: 100%;
+    justify-content: center;
+    align-items: center;
+ margin-right: 0rem;
+ padding: 15px;
+
+}
+.studysession-wrapper1{
+  gap: 15px;
+}
+
+.tabwrapper-session {
+  width: 100%;
+}
+
+  
+  
 }

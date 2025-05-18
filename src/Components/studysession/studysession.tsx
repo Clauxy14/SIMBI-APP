@@ -1,18 +1,31 @@
-// import React, { useState } from "react";
 
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CurrentSession from "./currentsession";
 import SessionStats from "./sessionstats";
 import NavBar from "../NavBar/NavBar";
-import { useNavigate } from "react-router-dom";
-
-import "./studysession.css";
 import TabHeader from "./tabHeader";
 import HeadBar from "../headBar/headBar";
+
+import "./studysession.css";
 
 const StudySession: React.FC = () => {
   const [progress] = useState(65);
   const navigate = useNavigate();
+
+  // Use _id param instead of id
+  const { _id } = useParams<{ _id: string }>();
+  console.log(_id)
+ 
+  useEffect(() => {
+    if (!_id) {
+      console.error("Session _id is undefined");
+      // Redirect to error page or study plan page if _id is missing
+      navigate("/error");
+    }
+  }, [_id, navigate]);
+
   return (
     <div className="studysession-container">
       <div className="studysesion-Navbar">

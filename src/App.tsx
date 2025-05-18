@@ -1,13 +1,7 @@
 import { Suspense, lazy } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./loading";
 import MainLayout from "./Components/Layout/MainLayout";
-
-
 
 // Lazy load your pages
 const Onboarding = lazy(() => import("./Components/Onboarding/onboarding"));
@@ -21,12 +15,13 @@ const QuizPage = lazy(() => import("./Components/Quiz/QuizPage"));
 const Quiz = lazy(() => import("./Components/Quiz/Quiz"));
 const QuizResult = lazy(() => import("./Components/Quiz/Result"));
 const STUDYPLAAAN = lazy(() => import("./Components/studyplaaan/studyplaaan"));
-const StudySession = lazy(() => import("./Components/studysession/studysession"));
+const StudySession = lazy(
+  () => import("./Components/studysession/studysession")
+);
 const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
 const AboutUs = lazy(() => import("./Components/LandingPage/AboutUs"));
 const NotFound = lazy(() => import("./not-found"));
 const Dashboard = lazy(() => import("./Components/Dashboard/Dashboard"));
-
 
 function App() {
   return (
@@ -40,10 +35,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/connect-wallet" element={<ConnectWallet />} />
           <Route path="/welcome" element={<Welcome />} />
-          
+
           {/* Routes with NavBar */}
           <Route element={<MainLayout />}>
-            <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/Accountability" element={<SocialAccountability />} />
             <Route path="/AskSimbi" element={<AskSimbi />} />
             <Route path="/QuizPage" element={<QuizPage />} />
@@ -52,8 +47,7 @@ function App() {
             <Route path="/studyPage" element={<STUDYPLAAAN />} />
             {/* <Route path="/trophy-room" element={<Welcome />} /> */}
           </Route>
-
-          <Route path="/studySession" element={<StudySession />} />
+          <Route path="/study-session/:_id" element={<StudySession />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
