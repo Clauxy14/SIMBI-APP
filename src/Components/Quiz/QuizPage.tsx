@@ -34,7 +34,6 @@ const QuizPage: React.FC = () => {
     };
 
     const token = localStorage.getItem("authToken");
-
     if (!token) {
       alert("No token found, please log in.");
       return;
@@ -50,49 +49,48 @@ const QuizPage: React.FC = () => {
         body: JSON.stringify(quizData),
       });
 
-      let resJson;
-      try {
-        resJson = await response.json();
-      } catch (err) {
-        console.error("❌ Failed to parse JSON from response", err);
-        throw new Error("Invalid response format from server");
-      }
+      const resJson = await response.json();
+
+      console.log("✅ Full backend response:", resJson);
 
       if (!response.ok || !resJson.success || !resJson.data) {
-        console.error("❌ Backend error response:", resJson);
-        throw new Error(resJson.message || "Quiz generation failed");
+        throw new Error(resJson.message || "Failed to generate quiz.");
       }
 
-      const quiz = resJson.data;
+      // Safely extract quiz data regardless of nesting
+      const quizDataObj = resJson.data.quiz || resJson.data;
 
-      // ✅ Save to localStorage (optional backup)
+      const { _id, questions, duration: quizDuration } = quizDataObj;
+
+      if (!Array.isArray(questions) || !questions.length || !_id) {
+        throw new Error("Invalid quiz data returned from server.");
+      }
+
+      // Store locally for persistence
       localStorage.setItem(
         "quizData",
         JSON.stringify({
-          questions: quiz.questions,
-          quizId: quiz._id,
-          duration: quiz.duration,
+          quizId: _id,
+          questions,
+          duration: quizDuration,
         })
       );
 
-      // ✅ Navigate with correct state
+      // Navigate to /quiz route with state
       navigate("/quiz", {
         state: {
-          questions: quiz.questions,
-          quizId: quiz._id,
-          duration: quiz.duration,
+          quizId: _id,
+          questions,
+          duration: quizDuration,
         },
       });
     } catch (error: unknown) {
       if (error instanceof Error) {
+        alert(error.message);
         console.error("❌ Error generating quiz:", error.message);
-        alert(
-          error.message ||
-            "There was an error creating the quiz. Please try again."
-        );
       } else {
-        console.error("❌ Unknown error generating quiz:", error);
-        alert("An unknown error occurred. Please try again.");
+        alert("An unknown error occurred.");
+        console.error("❌ Unknown error:", error);
       }
     }
   };
@@ -159,7 +157,9 @@ const QuizPage: React.FC = () => {
                 <select
                   required
                   value={numberOfQuestions}
-                  onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
+                  onChange={(e) =>
+                    setNumberOfQuestions(Number(e.target.value))
+                  }
                   className="quiz-dropdowns"
                 >
                   <option value="" disabled>
@@ -230,3 +230,5 @@ const QuizPage: React.FC = () => {
 };
 
 export default QuizPage;
+
+
