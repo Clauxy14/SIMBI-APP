@@ -50,30 +50,39 @@ const QuizPage: React.FC = () => {
         body: JSON.stringify(quizData),
       });
 
-      let data;
+      let resJson;
       try {
-        data = await response.json();
+        resJson = await response.json();
       } catch (err) {
         console.error("❌ Failed to parse JSON from response", err);
         throw new Error("Invalid response format from server");
       }
 
-      if (!response.ok) {
-        console.error("❌ Backend error response:", data);
-        throw new Error(data.message || "Quiz generation failed");
+      if (!response.ok || !resJson.success || !resJson.data) {
+        console.error("❌ Backend error response:", resJson);
+        throw new Error(resJson.message || "Quiz generation failed");
       }
 
-      // ✅ Store quiz data in localStorage
+      const quiz = resJson.data;
+
+      // ✅ Save to localStorage (optional backup)
       localStorage.setItem(
         "quizData",
         JSON.stringify({
-          questions: data.questions,
-          quizId: data._id,
-          duration: quizData.duration,
+          questions: quiz.questions,
+          quizId: quiz._id,
+          duration: quiz.duration,
         })
       );
 
-      navigate("/quiz"); // navigate without state; Quiz.tsx will retrieve from localStorage
+      // ✅ Navigate with correct state
+      navigate("/quiz", {
+        state: {
+          questions: quiz.questions,
+          quizId: quiz._id,
+          duration: quiz.duration,
+        },
+      });
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("❌ Error generating quiz:", error.message);
@@ -150,9 +159,7 @@ const QuizPage: React.FC = () => {
                 <select
                   required
                   value={numberOfQuestions}
-                  onChange={(e) =>
-                    setNumberOfQuestions(Number(e.target.value))
-                  }
+                  onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
                   className="quiz-dropdowns"
                 >
                   <option value="" disabled>
@@ -223,4 +230,3 @@ const QuizPage: React.FC = () => {
 };
 
 export default QuizPage;
-
