@@ -12,7 +12,7 @@ const StatBox: React.FC<{
   subtext?: string;
 }> = ({ icon, title, count, subtext }) => {
   return (
-    <div className="bg-[#FFFFF] rounded-[12px] shadow-[0_0_20px_rgba(0,0,0,0.1)] px-[16px]  py-[24px] min-w-[385px] min-h-[100px] flex flex-col justify-between">
+    <div className="bg-[#FFFFF] rounded-[12px] shadow-[0_0_20px_rgba(0,0,0,0.1)] px-[16px]  py-[24px] min-w-[300px] min-h-[100px] flex flex-col justify-between">
       <div className="flex items-center justify-between mb-2">
         <div className="text-gray-700 text-[20px] font-[700]">{title}</div>
         <div className="text-2xl">{icon}</div>

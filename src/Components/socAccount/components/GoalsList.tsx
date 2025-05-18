@@ -13,7 +13,7 @@ const GoalsList: React.FC = () => {
 
   const AddGoalButton = () => (
     <button
-      className="flex items-center justify-center px-[70px] py-[8px] border border-transparent text-[18px] font-medium rounded-[7px] text-[#FFFFF] bg-[#3A86FF]"
+      className="flex items-center justify-center px-[42px] py-[8px] border border-transparent text-[18px] font-medium rounded-[7px] text-[#FFFFF] bg-[#3A86FF]"
       aria-label="Add Goals"
       onClick={() =>
         document

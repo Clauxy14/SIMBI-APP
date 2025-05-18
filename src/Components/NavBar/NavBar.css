@@ -27,12 +27,12 @@
   list-style: none;
 }
 
-.sidebar-ul .links:hover{
-  color:#1b58dd ;
+.sidebar-ul .links:hover,
+.sidebar-ul .links.active-link {
+  color: #1b58dd;
 }
 
-.sidebar-ul .links:active{
-
+.sidebar-ul .links:active {
   transform: scale(1.7);
 }
 

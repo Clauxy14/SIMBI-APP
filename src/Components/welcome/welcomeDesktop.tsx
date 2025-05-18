@@ -93,10 +93,10 @@ const WelcomeDesktop: React.FC = () => {
 
       const data = await response.json();
       localStorage.setItem("simbiAIResponse", JSON.stringify(data));
-      navigate("/askSimbi");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error sending data to Simbi AI:", error);
-      navigate("/askSimbi");
+      navigate("/dashboard");
     } finally {
       setIsLoading(false);
     }
@@ -112,7 +112,7 @@ const WelcomeDesktop: React.FC = () => {
   };
 
     const skipWelcomes = () => {
-      navigate("/askSimbi");
+      navigate("/dashboard");
     
   };
 
@@ -123,6 +123,8 @@ const WelcomeDesktop: React.FC = () => {
           src="/assets/icons/Simbi-logo.png"
           alt="Simbi Logo"
           className="logo"
+          onClick={() => navigate("/landingpage")}
+          style={{ cursor: 'pointer' }}
         />
         <div className="user-info">
           <HeadBar />

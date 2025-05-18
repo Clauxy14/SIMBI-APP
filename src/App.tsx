@@ -5,7 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import Loading from "./loading";
-import WelcomePage from "./Components/welcome/welcome";
+import MainLayout from "./Components/Layout/MainLayout";
+
 
 
 // Lazy load your pages
@@ -14,7 +15,7 @@ const Signup = lazy(() => import("./Components/Signup/Signup"));
 const Login = lazy(() => import("./Components/Login/Login"));
 const ConnectWallet = lazy(() => import("./Components/Wallet/Wallet"));
 const Welcome = lazy(() => import("./Components/welcome/welcome"));
-const SocialAccountability = lazy(() => import("./Components/socAccount"));
+const SocialAccountability = lazy(() => import("./Components/socAccount/main"));
 const AskSimbi = lazy(() => import("./Components/AskSimbi/AskSimbi"));
 const QuizPage = lazy(() => import("./Components/Quiz/QuizPage"));
 const STUDYPLAAAN = lazy(() => import("./Components/studyplaaan/studyplaaan"));
@@ -22,6 +23,7 @@ const StudySession = lazy(() => import("./Components/studysession/studysession")
 const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
 const AboutUs = lazy(() => import("./Components/LandingPage/AboutUs"));
 const NotFound = lazy(() => import("./not-found"));
+const Dashboard = lazy(() => import("./Components/Dashboard/Dashboard"));
 
 
 function App() {
@@ -36,20 +38,21 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/connect-wallet" element={<ConnectWallet />} />
           <Route path="/welcome" element={<Welcome />} />
-          <Route path="/welcome" element={<WelcomePage />} />
-          /* Adjust the path to your image if needed */
-          <Route
-            path="/SocialAccountability"
-            element={<SocialAccountability />}
-          />
-          <Route path="/askSimbi" element={<AskSimbi />} />
-          <Route path="/quizPage" element={<QuizPage />} />
-          <Route path="/studyPage" element={<STUDYPLAAAN />} />
+          
+          {/* Routes with NavBar */}
+          <Route element={<MainLayout />}>
+            <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/Accountability" element={<SocialAccountability />} />
+            <Route path="/AskSimbi" element={<AskSimbi />} />
+            <Route path="/QuizPage" element={<QuizPage />} />
+            <Route path="/studyPage" element={<STUDYPLAAAN />} />
+            {/* <Route path="/trophy-room" element={<Welcome />} /> */}
+          </Route>
+
           <Route path="/studySession" element={<StudySession />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
-
     </Router>
   );
 }

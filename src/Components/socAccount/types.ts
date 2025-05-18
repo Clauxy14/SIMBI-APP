@@ -12,8 +12,9 @@ export interface Goal {
 export interface Partner {
   id: string;
   name: string;
+  email: string;
   avatar: string;
-  activeDate: Date;
   activeGoals: number;
   sharedGoals: number;
+  activeDate: Date;
 } 

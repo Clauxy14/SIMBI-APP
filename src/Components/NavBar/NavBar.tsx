@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./NavBar.css";
 
 function NavBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -28,14 +29,27 @@ function NavBar() {
   return (
     <div className="general-navbar">
       <div className="nav-logoo" onClick={toggleSidebar}>
-        <img src="/assets/icons/Simbi-logo.svg" className="logo" />
+        <img 
+          src="/assets/icons/Simbi-logo.svg" 
+          className="logo" 
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent sidebar toggle when clicking logo
+            navigate("/landingpage");
+          }}
+          style={{ cursor: 'pointer' }}
+        />
         <img src="/assets/icons/cuida_sidebar.svg" alt="collapse" width="25%" />
       </div>
 
       <div className={`sidebars ${sidebarOpen ? "show" : ""}`}>
         <ul className="sidebar-ul">
           <li className="sidebar-li">
-            <Link className="links" to="/dashboard">
+            <NavLink 
+              className={({ isActive }) => 
+                `links ${isActive ? 'active-link' : ''}`
+              } 
+              to="/dashboard"
+            >
               <img
                 src="/assets/dashboard.svg"
                 style={{
@@ -45,10 +59,15 @@ function NavBar() {
                 }}
               />
               &nbsp;&nbsp;&nbsp;Dashboard
-            </Link>
+            </NavLink>
           </li>
           <li className="sidebar-li">
-            <Link className="links" to="/AskSimbi">
+            <NavLink 
+              className={({ isActive }) => 
+                `links ${isActive ? 'active-link' : ''}`
+              } 
+              to="/AskSimbi"
+            >
               <img
                 src="/assets/tiny-logo-icon.svg"
                 style={{
@@ -58,10 +77,15 @@ function NavBar() {
                 }}
               />
               &nbsp;&nbsp;&nbsp;Ask SIMBI
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="links" to="/QuizPage">
+            <NavLink 
+              className={({ isActive }) => 
+                `links ${isActive ? 'active-link' : ''}`
+              } 
+              to="/QuizPage"
+            >
               <img
                 src="/assets/quizzes.svg"
                 style={{
@@ -71,10 +95,15 @@ function NavBar() {
                 }}
               />
               &nbsp;&nbsp;&nbsp;Quizzes
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="links" to="/SocialAccountability">
+            <NavLink 
+              className={({ isActive }) => 
+                `links ${isActive ? 'active-link' : ''}`
+              } 
+              to="/Accountability"
+            >
               <img
                 src="/assets/progress.svg"
                 style={{
@@ -84,10 +113,15 @@ function NavBar() {
                 }}
               />
               &nbsp;&nbsp;&nbsp;Accountability
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="links" to="">
+            <NavLink 
+              className={({ isActive }) => 
+                `links ${isActive ? 'active-link' : ''}`
+              } 
+              to="/trophy-room"
+            >
               <img
                 src="/assets/trophy.svg"
                 style={{
@@ -97,10 +131,15 @@ function NavBar() {
                 }}
               />
               &nbsp;&nbsp;&nbsp;Trophy Room
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="links" to="/studyPage">
+            <NavLink 
+              className={({ isActive }) => 
+                `links ${isActive ? 'active-link' : ''}`
+              } 
+              to="/studyPage"
+            >
               <img
                 src="/assets/study-plan.svg"
                 style={{
@@ -110,7 +149,7 @@ function NavBar() {
                 }}
               />
               &nbsp;&nbsp;&nbsp;Study Plan
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <div className="sidebar-web3-card">
