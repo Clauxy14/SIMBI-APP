@@ -1,52 +1,91 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "./QuizPage.css";
-import HeadBar from "../headBar/headBar";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const QuizPage: React.FC = () => {
   const navigate = useNavigate();
+  const storedUser = localStorage.getItem("simbiUser");
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  const userName = parsedUser?.name || parsedUser?.given_name || "User";
 
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(
-    null
-  );
-  const [selectedSubject, setSelectedSubject] = useState("");
-  const [selectedDuration, setSelectedDuration] = useState("");
-  const [user, setUser] = useState<{ name: string; avatar: string } | null>(
-    null
-  );
+  const [topic, setTopic] = useState("");
+  const [academicLevel, setAcademicLevel] = useState("");
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+  const [duration, setDuration] = useState("5");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
-  useEffect(() => {
-    const stored = localStorage.getItem("simbiUser");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setUser({
-        name: parsed.name || parsed.given_name || "User",
-        avatar:
-          parsed.avatar ||
-          `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(
-            parsed.name || "User"
-          )}`,
-      });
-    }
-  }, []);
-
-  const startQuiz = (e: React.FormEvent) => {
+  const startQuiz = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedDifficulty || !selectedSubject || !selectedDuration) {
-      alert("Please select subject, difficulty, and duration.");
+    if (!selectedDifficulty) {
+      alert("Please select a difficulty level.");
       return;
     }
 
-    console.log("Selected difficulty:", selectedDifficulty);
-    navigate("/quiz", {
-      state: {
-        subject: selectedSubject,
-        difficulty: selectedDifficulty,
-        duration: selectedDuration,
-      },
-    });
+    const quizData = {
+      topic,
+      academicLevel,
+      numberOfQuestions,
+      duration: Number(duration),
+      difficulty: selectedDifficulty,
+    };
+
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      alert("No token found, please log in.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/api/quiz/generate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(quizData),
+      });
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (err) {
+        console.error("❌ Failed to parse JSON from response", err);
+        throw new Error("Invalid response format from server");
+      }
+
+      if (!response.ok) {
+        console.error("❌ Backend error response:", data);
+        throw new Error(data.message || "Quiz generation failed");
+      }
+
+      // ✅ Store quiz data in localStorage
+      localStorage.setItem(
+        "quizData",
+        JSON.stringify({
+          questions: data.questions,
+          quizId: data._id,
+          duration: quizData.duration,
+        })
+      );
+
+      navigate("/quiz"); // navigate without state; Quiz.tsx will retrieve from localStorage
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("❌ Error generating quiz:", error.message);
+        alert(
+          error.message ||
+            "There was an error creating the quiz. Please try again."
+        );
+      } else {
+        console.error("❌ Unknown error generating quiz:", error);
+        alert("An unknown error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -55,97 +94,129 @@ const QuizPage: React.FC = () => {
         <NavBar />
       </div>
 
-      <div className="user-info-wrapper">       
-          <HeadBar/>
-      </div>
+      <div className="quiz-form">
+        <form onSubmit={startQuiz}>
+          <div className="quiz-card">
+            <img src="/assets/small-logo-blue.svg" className="quiz-logo" />
+            <h1>{`Welcome ${userName}`}</h1>
+            <p>
+              Did you know? With SIMBI by your side, you're 3x more likely to
+              stay on track with your study goals!
+            </p>
+            <p>
+              Your AI Study Buddy isn't just smart — it's your secret weapon for
+              academic success.
+            </p>
+          </div>
 
-      <div className="quiz-form-wrapper">
-        <div className="quiz-form-container">
-          <form onSubmit={startQuiz} className="quiz-form">
-            <div className="quiz-card">
-              <img src="/assets/small-logo-blue.svg" className="quiz-logo" />
-              <h1>{`Welcome ${user?.name}`}</h1>
-
-              <p className="quiz-p">
-                Did you know? With SIMBI by your side, you're 3x more likely to
-                stay on track with your study goals!
-              </p>
-              <p className="quiz-p">
-                Your AI Study Buddy isn't just smart — it's your secret weapon
-                for academic success.
-              </p>
+          <div className="quiz-selection">
+            <div className="quiz-type">
+              <label>Choose Quiz</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Enter a topic"
+                required
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                className="topic"
+              />
             </div>
 
-            <div className="quiz-selection">
-              {/* Subject Dropdown */}
-              <div className="quiz-type">
-                <label className="quiz-label">Choose Quiz</label>
-                <br />
-
-                <input
-                  type="text"
-                  className="quiz-input"
-                  required
-                  value={selectedSubject}
-                  placeholder="Input Topic"
-                  onChange={(e) => setSelectedSubject(e.target.value)}
-                />
-              </div>
-
-              {/* Difficulty Buttons */}
-              <div className="difficulty">
-                <label className="quiz-label">Difficulty Level</label>
-                <br />
-                <div
-                  className="difficulty-buttons"
-                  role="radiogroup"
-                  aria-label="Difficulty Level"
-                >
-                  {["easy", "medium", "hard"].map((level) => (
-                    <button
-                      type="button"
-                      key={level}
-                      role="radio"
-                      aria-checked={selectedDifficulty === level}
-                      className={`difficulty-btn ${
-                        selectedDifficulty === level ? "active" : ""
-                      }`}
-                      onClick={() => setSelectedDifficulty(level)}
-                    >
-                      {level.charAt(0).toUpperCase() + level.slice(1)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Duration Dropdown */}
-              <div className="duration">
-                <label className="quiz-label">Duration</label>
+            <div className="academic-level">
+              <label>
+                Academic Level
                 <br />
                 <select
-                  className="quiz-dropdown"
                   required
-                  value={selectedDuration}
-                  onChange={(e) => setSelectedDuration(e.target.value)}
+                  value={academicLevel}
+                  onChange={(e) => setAcademicLevel(e.target.value)}
+                  className="quiz-dropdowns"
                 >
                   <option value="" disabled>
                     Select
                   </option>
-                  <option value="15 Minutes">15 Minutes</option>
-                  <option value="25 Minutes">25 Minutes</option>
-                  <option value="30 Minutes">30 Minutes</option>
-                  <option value="45 Minutes">45 Minutes</option>
+                  <option value="secondary">secondary</option>
+                  <option value="university">university</option>
+                  <option value="personal development">
+                    personal development
+                  </option>
                 </select>
-              </div>
+              </label>
 
-              <div className="start-quiz">
-                <button type="submit" className="start-button">
-                  Next
-                </button>
+              <label>
+                Number of Questions
+                <br />
+                <select
+                  required
+                  value={numberOfQuestions}
+                  onChange={(e) =>
+                    setNumberOfQuestions(Number(e.target.value))
+                  }
+                  className="quiz-dropdowns"
+                >
+                  <option value="" disabled>
+                    Select
+                  </option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                </select>
+              </label>
+            </div>
+
+            <div className="difficulty">
+              <label>Difficulty Level</label>
+              <br />
+              <div
+                className="difficulty-buttons"
+                role="radiogroup"
+                aria-label="Difficulty Level"
+              >
+                {["easy", "medium", "hard"].map((level) => (
+                  <button
+                    type="button"
+                    key={level}
+                    role="radio"
+                    aria-checked={selectedDifficulty === level}
+                    className={`difficulty-btn ${
+                      selectedDifficulty === level ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedDifficulty(level)}
+                  >
+                    {level.charAt(0).toUpperCase() + level.slice(1)}
+                  </button>
+                ))}
               </div>
             </div>
-          </form>
-        </div>
+
+            <div className="duration">
+              <label>Duration</label>
+              <br />
+              <select
+                required
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                className="quiz-dropdown"
+              >
+                <option value="" disabled>
+                  Select
+                </option>
+                <option value="5">5 Minutes</option>
+                <option value="10">10 Minutes</option>
+                <option value="15">15 Minutes</option>
+                <option value="20">20 Minutes</option>
+              </select>
+            </div>
+
+            <div className="start-quiz">
+              <button type="submit" className="start-button">
+                Start Quiz
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );
@@ -153,4 +224,3 @@ const QuizPage: React.FC = () => {
 
 export default QuizPage;
 
-//

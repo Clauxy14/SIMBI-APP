@@ -11,6 +11,7 @@ import ConnectWallet from "./Components/Wallet/Wallet";
 // import Welcome from "./Components/welcome/welcome";
 import AskSimbi from "./Components/AskSimbi/AskSimbi";
 import QuizPage from "./Components/Quiz/QuizPage";
+import Quiz from "./Components/Quiz/Quiz"; 
 import STUDYPLAAAN from "./Components/studyplaaan/studyplaaan";
 import StudySession from "./Components/studysession/studysession";
 import LandingPage from "./Components/LandingPage/LandingPage";
@@ -31,6 +32,7 @@ function App() {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/askSimbi" element={<AskSimbi />} />
         <Route path="/quizPage" element={<QuizPage />} />
+        <Route path="/quiz" element={<Quiz />} />
         <Route path="/studyPage" element={<STUDYPLAAAN />} />
         <Route path="/studySession" element={<StudySession />} />
         <Route path="*" element={<Navigate to="/" replace />} />
