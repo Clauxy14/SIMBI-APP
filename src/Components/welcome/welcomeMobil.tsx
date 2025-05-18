@@ -1,7 +1,10 @@
-import {  useState } from "react";
+//welcome.mobile.tsx
+
+import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import "./welcomeMobile.css"
+import "./welcomeMobile.css";
+import HeadBar from "../headBar/headBar";
 
 const steps = [
   {
@@ -72,23 +75,6 @@ export default function WelcomeMobile() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-   const stored = localStorage.getItem("simbiUser");
-   let simbiUser = null;
-
-try {
-  if (stored && stored !== "undefined") {
-    const parsed = JSON.parse(stored);
-    const name = parsed?.name || parsed?.given_name || "Guest";
-    const avatar =
-      parsed?.avatar ||
-     ` https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
-    simbiUser = { name, avatar };
-  }
-} catch (e) {
-  console.error("Error parsing simbiUser from localStorage", e);
-}
-
-
   const sendDataToSimbiAI = async () => {
     setIsLoading(true);
     try {
@@ -143,41 +129,24 @@ try {
           <img
             src="/assets/icons/Simbi-logo.svg"
             alt="Simbi Logo"
-            // className="logo"
+            className=".logo-welcome-mobile"
           />
         </div>
 
         <div className="user-info">
-          <span className="bell-icon">
-            <img
-              src="/assets/icons/notification-icon.svg"
-              alt="notification"
-              className="bell-icon-img"
-            />
-          </span>
-          <div className="user-avatar">
-            <img
-              src={
-                simbiUser?.avatar ||
-                "https://api.dicebear.com/7.x/bottts/svg?seed=Guest"
-              }
-              alt="Avatar"
-            />
-            <span className="username">{simbiUser?.name || "Guest"}</span>
-          </div>
-
-          <button className="wallet-btn-btn">Connect Wallet</button>
+          <HeadBar />
         </div>
       </header>
+
       <div className="welcome-title-content-mobile">
-        <h2 className="welcome-title-mobile">
-          Welcome to{" "}
+        <div className="asksimbititle-logo-mobile">
+          <h2 className="welcome-title-mobile">Welcome to </h2>
           <img
             className="welcome-simbi-mobile"
             src="/assets/icons/Simbi-logo.png"
             alt="Simbi"
           />
-        </h2>
+        </div>
         <p className="subtitle-mobile-mobile">Your AI Study Buddy</p>
         <p className="desc">
           Complete the the 3 steps to get a personalised study plan and content
@@ -191,7 +160,7 @@ try {
             style={{ width: ` ${progress}%` }}
           ></div>
         </div>
-        <div className="progress-percent-mobile">{progress}</div>
+        <div className="progress-percent-mobile">{progress}%</div>
 
         <h3 className="welcome-label-mobile">{label}</h3>
         <p className="desc">{description}</p>
@@ -199,16 +168,15 @@ try {
         {content}
 
         <div className="div-next-butn-mobile">
-         {stepIndex < steps.length - 1 && (
-                           <div className="skipcontainer">
-                             <button className="skip-welcome" onClick={skipWelcome}>
-                               Skip
-                             </button>
-                             <IoIosArrowForward />
-                           </div>
-                         )}
-         
-          
+          {stepIndex < steps.length - 1 && (
+            <div className="skipcontainer-mobile">
+              <button className="skip-welcome" onClick={skipWelcome}>
+                Skip
+              </button>
+              <IoIosArrowForward />
+            </div>
+          )}
+
           <button
             className="next-butn-mobile"
             onClick={nextStep}

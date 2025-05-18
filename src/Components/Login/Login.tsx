@@ -157,7 +157,6 @@ const Login: React.FC = () => {
                 useOneTap
                 text="signup_with"
                 shape="pill"
-                // width="450"
                 logo_alignment="center"
               />
             </GoogleOAuthProvider>

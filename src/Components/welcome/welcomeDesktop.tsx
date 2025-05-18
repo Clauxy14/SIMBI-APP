@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -302,7 +303,7 @@ const WelcomeDesktop: React.FC = () => {
 
               <div className="div-next-butn">
                 {currentStep < desktopSteps.length - 1 && (
-                  <div className="skipcontainer">
+                  <div className="skipcontainer-desktop">
                     <button className="skip-welcome" onClick={skipWelcomes}>
                       Skip
                     </button>
