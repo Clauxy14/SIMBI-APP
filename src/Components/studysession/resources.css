@@ -1,0 +1,44 @@
+.resources-container {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.upload-header h3 {
+  margin-bottom: 0.3rem;
+}
+
+.upload-subtext {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.file-upload-box {
+  margin-top: 1rem;
+  padding: 2rem;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.file-list {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.upload-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}

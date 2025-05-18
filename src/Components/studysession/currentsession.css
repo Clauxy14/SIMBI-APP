@@ -3,7 +3,8 @@
   padding: 24px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 320px;
+  /* width: 320px; */
+  width: 100%;
   font-family: "Segoe UI", sans-serif;
   display: flex;
   flex-direction: column;
@@ -115,4 +116,17 @@
   background-color: #4caf8c;
   border-radius: 20px 0 0 20px;
   transition: width 0.4s ease;
+}
+
+@media screen and (max-width: 768px) {
+.current-session-container{
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto ;
+  
+}
+
 }

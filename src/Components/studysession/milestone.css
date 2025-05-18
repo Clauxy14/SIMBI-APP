@@ -1,0 +1,77 @@
+.milestones-wrapper {
+  border: 1px solid #d0e3ff;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: #fefefe;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.milestone {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.milestone.completed {
+  background-color: #f0faff;
+  border-left: 4px solid #007aff;
+}
+
+.milestone-text p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: gray;
+}
+
+.add-btn {
+  background-color: #e6f0ff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.track-btn {
+  align-self: flex-end;
+  margin-top: 8px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-milestone-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-milestone-form input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.mileston-contaier{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-milestone-form button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}

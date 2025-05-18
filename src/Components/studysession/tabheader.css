@@ -55,3 +55,33 @@
   padding: 15px;
   border-radius: 8px;
 }
+.border-line{
+  color: antiquewhite;
+  margin: 10px 0;
+}
+
+.studysession-btn {
+  padding:10px; 
+  background-color: #1b60f5;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  border-radius: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-title h4 {
+  font-size: 15px;
+}
+
+.studysession-btn {
+  padding:10px; 
+  background-color: #1b60f5;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 13px;
+  border-radius: 12px;
+}
+}
