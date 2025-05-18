@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function useTelegramAuth() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

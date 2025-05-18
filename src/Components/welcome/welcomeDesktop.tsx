@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import "./welcomeDesktop.css";
+import HeadBar from "../headBar/headBar";
+
 
 const desktopSteps = [
   {
@@ -107,6 +110,11 @@ const WelcomeDesktop: React.FC = () => {
     }
   };
 
+    const skipWelcomes = () => {
+      navigate("/askSimbi");
+    
+  };
+
   return (
     <div className="welcome-wrapper">
       <header className="welcome-header-Desktop">
@@ -116,14 +124,7 @@ const WelcomeDesktop: React.FC = () => {
           className="logo"
         />
         <div className="user-info">
-          <span className="bell-icon">
-            <img src="/assets/icons/notification-icon.svg" alt="notification" />
-          </span>
-          <div className="user-avatar">
-            <img src={user?.avatar} alt="Avatar" />
-            <span className="username">{user?.name}</span>
-          </div>
-          <button className="wallet-btn">Connect Wallet</button>
+          <HeadBar />
         </div>
       </header>
 
@@ -161,7 +162,7 @@ const WelcomeDesktop: React.FC = () => {
             <div className="progress-bar">
               <div
                 className="progresss"
-                style={{ width: `${progress}% `}}
+                style={{ width: ` ${progress}%` }}
               ></div>
             </div>
             <p className="progress-percent">{progress}%</p>
@@ -199,8 +200,8 @@ const WelcomeDesktop: React.FC = () => {
                     <option value="" className="first-option">
                       Select-option
                     </option>
-                    <option value="Js 1-3">Js 1-3</option>
-                    <option value="Ss 1-3">Ss 1-3</option>
+                    <option value="Js 1-3">Junior Secondary</option>
+                    <option value="Ss 1-3">Senior Secondary</option>
                     <option value="100 level">100 level</option>
                     <option value="200 level">200 level</option>
                     <option value="300 level">300 level</option>
@@ -300,6 +301,15 @@ const WelcomeDesktop: React.FC = () => {
               )}
 
               <div className="div-next-butn">
+                {currentStep < desktopSteps.length - 1 && (
+                  <div className="skipcontainer">
+                    <button className="skip-welcome" onClick={skipWelcomes}>
+                      Skip
+                    </button>
+                    <IoIosArrowForward />
+                  </div>
+                )}
+
                 <button
                   className="next-butn"
                   onClick={handleNext}

@@ -1,4 +1,6 @@
-import Link from 'next/link';
+
+import { Link } from "react-router-dom";
+
 import { StudyGroup } from '../../types/telegram';
 
 export default function GroupCard({ 
@@ -21,7 +23,7 @@ export default function GroupCard({
       
       <div className="mt-3 flex space-x-2">
         <Link 
-          href={`/telegram/session/${group.id}`}
+          to={`/telegram/session/${group.id}`}
           className="bg-tg-button text-tg-button-text py-1 px-3 rounded text-sm"
         >
           {isCreator ? 'Manage' : 'View'}

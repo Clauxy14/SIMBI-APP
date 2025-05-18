@@ -212,12 +212,20 @@ const AskSimbi: React.FC = () => {
           <img
             src="/assets/icons/cuida_sidebar.svg"
             alt="collapse"
-            width="15%"
+            className="collapse-img"
           />
         </div>
 
         {historyVisible && (
           <aside className="chat-history">
+            <div className="cancel-button-div">
+              <button
+                onClick={() => navigate("/quizPage")}
+                className="cancel-button"
+              >
+                Dashboard
+              </button>
+            </div>
             <h2>History</h2>
             {history.map((entry, idx) => (
               <div key={idx} className="history-section">
@@ -241,118 +249,110 @@ const AskSimbi: React.FC = () => {
           </aside>
         )}
       </div>
-
       <div className="asksimbi-container">
-        <div className="cancel-button-div">
-          <button
-            onClick={() => navigate("/quizPage")}
-            className="cancel-button"
-          >
-            Dashboard
-          </button>
-        </div>
-
-        {messages.length === 0 && (
-          <div className="suggestions">
-            <img
-              src="/assets/icons/Simbi-logo.svg"
-              className="askSimbi-image"
-              alt="Logo"
-              style={{ width: "9.5rem", height: "3rem" }}
-            />
-            <p className="greeting">Hi {userName} 👋!</p>
-            <h6>How can I help you?</h6>
-            <div className="suggestionBox">
-              {suggestions.map((suggestion, idx) => (
-                <button
-                  key={idx}
-                  className="suggestion-button"
-                  onClick={() => handleSendQuestion(suggestion)}
-                >
-                  {suggestion}
-                </button>
-              ))}
+        <div>
+          {messages.length === 0 && (
+            <div className="suggestions">
+              <img
+                src="/assets/icons/Simbi-logo.svg"
+                className="askSimbi-image"
+                alt="Logo"
+                style={{ width: "9.5rem", height: "3rem" }}
+              />
+              <p className="greeting">Hi {userName} 👋!</p>
+              <h6>How can I help you?</h6>
+              <div className="suggestionBox">
+                {suggestions.map((suggestion, idx) => (
+                  <button
+                    key={idx}
+                    className="suggestion-button"
+                    onClick={() => handleSendQuestion(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
+          )}
+
+          <div className="chat-box">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`chat-bubble ${
+                  msg.sender === "user" ? "right" : "left"
+                }`}
+              >
+                {msg.text}
+              </div>
+            ))}
+            {loading && <div className="chat-bubble left">Typing...</div>}
+            <div ref={bottomRef} />
           </div>
-        )}
 
-        <div className="chat-box">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`chat-bubble ${
-                msg.sender === "user" ? "right" : "left"
-              }`}
-            >
-              {msg.text}
-            </div>
-          ))}
-          {loading && <div className="chat-bubble left">Typing...</div>}
-          <div ref={bottomRef} />
-        </div>
-
-        <div className="input-area">
-          <textarea
-            ref={textareaRef}
-            rows={1}
-            maxLength={500}
-            value={questionInput}
-            onChange={(e) => {
-              setQuestionInput(e.target.value);
-              if (textareaRef.current) {
-                textareaRef.current.style.height = "auto";
-                textareaRef.current.style.height = `${Math.min(
-                  textareaRef.current.scrollHeight,
-                  96
-                )}px`;
-              }
-            }}
-            placeholder="Ask SIMBI anything"
-            className="chat-input"
-          />
-          <div className="input-buttons">
-            <button
-              onClick={() => handleSendQuestion(questionInput)}
-              disabled={loading}
-              className="send-button"
-            >
-              {loading ? (
-                <img src="/assets/icons/block.svg" alt="block" />
-              ) : (
-                <img src="/assets/icons/send.svg" alt="send" />
-              )}
-            </button>
-
-            <div className="two-btn">
+          <div className="input-area">
+            <textarea
+              ref={textareaRef}
+              rows={1}
+              maxLength={500}
+              value={questionInput}
+              onChange={(e) => {
+                setQuestionInput(e.target.value);
+                if (textareaRef.current) {
+                  textareaRef.current.style.height = "auto";
+                  textareaRef.current.style.height = `${Math.min(
+                    textareaRef.current.scrollHeight,
+                    96
+                  )}px`;
+                }
+              }}
+              placeholder="Ask SIMBI anything"
+              className="chat-input"
+            />
+            <div className="input-buttons">
               <button
-                onClick={() => {
-                  const lastMessage = [...messages]
-                    .reverse()
-                    .find((m) => m.sender === "ai");
-                  if (lastMessage) speakText(lastMessage.text);
-                }}
-                disabled={!messages.some((m) => m.sender === "ai")}
-                className="replay-button"
+                onClick={() => handleSendQuestion(questionInput)}
+                disabled={loading}
+                className="send-button"
               >
-                <img
-                  src={
-                    isSpeaking
-                      ? "/assets/icons/stop_circle.svg"
-                      : "/assets/icons/play.svg"
-                  }
-                  alt={isSpeaking ? "stop" : "play"}
-                />
-              </button>
-              <button
-                onClick={isListening ? stopListening : startListening}
-                className="voice-button"
-              >
-                {isListening ? (
-                  <img src="/assets/icons/mic_off.svg" alt="mic-off" />
+                {loading ? (
+                  <img src="/assets/icons/block.svg" alt="block" />
                 ) : (
-                  <img src="/assets/icons/mic.svg" alt="mic" />
+                  <img src="/assets/icons/send.svg" alt="send" />
                 )}
               </button>
+
+              <div className="two-btn">
+                <button
+                  onClick={() => {
+                    const lastMessage = [...messages]
+                      .reverse()
+                      .find((m) => m.sender === "ai");
+                    if (lastMessage) speakText(lastMessage.text);
+                  }}
+                  disabled={!messages.some((m) => m.sender === "ai")}
+                  className="replay-button"
+                >
+                  <img
+                    src={
+                      isSpeaking
+                        ? "/assets/icons/stop_circle.svg"
+                        : "/assets/icons/play.svg"
+                    }
+                    alt={isSpeaking ? "stop" : "play"}
+                  />
+                </button>
+                <button
+                  onClick={isListening ? stopListening : startListening}
+                  className="voice-button"
+                >
+                  {isListening ? (
+                    <img src="/assets/icons/mic_off.svg" alt="mic-off" />
+                  ) : (
+                    <img src="/assets/icons/mic.svg" alt="mic" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>

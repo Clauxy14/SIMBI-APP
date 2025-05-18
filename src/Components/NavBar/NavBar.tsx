@@ -9,13 +9,31 @@ function NavBar() {
     setSidebarOpen(!sidebarOpen);
   };
 
+  // Updated Telegram redirect function with better error handling
+  const redirectToTelegram = () => {
+    const botUsername = "SimbiStudyBot"; // No @ symbol
+    const miniAppPath = "https://simbi-app.vercel.app/telegram"; // The route where your Mini App lives
+
+    // First try the direct mobile app link
+    const mobileLink = `tg://resolve?domain=${botUsername}&startapp=${miniAppPath}`;
+    window.location.href = mobileLink;
+
+    // If mobile link fails (or on desktop), fallback to web
+    setTimeout(() => {
+      const webLink = `https://t.me/${botUsername}/${miniAppPath}`;
+      window.open(webLink, "_blank");
+    }, 100);
+  };
+
   return (
-    <div className="navbar">
-      <div className="nav-logo" onClick={toggleSidebar}>
-        <img src="/assets/small-logo.svg" className="nav-logo" />
+  
+    <div className="general-navbar">
+      <div className="nav-logoo" onClick={toggleSidebar}>
+        <img src="/assets/icons/Simbi-logo.svg" className="nav-logo" />
+        <img src="/assets/icons/cuida_sidebar.svg" alt="collapse" width="25%" />
       </div>
 
-      <nav className={`sidebar ${sidebarOpen ? "show" : ""}`}>
+      <div className={`sidebars ${sidebarOpen ? "show" : ""}`}>
         <ul className="sidebar-ul">
           <li className="sidebar-li">
             <Link className="links" to="/dashboard">
@@ -66,7 +84,7 @@ function NavBar() {
                   marginBottom: "-0.5rem",
                 }}
               />
-              &nbsp;&nbsp;&nbsp;Progress
+              &nbsp;&nbsp;&nbsp;Accountability
             </Link>
           </li>
           <li>
@@ -96,18 +114,16 @@ function NavBar() {
             </Link>
           </li>
         </ul>
-
-        <div className="telegram-link">
-        <h2>Web3</h2>
-        <button
-          className="telegram-connect"
-          onClick={() => window.location.href = "https://telegram.com"}>
-          Connect to Telegram
-        </button>
+        <div className="sidebar-web3-card">
+          <h3 className="sidebar-web3-title">Web3</h3>
+          <button 
+            className="sidebar-telegram-btn" 
+            onClick={redirectToTelegram}
+          >
+            Connect to Telegram
+          </button>
+        </div>
       </div>
-      
-      </nav>
-
     </div>
   );
 }

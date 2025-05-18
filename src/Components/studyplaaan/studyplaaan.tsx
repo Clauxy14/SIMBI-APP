@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +42,10 @@ const formatTimeRange = (time: string, duration: number): string => {
     hour12: true,
   };
 
-  return `${start.toLocaleTimeString([], options)} - ${end.toLocaleTimeString([], options)}`;
+  return `${start.toLocaleTimeString([], options)} - ${end.toLocaleTimeString(
+    [],
+    options
+  )}`;
 };
 
 const STUDYPLAAAN: React.FC = () => {
@@ -126,7 +127,7 @@ const STUDYPLAAAN: React.FC = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization:` Bearer ${token} `,
+          Authorization: ` Bearer ${token} `,
         },
         body: JSON.stringify(formData),
       });
@@ -173,35 +174,82 @@ const STUDYPLAAAN: React.FC = () => {
     day: "numeric",
   });
 
+  // const deleteSession = async (id?: number) => {
+  //   if (!id) return;
+
+  //   const token = getToken();
+  //   if (!token) {
+  //     alert("You're not logged in. Please log in again.");
+  //     navigate("/login");
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await fetch(
+  //       `https://simbi-ai.onrender.com/api/sessions/${id}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (res.ok) {
+  //       setSessions((prev) => prev.filter((session) => session.id !== id));
+  //     } else {
+  //       const errorText = await res.text();
+  //       console.error("Failed to delete session:", errorText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting session:", error);
+  //   }
+  // };
+
   const deleteSession = async (id?: number) => {
-  if (!id) return;
+    if (!id) return;
+    console.log("🗑️ Attempting to delete session with ID:", id);
 
-  const token = getToken();
-  if (!token) {
-    alert("You're not logged in. Please log in again.");
-    navigate("/login");
-    return;
-  }
-
-  try {
-    const res = await fetch('https://simbi-ai.onrender.com/api/sessions/${id}', {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token} `,
-      },
-    });
-
-    if (res.ok) {
-      setSessions((prev) => prev.filter((session) => session.id !== id));
-    } else {
-      const errorText = await res.text();
-      console.error("Failed to delete session:", errorText);
+    const token = getToken();
+    if (!token) {
+      alert("You're not logged in. Please log in again.");
+      navigate("/login");
+      return;
     }
-  } catch (error) {
-    console.error("Error deleting session:", error);
-  }
-};
 
+    try {
+      const res = await fetch(
+        `https://simbi-ai.onrender.com/api/sessions/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (res.ok) {
+        console.log("✅ Delete successful");
+        setSessions((prev) => {
+          const updated = prev.filter(
+            (session) => String(session.id) !== String(id)
+          );
+          console.log("📦 Updated sessions list:", updated);
+          return updated;
+        });
+
+        // OPTIONAL: Re-fetch sessions from backend to be 100% sure
+        // const updatedSessions = await fetchSessions();
+        // setSessions(updatedSessions);
+      } else {
+        const errorText = await res.text();
+        console.error("❌ Failed to delete session:", errorText);
+      }
+    } catch (error) {
+      console.error("🔥 Error deleting session:", error);
+    }
+  };
+  
 
   return (
     <div className="studyplan-container">
@@ -226,7 +274,6 @@ const STUDYPLAAAN: React.FC = () => {
             </button>
           </div>
         </header>
-
         {/* Today */}
         <div className="section">
           <h2>Today</h2>
@@ -243,43 +290,40 @@ const STUDYPLAAAN: React.FC = () => {
                 <div>
                   <strong>{s.subject}</strong>
                   <p>{s.topic}</p>
-                  <span>
-                    {formatDate(s.date)}  
-                  </span>
+                  <span>{formatDate(s.date)}</span>
                 </div>
                 <div>
-                <div className="delete-div">
-                   <div>→</div>
-                   <MdDelete
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent navigating to /studySession
-                            deleteSession(s.id);
-                          }}
-                          style={{ cursor: "pointer" }}
-                        />
-
-                </div>
-                <span>{formatTimeRange(s.time, s.duration)}</span>
+                  <div className="delete-div">
+                    <div>→</div>
+                    <MdDelete
+                      onClick={(e) => {
+                        e.stopPropagation(); // prevent navigating to /studySession
+                        deleteSession(s.id);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "red",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                  </div>
+                  <span>{formatTimeRange(s.time, s.duration)}</span>
                 </div>
               </div>
             ))}
         </div>
-
-        {/* Tomorrow */}
         <div className="section">
           <h2>Tomorrow</h2>
-         
 
           {sessions
             .filter((s) => isSameDay(s.date, tomorrow.toISOString()))
             .map((s, i) => (
               <div
                 key={s.id || i}
-                className="session-card-tomorrow"
+                className="session-card-1"
                 onClick={() => navigate("/studySession")}
               >
                 <div>
-
                   <strong>{s.subject}</strong>
                   <p>{s.topic}</p>
                   <span style={{ color: "red", fontSize: "14px" }}>
@@ -288,23 +332,34 @@ const STUDYPLAAAN: React.FC = () => {
                   </span>
                   <p>{formatDate(tomorrow.toISOString())}</p>
                 </div>
-                 <div>
-                <div className="delete-div">
-                   <div>→</div>
+                <div>
+                  <div
+                    className="delete-div"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <div>→</div>
                     <MdDelete
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent navigating to /studySession
-                            deleteSession(s.id);
-                          }}
-                          style={{ cursor: "pointer" }}
-                        />
-                </div>
-                <span>{formatTimeRange(s.time, s.duration)}</span>
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent card click
+                        console.log("🗑️ Clicked delete for ID:", s.id);
+                        deleteSession(s.id);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "red",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                  </div>
+                  <span>{formatTimeRange(s.time, s.duration)}</span>
                 </div>
               </div>
             ))}
         </div>
-
         {/* Missed Sessions */}
         <div className="section">
           <h2 style={{ color: "#C2402E" }}>Missed Session</h2>
@@ -321,23 +376,26 @@ const STUDYPLAAAN: React.FC = () => {
                   <strong>{s.subject}</strong>
                   <p>{s.topic}</p>
                 </div>
-                 <div>
-                <div className="delete-div">
-                   <div>→</div>
+                <div>
+                  <div className="delete-div">
+                    <div>→</div>
                     <MdDelete
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent navigating to /studySession
-                            deleteSession(s.id);
-                          }}
-                          style={{ cursor: "pointer" }}
-                        />
-                </div>
-                <span>{formatTimeRange(s.time, s.duration)}</span>
+                      onClick={(e) => {
+                        e.stopPropagation(); // prevent navigating to /studySession
+                        deleteSession(s.id);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: "red",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                  </div>
+                  <span>{formatTimeRange(s.time, s.duration)}</span>
                 </div>
               </div>
             ))}
         </div>
-
         All Sessions
         <div className="section">
           <h2>All Scheduled Sessions</h2>
@@ -354,23 +412,26 @@ const STUDYPLAAAN: React.FC = () => {
                   {formatDate(s.date)} at {formatTimeRange(s.time, s.duration)}
                 </span>
               </div>
-                <div>
+              <div>
                 <div className="delete-div">
-                   <div>→</div>
-                    <MdDelete
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent navigating to /studySession
-                            deleteSession(s.id);
-                          }}
-                          style={{ cursor: "pointer" }}
-                        />
+                  <div>→</div>
+                  <MdDelete
+                    onClick={(e) => {
+                      e.stopPropagation(); // prevent navigating to /studySession
+                      deleteSession(s.id);
+                    }}
+                    style={{
+                      cursor: "pointer",
+                      color: "red",
+                      fontSize: "1.5rem",
+                    }}
+                  />
                 </div>
                 <span>{formatTimeRange(s.time, s.duration)}</span>
-                </div>
+              </div>
             </div>
           ))}
         </div>
-
         {/* Add Session Modal */}
         {showModal && (
           <div className="modal">
@@ -426,7 +487,6 @@ const STUDYPLAAAN: React.FC = () => {
             </div>
           </div>
         )}
-
         {/* Success Message */}
         {showSuccess && (
           <div className="success-popup">
