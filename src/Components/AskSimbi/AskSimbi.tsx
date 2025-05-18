@@ -1,3 +1,5 @@
+//asksimbi.tsx
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
@@ -146,8 +148,8 @@ const AskSimbi: React.FC = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_MISTRAL_API_KEY}`,
-            "Content-Type": "application/json",
+            Authorization:` Bearer ${import.meta.env.VITE_MISTRAL_API_KEY},
+            "Content-Type": "application/json"`,
           },
         }
       );
@@ -204,6 +206,7 @@ const AskSimbi: React.FC = () => {
   return (
     <div className="chat-container">
       <div className="chat-wrapper">
+        
         <div
           className="sidebar-toggle"
           onClick={() => setHistoryVisible((prev) => !prev)}
@@ -294,7 +297,7 @@ const AskSimbi: React.FC = () => {
             <textarea
               ref={textareaRef}
               rows={1}
-              maxLength={500}
+              // maxLength={500}
               value={questionInput}
               onChange={(e) => {
                 setQuestionInput(e.target.value);
