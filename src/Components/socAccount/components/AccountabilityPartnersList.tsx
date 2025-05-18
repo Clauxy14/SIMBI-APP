@@ -1,14 +1,33 @@
 import React from "react";
 import AccountabilityPartner from "./AccountabilityPartner";
 import { useAccountability } from "../contexts/AccountabilityContexts";
+import { IoAdd } from "react-icons/io5";
 
 const AccountabilityPartnersList: React.FC = () => {
   const { partners } = useAccountability();
+
+  const AddPartnerButton = () => (
+    <button
+      className="flex items-center justify-center px-[70px] py-[8px] border border-transparent text-[18px] font-medium rounded-[7px] text-[#FFFFF] bg-[#3A86FF]"
+      aria-label="Add Partner"
+      onClick={() =>
+        document
+          .getElementById("add-partner-modal")
+          ?.classList.remove("hidden")
+      }
+    >
+      <div className="flex items-center justify-center flex-row gap-[4px] text-[#FFFF]">
+        <IoAdd className="h-4 w-4 mr-1" />
+        <p>Add</p> <p>Partner</p>
+      </div>
+    </button>
+  );
 
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-base sm:text-lg font-medium">Your Accountability Network</h2>
+        {partners.length > 0 && <AddPartnerButton />}
       </div>
 
       {partners.length === 0 ? (
@@ -19,6 +38,9 @@ const AccountabilityPartnersList: React.FC = () => {
           <p className="text-gray-500 mt-1">
             Add partners to help you stay on track with your goals.
           </p>
+          <div className="flex justify-center mt-4">
+            <AddPartnerButton />
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -27,35 +49,6 @@ const AccountabilityPartnersList: React.FC = () => {
           ))}
         </div>
       )}
-
-      <div className="flex items-center justify-center mt-4 sm:mt-[16px]">
-        <button
-          className="flex items-center  px-[70px] py[8px] sm:px-[70px] py-2 sm:py-[8px] border border-transparent text-[18px] sm:text-[18px] font-medium rounded-[7px] text-white bg-[#3A86FF] hover:bg-blue-700"
-          aria-label="Add Partner"
-          onClick={() =>
-            document
-              .getElementById("add-partner-modal")
-              ?.classList.remove("hidden")
-          }
-        >
-        <div className="flex text-[#FFFFF] gap-[4px]">
-        <svg
-            className="h-4 w-4 mr-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-          Add Partner
-        </div>
-        </button>
-      </div>
     </div>
   );
 };

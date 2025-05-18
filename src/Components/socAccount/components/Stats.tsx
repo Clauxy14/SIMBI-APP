@@ -27,7 +27,7 @@ const Stats: React.FC = () => {
   const { stats } = useAccountability();
 
   return (
-    <div className="flex flex-row flex-wrap gap-[24px] mb-[42px] justify-center">
+    <div className="flex flex-row flex-wrap gap-[24px] mb-[42px] sm:p-[10px] justify-center">
       <StatBox
         icon={<span className="text-blue-500 font-bold "><img src={rewardIcon} alt="Notifications" className="h-[30px] w-[30px]"/></span>}
         title="Active Goals"

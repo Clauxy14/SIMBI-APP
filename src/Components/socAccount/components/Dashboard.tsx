@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F8f8]">
+    <div className="min-h-screen bg-[#F8F8f8] mb-[14px]">
       <div className="max-w-9xl mx-auto px-[42px] bg-[#F8F8F8] sm:px-8 py-8">
         {/* Header */}
         <header className="bg-[#FFFFF] rounded-[45px] px-[16px]  flex justify-between items-center  mx-[10px] mt-[52px] mb-[70px] shadow-[0_0_20px_rgba(0,0,0,0.1)]">

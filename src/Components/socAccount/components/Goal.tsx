@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Goal as GoalType } from '../types';
+import shareIcon from "../../../../public/assets/icons/send.svg";
 
 interface GoalProps {
   goal: GoalType;
   onUpdateProgress: (id: string, progress: number) => void;
 }
 
-const Goal: React.FC<GoalProps> = ({ goal, onUpdateProgress }) => {
+const Goal = ({ goal, onUpdateProgress }: GoalProps): React.ReactElement => {
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [progress, setProgress] = useState(goal.progress);
+
   const getStatusColor = (status: string): string => {
     switch (status) {
       case 'on track':
@@ -30,53 +34,96 @@ const Goal: React.FC<GoalProps> = ({ goal, onUpdateProgress }) => {
     });
   };
 
+  const handleProgressUpdate = () => {
+    onUpdateProgress(goal.id, progress);
+    setShowUpdateModal(false);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 mb-4">
-      <h3 className="text-base sm:text-lg font-semibold">{goal.title}</h3>
-      <p className="text-xs sm:text-sm text-gray-600">
-        {goal.description} by {formatDeadline(goal.deadline)}
-      </p>
-
-      <div className="mt-3 sm:mt-4">
-        <div className="flex justify-between mb-1">
-          <span className="text-xs sm:text-sm text-gray-600">Progress: {goal.progress}%</span>
-          <span className={`text-xs sm:text-sm ${statusColor}`}>{goal.status}</span>
+    <>
+      <div className="bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-xl transition-all duration-300 p-[8px] flex flex-col w-[320px] h-[280px]">
+        <div className="p-3 pb-2">
+          <h3 className="text-base font-semibold text-gray-800 truncate">{goal.title}</h3>
+          <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+            {goal.description}
+          </p>
+          <p className="text-xs text-gray-400 mt-1">
+            Due: {formatDeadline(goal.deadline)}
+          </p>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div
-            className={`h-2 rounded-full ${
-              goal.status === 'needs attention' ? 'bg-red-500' : 'bg-green-500'
-            }`}
-            style={{ width: `${goal.progress}%` }}
-          ></div>
+
+        <div className="px-3 py-2">
+          <div className="flex justify-between items-center mb-1">
+            <span className="text-xs text-gray-600">Progress</span>
+            <span className={`text-xs font-medium ${statusColor}`}>{goal.status}</span>
+          </div>
+          <div className="w-full bg-gray-100 rounded-full h-1.5">
+            <div
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                goal.status === 'needs attention' ? 'bg-red-500' : 'bg-green-500'
+              }`}
+              style={{ width: `${goal.progress}%` }}
+            ></div>
+          </div>
+          <span className="text-xs text-gray-500 mt-1 block">{goal.progress}%</span>
+        </div>
+
+        <div className="px-3 py-2 flex items-center text-xs text-gray-500">
+          <span>{goal.partners.length} accountability partners</span>
+        </div>
+
+        <div className="p-3 pt-2 flex gap-[4px] mt-auto">
+          <button
+            className="flex-1 flex items-center justify-center px-2 py-[6px] shadow-[0_0_20px_rgba(0,0,0,0.1)] text-xs font-medium rounded-[7px] text-gray-600 bg-white hover:bg-gray-50 transition-colors duration-200"
+          >
+            <img src={shareIcon} alt="Share" className="h-3 w-3 color-[#00000] mr-1" />
+            Share
+          </button>
+          <button
+            onClick={() => setShowUpdateModal(true)}
+            className="flex-1 flex items-center justify-center px-2 py-[6px] text-xs font-medium rounded-[7px] text-white bg-[#3A86FF] hover:bg-blue-700 transition-colors duration-200"
+          >
+            Update
+          </button>
         </div>
       </div>
 
-      <div className="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-600 flex items-center">
-        <span className="mr-2">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292m0 0l3 3m-3-3l-3 3m3 3v3m-3-6h.01" />
-          </svg>
-        </span>
-        <span>{goal.partners.length} accountability partners</span>
-      </div>
-
-      <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-0">
-        <button
-          className="inline-flex items-center justify-center px-3 py-1 border border-gray-300 text-xs font-medium rounded-[7px] text-gray-700 bg-white hover:bg-gray-50"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 mr-1" fill="none"  stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.48-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-          </svg>
-          Share Update
-        </button>
-        <button
-          className="inline-flex items-center justify-center px-3 py-1 border border-transparent text-xs leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-        >
-          Update Progress
-        </button>
-      </div>
-    </div>
+      {/* Progress Update Modal */}
+      {showUpdateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-6 w-[320px]">
+            <h3 className="text-lg font-semibold mb-4">Update Progress</h3>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Progress: {progress}%
+              </label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={(e) => setProgress(Number(e.target.value))}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              />
+            </div>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowUpdateModal(false)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleProgressUpdate}
+                className="px-4 py-2 text-sm font-medium text-white bg-[#3A86FF] rounded-lg hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
