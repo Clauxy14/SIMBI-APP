@@ -17,6 +17,7 @@ import LandingPage from "./Components/LandingPage/LandingPage";
 import AboutUs from "./Components/LandingPage/AboutUs";
 import WelcomePage from "./Components/welcome/welcome";
 
+
 function App() {
   return (
     <Router>
@@ -34,6 +35,7 @@ function App() {
         <Route path="/studyPage" element={<STUDYPLAAAN />} />
         <Route path="/studySession" element={<StudySession />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+       
       </Routes>
     </Router>
   );

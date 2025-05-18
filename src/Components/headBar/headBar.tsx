@@ -25,7 +25,8 @@ const HeadBar: React.FC = () => {
     <div className="userinfo">
       <button className="wallet-btn">200 token</button>
       <span className="bell-icon">
-        <img src="/assets/icons/notification-icon.svg" alt="notification" />
+        <img src="/assets/icons/notification-icon.svg" alt="notification" 
+        />
       </span>
       <div className="user-avatar">
         <img src={user?.avatar} alt="Avatar" />

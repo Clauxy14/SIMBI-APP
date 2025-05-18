@@ -41,3 +41,44 @@
   font-weight: 500;
   font-size: 14px;
 }
+
+
+@media (max-width: 760px) {
+  .user-info-wrapper{
+    margin-right: 10px;
+  }
+  .bell-icon img {
+    width: 24px;
+  }
+
+  .user-avatar img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .username{
+    font-size: 12px;
+  }
+  .user-avatar {
+    padding: 4px 10px;
+  }
+  .userinfo .wallet-btn{
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px){
+  .bell-icon img{
+    display: none;
+  }
+
+  .user-avatar{
+    display: none;
+  }
+
+  .nav-logo{
+    width: 70%;
+  }
+}
+

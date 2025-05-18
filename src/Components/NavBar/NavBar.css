@@ -29,6 +29,11 @@
   color:#1b58dd ;
 }
 
+.sidebar-ul .links:active{
+
+  transform: scale(1.7);
+}
+
 .nav-logoo {
   display: flex;
   gap: 5px;

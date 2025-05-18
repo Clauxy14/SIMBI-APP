@@ -12,11 +12,11 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
-.user-info {
+/* .user-info {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-}
+} */
 
 /* .bell-icon {
   cursor: pointer;
@@ -294,9 +294,9 @@
     max-width: 700px;
   }
 
-  .bell-icon img {
+  /* .bell-icon img {
     width: 2rem;
-  }
+  } */
 
   .option-btnn {
     width: 100%;
@@ -315,9 +315,9 @@
     gap: 1rem;
   }
 
-  .user-info {
+  /* .user-info {
     align-self: flex-end;
-  }
+  } */
 
   .welcome-title {
     font-size: 2rem;
