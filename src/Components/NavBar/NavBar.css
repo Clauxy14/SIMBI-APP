@@ -1,3 +1,4 @@
+
 .sidebars {
   max-width: 200px;
   width: 100%;
@@ -27,12 +28,12 @@
   list-style: none;
 }
 
-.sidebar-ul .links:hover,
-.sidebar-ul .links.active-link {
-  color: #1b58dd;
+.sidebar-ul .links:hover{
+  color:#1b58dd ;
 }
 
-.sidebar-ul .links:active {
+.sidebar-ul .links:active{
+
   transform: scale(1.7);
 }
 
@@ -96,12 +97,12 @@ margin-top:2rem;
 }
 
 .sidebar-telegram-btn:hover {
-  background-color: #e6f3ff;
+  background-color:#BCDBFF;
   border-color: #91caff;
 }
 
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   html {
     font-size: 14px;
   }
@@ -111,6 +112,7 @@ margin-top:2rem;
     padding-top: 6rem;
     width: 100%;
     max-width: 180px;
+    background-color: white;
   }
 
   .sidebars.show {

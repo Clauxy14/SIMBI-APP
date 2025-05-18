@@ -1,4 +1,4 @@
-//asksimbi.tsx
+
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef, useEffect } from "react";
@@ -148,8 +148,8 @@ const AskSimbi: React.FC = () => {
         },
         {
           headers: {
-            Authorization:` Bearer ${import.meta.env.VITE_MISTRAL_API_KEY},
-            "Content-Type": "application/json"`,
+            Authorization: `Bearer ${import.meta.env.VITE_MISTRAL_API_KEY}`,
+            "Content-Type": "application/json",
           },
         }
       );

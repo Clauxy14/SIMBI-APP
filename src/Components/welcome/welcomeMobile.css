@@ -1,3 +1,4 @@
+welcome mobile.css
 
 *{
 box-sizing: border-box;
@@ -5,13 +6,13 @@ padding: 0;
 margin: 0;
 }
 
-.logo-welcome-mobile{
+.logo{
   width: 70px;
 }
 
 /* Base layout */
 .welcome-wrapper-mobile {
-  background-color: #f7f7f7;
+  background-color: #f8f8f8;
   min-height: 100vh;
   /* padding: 1rem; */
 }

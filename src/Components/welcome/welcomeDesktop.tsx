@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -93,10 +92,10 @@ const WelcomeDesktop: React.FC = () => {
 
       const data = await response.json();
       localStorage.setItem("simbiAIResponse", JSON.stringify(data));
-      navigate("/dashboard");
+      navigate("/askSimbi");
     } catch (error) {
       console.error("Error sending data to Simbi AI:", error);
-      navigate("/dashboard");
+      navigate("/askSimbi");
     } finally {
       setIsLoading(false);
     }
@@ -112,7 +111,7 @@ const WelcomeDesktop: React.FC = () => {
   };
 
     const skipWelcomes = () => {
-      navigate("/dashboard");
+      navigate("/askSimbi");
     
   };
 
@@ -123,8 +122,6 @@ const WelcomeDesktop: React.FC = () => {
           src="/assets/icons/Simbi-logo.png"
           alt="Simbi Logo"
           className="logo"
-          onClick={() => navigate("/landingpage")}
-          style={{ cursor: 'pointer' }}
         />
         <div className="user-info">
           <HeadBar />
