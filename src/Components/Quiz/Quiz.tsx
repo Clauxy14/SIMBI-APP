@@ -87,7 +87,13 @@ export default function Quiz() {
             throw new Error(`Error ${res.status}: ${errorText}`);
           }
 
-          const data: QuizData = await res.json();
+          const resJson = await res.json();
+
+          if (!resJson.success || !resJson.data || !resJson.data.questions) {
+            throw new Error("Invalid response format");
+          }
+
+          const data: QuizData = resJson.data;
           setQuestions(data.questions);
           setQuizId(data._id);
           setAnswers([]);
@@ -116,7 +122,9 @@ export default function Quiz() {
   }, [timeLeft]);
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
@@ -163,7 +171,9 @@ export default function Quiz() {
       }
     } catch (error) {
       console.error("Answer submission error:", error);
-      toast.error("Failed to save your answer. It will still be counted locally.");
+      toast.error(
+        "Failed to save your answer. It will still be counted locally."
+      );
     }
   };
 
@@ -207,13 +217,12 @@ export default function Quiz() {
   };
 
   if (isLoading) {
-  return <div className="loading-message">Loading quiz...</div>;
-}
+    return <div className="loading-message">Loading quiz...</div>;
+  }
 
-if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
-  return <div className="loading-message">No questions available</div>;
-}
-
+  if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
+    return <div className="loading-message">No questions available</div>;
+  }
 
   const question = questions[currentIndex];
   const progressPercent = ((currentIndex + 1) / questions.length) * 100;
@@ -221,13 +230,20 @@ if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <span>{currentIndex + 1}/{questions.length}</span>
+        <span>
+          {currentIndex + 1}/{questions.length}
+        </span>
         <span>{isTimeUp ? "Time's up!" : formatTime(timeLeft)}</span>
-        <button className="cancel-btn" onClick={handleCancel}>×</button>
+        <button className="cancel-btn" onClick={handleCancel}>
+          ×
+        </button>
       </div>
 
       <div className="progress-bar">
-        <div className="quiz-progress" style={{ width: `${progressPercent}%` }}></div>
+        <div
+          className="quiz-progress"
+          style={{ width: `${progressPercent}%` }}
+        ></div>
       </div>
 
       <h2 className="question">{question.question}</h2>
@@ -237,7 +253,9 @@ if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
             key={opt}
             onClick={() => handleOptionClick(opt)}
             className={`option-btn
-              ${selectedOption === opt && opt === correctAnswer ? "correct" : ""}
+              ${
+                selectedOption === opt && opt === correctAnswer ? "correct" : ""
+              }
               ${selectedOption === opt && opt !== correctAnswer ? "wrong" : ""}
             `}
             disabled={!!selectedOption}
