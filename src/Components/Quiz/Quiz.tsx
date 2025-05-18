@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Quiz.css";
 import { toast } from "react-toastify";
@@ -54,227 +54,256 @@ export default function Quiz() {
   };
 
   // Fallback quiz generation
-  useEffect(() => {
-    if (!state.questions || !state.quizId) {
-      const generateQuiz = async () => {
-        setIsLoading(true);
-        const token = getAuthToken();
-        if (!token) return;
+ 
+const hasGenerated = useRef(false);
 
-        try {
-          const res = await fetch(`${API_BASE}/generate`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              topic: "General",
-              academicLevel: "secondary",
-              numberOfQuestions: 5,
-              duration: 5,
-              difficulty: "medium",
-            }),
-          });
+useEffect(() => {
+  if (hasGenerated.current) return;
+  hasGenerated.current = true;
 
-          if (res.status === 401) {
-            localStorage.removeItem("authToken");
-            navigate("/login");
-            return;
-          }
+  const hasValidState =
+    state &&
+    Array.isArray(state.questions) &&
+    state.questions.length > 0 &&
+    typeof state.quizId === "string" &&
+    state.quizId.trim() !== "";
 
-          if (!res.ok) {
-            const errorText = await res.text();
-            throw new Error(`Error ${res.status}: ${errorText}`);
-          }
+  if (hasValidState) {
+    console.log("Using state data:", state);
+    setQuestions(state.questions);
+    setQuizId(state.quizId);
+    setTimeLeft((state.duration || 5) * 60);
+    return;
+  }
 
-          const resJson = await res.json();
-
-          if (!resJson.success || !resJson.data || !resJson.data.questions) {
-            throw new Error("Invalid response format");
-          }
-
-          const data: QuizData = resJson.data;
-          setQuestions(data.questions);
-          setQuizId(data._id);
-          setAnswers([]);
-          setProgress(0);
-          setTimeLeft((data.duration || 5) * 60);
-        } catch (error) {
-          console.error("Quiz generation error:", error);
-          toast.error("Failed to generate quiz. Please try again.");
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      generateQuiz();
+  const stored = localStorage.getItem("quizData");
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      if (
+        parsed &&
+        Array.isArray(parsed.questions) &&
+        parsed.questions.length > 0 &&
+        typeof parsed.quizId === "string"
+      ) {
+        console.log("Using localStorage data:", parsed);
+        setQuestions(parsed.questions);
+        setQuizId(parsed.quizId);
+        setTimeLeft((parsed.duration || 5) * 60);
+        localStorage.removeItem("quizData");
+        return;
+      }
+    } catch (e) {
+      console.error("Error parsing quizData from localStorage", e);
     }
-  }, []);
+  }
 
-  // Timer countdown
-  useEffect(() => {
-    if (timeLeft <= 0) {
-      setIsTimeUp(true);
-      handleFinishQuiz();
-      return;
-    }
-    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const s = (seconds % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
-  };
-
-  const handleOptionClick = async (option: string) => {
-    if (selectedOption) return;
-
+  console.log("No valid state or localStorage, generating fallback quiz");
+  // ❌ If no valid state or localStorage, generate default quiz
+  const generateQuiz = async () => {
+    setIsLoading(true);
     const token = getAuthToken();
     if (!token) return;
 
-    const correct = questions[currentIndex]?.correct_answer;
-    setSelectedOption(option);
-    setCorrectAnswer(correct);
-
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentIndex] = option;
-    setAnswers(updatedAnswers);
-
-    const updatedProgress = currentIndex + 1;
-    setProgress(updatedProgress);
-
     try {
-      const response = await fetch(`${API_BASE}/${quizId}/answer`, {
+      const res = await fetch(`${API_BASE}/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          questionIndex: currentIndex,
-          answer: option,
-          progress: updatedProgress,
+          topic: "General",
+          academicLevel: "secondary",
+          numberOfQuestions: 5,
+          duration: 5,
+          difficulty: "medium",
         }),
       });
 
-      if (response.status === 401) {
+      if (res.status === 401) {
         localStorage.removeItem("authToken");
         navigate("/login");
         return;
       }
 
-      if (!response.ok) {
-        throw new Error(`Failed to save answer: ${response.status}`);
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Error ${res.status}: ${errorText}`);
       }
+
+      const resJson = await res.json();
+
+      if (!resJson.success || !resJson.data || !resJson.data.questions) {
+        throw new Error("Invalid response format");
+      }
+
+      const data: QuizData = resJson.data;
+      setQuestions(data.questions);
+      setQuizId(data._id);
+      setAnswers([]);
+      setProgress(0);
+      setTimeLeft((data.duration || 5) * 60);
     } catch (error) {
-      console.error("Answer submission error:", error);
-      toast.error(
-        "Failed to save your answer. It will still be counted locally."
-      );
-    }
-  };
-
-  const handleNext = () => {
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setSelectedOption(null);
-      setCorrectAnswer(null);
-    } else {
-      handleFinishQuiz();
-    }
-  };
-
-  const handleFinishQuiz = async () => {
-    const token = getAuthToken();
-    if (!token) return;
-
-    try {
-      await fetch(`${API_BASE}/${quizId}/complete`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          completed: true,
-          finalProgress: progress,
-        }),
-      });
-    } catch (error) {
-      console.error("Quiz completion error:", error);
+      console.error("Quiz generation error:", error);
+      toast.error("Failed to generate quiz. Please try again.");
     } finally {
-      navigate("/result", { state: { quizId } });
+      setIsLoading(false);
     }
   };
 
-  const handleCancel = () => {
-    if (confirm("Are you sure you want to cancel this quiz?")) {
-      navigate("/home");
+  generateQuiz();
+}, []);
+
+
+
+  // Timer countdown
+ useEffect(() => {
+  if (timeLeft <= 0) {
+    setIsTimeUp(true);
+    handleFinishQuiz();
+    return;
+  }
+  const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+  return () => clearInterval(timer);
+}, [timeLeft]);
+
+const formatTime = (seconds: number) => {
+  const m = Math.floor(seconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const s = (seconds % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+};
+
+const handleOptionClick = async (option: string) => {
+  if (selectedOption) return;
+
+  const token = getAuthToken();
+  if (!token) return;
+
+  const correct = questions[currentIndex]?.correct_answer;
+  setSelectedOption(option);
+  setCorrectAnswer(correct);
+
+  const updatedAnswers = [...answers];
+  updatedAnswers[currentIndex] = option;
+  setAnswers(updatedAnswers);
+
+  const updatedProgress = currentIndex + 1;
+  setProgress(updatedProgress);
+
+  try {
+    const response = await fetch(`${API_BASE}/${quizId}/answer`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        questionIndex: currentIndex,
+        answer: option,
+        progress: updatedProgress,
+      }),
+    });
+
+    if (response.status === 401) {
+      localStorage.removeItem("authToken");
+      navigate("/login");
+      return;
     }
-  };
 
-  if (isLoading) {
-    return <div className="loading-message">Loading quiz...</div>;
+    if (!response.ok) {
+      throw new Error(`Failed to save answer: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Answer submission error:", error);
+    toast.error(
+      "Failed to save your answer. It will still be counted locally."
+    );
   }
+};
 
-  if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
-    return <div className="loading-message">No questions available</div>;
+const handleNext = () => {
+  if (currentIndex < questions.length - 1) {
+    setCurrentIndex(currentIndex + 1);
+    setSelectedOption(null);
+    setCorrectAnswer(null);
+  } else {
+    handleFinishQuiz();
   }
+};
 
-  const question = questions[currentIndex];
-  const progressPercent = ((currentIndex + 1) / questions.length) * 100;
+// ✅ Modified to REMOVE call to /complete
+const handleFinishQuiz = () => {
+  navigate("/result", { state: { quizId, progress } });
+};
 
-  return (
-    <div className="quiz-container">
-      <div className="quiz-header">
-        <span>
-          {currentIndex + 1}/{questions.length}
-        </span>
-        <span>{isTimeUp ? "Time's up!" : formatTime(timeLeft)}</span>
-        <button className="cancel-btn" onClick={handleCancel}>
-          ×
-        </button>
-      </div>
+const handleCancel = () => {
+  if (confirm("Are you sure you want to cancel this quiz?")) {
+    navigate("/home");
+  }
+};
 
-      <div className="progress-bar">
-        <div
-          className="quiz-progress"
-          style={{ width: `${progressPercent}%` }}
-        ></div>
-      </div>
+if (isLoading) {
+  return <div className="loading-message">Loading quiz...</div>;
+}
 
-      <h2 className="question">{question.question}</h2>
-      <div className="options">
-        {question.options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => handleOptionClick(opt)}
-            className={`option-btn
-              ${
-                selectedOption === opt && opt === correctAnswer ? "correct" : ""
-              }
-              ${selectedOption === opt && opt !== correctAnswer ? "wrong" : ""}
-            `}
-            disabled={!!selectedOption}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
+if (!isLoading && (!Array.isArray(questions) || questions.length === 0)) {
+  return <div className="loading-message">No questions available</div>;
+}
 
-      <div className="quiz-footer">
-        <button
-          onClick={handleNext}
-          className="next-btn"
-          disabled={!selectedOption && !isTimeUp}
-        >
-          {currentIndex === questions.length - 1 ? "Finish" : "Next"}
-        </button>
-      </div>
+const question = questions[currentIndex];
+const progressPercent = ((currentIndex + 1) / questions.length) * 100;
+
+return (
+  <div className="quiz-container">
+    <div className="quiz-header">
+      <span>
+        {currentIndex + 1}/{questions.length}
+      </span>
+      <span>{isTimeUp ? "Time's up!" : formatTime(timeLeft)}</span>
+      <button className="cancel-btn" onClick={handleCancel}>
+        ×
+      </button>
     </div>
-  );
+
+    <div className="progress-bar">
+      <div
+        className="quiz-progress"
+        style={{ width: `${progressPercent}%` }}
+      ></div>
+    </div>
+
+    <h2 className="question">{question.question}</h2>
+    <div className="options">
+      {question.options.map((opt) => (
+        <button
+          key={opt}
+          onClick={() => handleOptionClick(opt)}
+          className={`option-btn
+            ${
+              selectedOption === opt && opt === correctAnswer ? "correct" : ""
+            }
+            ${selectedOption === opt && opt !== correctAnswer ? "wrong" : ""}
+          `}
+          disabled={!!selectedOption}
+        >
+          {opt}
+        </button>
+      ))}
+    </div>
+
+    <div className="quiz-footer">
+      <button
+        onClick={handleNext}
+        className="next-btn"
+        disabled={!selectedOption && !isTimeUp}
+      >
+        {currentIndex === questions.length - 1 ? "Finish" : "Next"}
+      </button>
+    </div>
+  </div>
+);
+
 }
