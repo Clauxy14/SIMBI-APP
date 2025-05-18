@@ -99,10 +99,9 @@ export default function Result() {
 
   return (
     <div className="result-container">
-      <div className="navbar-container">
+      <div>
         <NavBar />
       </div>
-
       <h2>Quiz Complete 🎉</h2>
       <p>You got <strong>{score.correctAnswers}</strong> out of <strong>{score.totalQuestions}</strong> questions correct.</p>
       <p>Your Score: <strong>{score.percentage}%</strong></p>
