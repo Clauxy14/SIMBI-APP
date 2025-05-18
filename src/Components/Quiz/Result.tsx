@@ -102,7 +102,7 @@ export default function Result() {
       <div className="navbar-container">
         <NavBar />
       </div>
-      
+
       <h2>Quiz Complete 🎉</h2>
       <p>You got <strong>{score.correctAnswers}</strong> out of <strong>{score.totalQuestions}</strong> questions correct.</p>
       <p>Your Score: <strong>{score.percentage}%</strong></p>
@@ -114,7 +114,7 @@ export default function Result() {
         <button onClick={handleRetake} disabled={retakeLoading}>
           {retakeLoading ? "Retaking..." : "Retake Quiz"}
         </button>
-        <button onClick={() => navigate("/home")}>Back to Home</button>
+        <button onClick={() => navigate("/dashboard")}>Back to Home</button>
       </div>
     </div>
   );
