@@ -8,7 +8,7 @@ const AccountabilityPartnersList: React.FC = () => {
 
   const AddPartnerButton = () => (
     <button
-      className="flex items-center justify-center px-[70px] py-[8px] border border-transparent text-[18px] font-medium rounded-[7px] text-[#FFFFF] bg-[#3A86FF]"
+      className="flex items-center justify-center px-[42px] py-[8px] border border-transparent text-[18px] font-medium rounded-[7px] text-[#FFFFF] bg-[#3A86FF]"
       aria-label="Add Partner"
       onClick={() =>
         document
@@ -17,7 +17,7 @@ const AccountabilityPartnersList: React.FC = () => {
       }
     >
       <div className="flex items-center justify-center flex-row gap-[4px] text-[#FFFF]">
-        <IoAdd className="h-4 w-4 mr-1" />
+        <IoAdd className="h-2 w-2 mr-1" />
         <p>Add</p> <p>Partner</p>
       </div>
     </button>

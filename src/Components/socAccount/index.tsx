@@ -1,13 +1,17 @@
 import React from 'react';
-import Dashboard from './components/Dashboard';
-import { AccountabilityProvider } from './contexts/AccountabilityContexts';
 
-const SocialAccountability: React.FC = () => {
+import NavBar from '../NavBar/NavBar';
+import SocialAccountability from './main';
+
+const Accountability: React.FC = () => {
   return (
-    <AccountabilityProvider>
-      <Dashboard />
-    </AccountabilityProvider>
+    <div>
+      <div className="sidebar">
+        <NavBar/>       
+      </div>
+      <SocialAccountability />
+    </div>
   );
 };
 
-export default SocialAccountability;
+export default Accountability;

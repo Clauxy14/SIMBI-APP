@@ -48,23 +48,21 @@ const AddGoalModal: React.FC = () => {
   };
 
   return (
-    <div id="add-goal-modal" className="fixed inset-0 z-50 hidden p-[8px]">
-      <div className="w-full mx-4 transform modal-content">
-        <div className="px-8 py-6  border-gray-100 sticky top-0 bg-white rounded-t-2xl">
-          <div className="flex justify-between items-center">
-            <h3 className="text-2xl font-semibold text-gray-800">Add New Learning Goal</h3>
-            <button 
-              onClick={handleClose} 
-              className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
-            >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+    <div id="add-goal-modal" className="fixed inset-0 z-50 hidden">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h3 className="text-2xl font-semibold text-gray-800">Add New Learning Goal</h3>
+          <button 
+            onClick={handleClose} 
+            className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
+          >
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="px-8 py-6">
+        <form onSubmit={handleSubmit} className="modal-body">
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Goal Title</label>
@@ -125,17 +123,17 @@ const AddGoalModal: React.FC = () => {
             </div>
           </div>
           
-          <div className="mt-[8px] flex justify-end gap-[6px] sticky bottom-0 bg-white pt-4 border-t border-gray-100">
+          <div className="modal-footer">
             <button
               type="button"
-              className="px-[6px] py-[4px] text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-[7px] shadow-sm hover:bg-gray-50 transition-colors duration-200"
+              className="cancel"
               onClick={handleClose}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-[10px] py-[4px] text-sm font-medium text-white bg-[#3A86FF] border border-transparent rounded-[7px] shadow-sm hover:bg-blue-700 transition-colors duration-200"
+              className="save"
             >
               Create Goal
             </button>
