@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./loading";
 import MainLayout from "./Components/Layout/MainLayout";
-import TrophyRoom from "./Components/TrophyRoom/TrophyRoom";
+// import TrophyRoom from "./Components/TrophyRoom/TrophyRoom";
 
 // Lazy load your pages
 const Onboarding = lazy(() => import("./Components/Onboarding/onboarding"));
@@ -46,7 +46,7 @@ function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/result" element={<QuizResult />} />
             <Route path="/studyPage" element={<STUDYPLAAAN />} />
-            <Route path="/trophy-room" element={<TrophyRoom />} />
+            {/* <Route path="/trophy-room" element={<TrophyRoom />} /> */}
           </Route>
           <Route path="/study-session/:_id" element={<StudySession />} />
           <Route path="*" element={<NotFound />} />
