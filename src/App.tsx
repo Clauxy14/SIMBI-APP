@@ -12,6 +12,8 @@ const Welcome = lazy(() => import("./Components/welcome/welcome"));
 const SocialAccountability = lazy(() => import("./Components/socAccount/main"));
 const AskSimbi = lazy(() => import("./Components/AskSimbi/AskSimbi"));
 const QuizPage = lazy(() => import("./Components/Quiz/QuizPage"));
+const Quiz = lazy(() => import("./Components/Quiz/Quiz"));
+const QuizResult = lazy(() => import("./Components/Quiz/Result"));
 const STUDYPLAAAN = lazy(() => import("./Components/studyplaaan/studyplaaan"));
 const StudySession = lazy(
   () => import("./Components/studysession/studysession")
@@ -40,6 +42,8 @@ function App() {
             <Route path="/Accountability" element={<SocialAccountability />} />
             <Route path="/AskSimbi" element={<AskSimbi />} />
             <Route path="/QuizPage" element={<QuizPage />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/result" element={<QuizResult />} />
             <Route path="/studyPage" element={<STUDYPLAAAN />} />
             {/* <Route path="/trophy-room" element={<Welcome />} /> */}
           </Route>

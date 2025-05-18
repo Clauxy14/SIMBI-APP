@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 import "./Result.css";
 
 interface ScoreData {
@@ -11,6 +12,8 @@ interface ScoreData {
 
 const API_BASE = `${import.meta.env.VITE_API_BASE_URL}/api/quiz`;
 
+// Helper to get auth token from localStorage
+const getAuthToken = () => localStorage.getItem("authToken");
 
 export default function Result() {
   const navigate = useNavigate();
@@ -24,8 +27,19 @@ export default function Result() {
 
   useEffect(() => {
     const fetchScore = async () => {
+      const token = getAuthToken();
+      if (!token) {
+        setError("Not authenticated. Redirecting to login...");
+        setTimeout(() => navigate("/login"), 2000);
+        return;
+      }
+
       try {
-        const res = await fetch(`${API_BASE}/${quizId}/score`);
+        const res = await fetch(`${API_BASE}/${quizId}/score`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (!res.ok) throw new Error("Failed to fetch score");
         const data = await res.json();
         setScore(data);
@@ -47,10 +61,20 @@ export default function Result() {
   const handleRetake = async () => {
     if (!quizId) return;
 
+    const token = getAuthToken();
+    if (!token) {
+      setError("Not authenticated. Redirecting to login...");
+      setTimeout(() => navigate("/login"), 2000);
+      return;
+    }
+
     setRetakeLoading(true);
     try {
       const res = await fetch(`${API_BASE}/${quizId}/retake`, {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (!res.ok) throw new Error("Failed to retake quiz");
 
@@ -75,6 +99,10 @@ export default function Result() {
 
   return (
     <div className="result-container">
+      <div className="navbar-container">
+        <NavBar />
+      </div>
+
       <h2>Quiz Complete 🎉</h2>
       <p>You got <strong>{score.correctAnswers}</strong> out of <strong>{score.totalQuestions}</strong> questions correct.</p>
       <p>Your Score: <strong>{score.percentage}%</strong></p>
@@ -86,8 +114,9 @@ export default function Result() {
         <button onClick={handleRetake} disabled={retakeLoading}>
           {retakeLoading ? "Retaking..." : "Retake Quiz"}
         </button>
-        <button onClick={() => navigate("/home")}>Back to Home</button>
+        <button onClick={() => navigate("/dashboard")}>Back to Home</button>
       </div>
     </div>
   );
 }
+

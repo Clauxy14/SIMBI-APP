@@ -1,0 +1,97 @@
+/* Result.css */
+
+.result-container {
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+}
+
+.result-container h2 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.result-container p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.result-container strong {
+  font-weight: 600;
+}
+
+.passed {
+  color: #28a745; /* green */
+}
+
+.failed {
+  color: #dc3545; /* red */
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.result-actions button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 150px;
+}
+
+.result-actions button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.result-actions button:disabled {
+  background-color: #9ec5fe;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .result-container {
+    margin: 40px 1rem;
+    padding: 1.5rem;
+  }
+
+  .result-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .result-container p {
+    font-size: 1rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .result-actions button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
