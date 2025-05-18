@@ -7,7 +7,6 @@ import {
 import Loading from "./loading";
 import WelcomePage from "./Components/welcome/welcome";
 
-// import AcademicResources from "../src/Components/AcademicSupport";
 
 // Lazy load your pages
 const Onboarding = lazy(() => import("./Components/Onboarding/onboarding"));
@@ -15,7 +14,6 @@ const Signup = lazy(() => import("./Components/Signup/Signup"));
 const Login = lazy(() => import("./Components/Login/Login"));
 const ConnectWallet = lazy(() => import("./Components/Wallet/Wallet"));
 const Welcome = lazy(() => import("./Components/welcome/welcome"));
-// import AcademicResources from "../src/Components/AcademicSupport";
 const SocialAccountability = lazy(() => import("./Components/socAccount"));
 const AskSimbi = lazy(() => import("./Components/AskSimbi/AskSimbi"));
 const QuizPage = lazy(() => import("./Components/Quiz/QuizPage"));
@@ -40,7 +38,6 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/welcome" element={<WelcomePage />} />
           /* Adjust the path to your image if needed */
-          {/* <Route path="/academic-resources" element={<AcademicResources />} />  */}
           <Route
             path="/SocialAccountability"
             element={<SocialAccountability />}

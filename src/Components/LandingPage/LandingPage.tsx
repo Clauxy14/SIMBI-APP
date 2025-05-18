@@ -51,7 +51,7 @@ function LandingPage() {
           </a>
           <Link to="/about">About Us</Link>
           <button className="lp-sign-in" onClick={() => navigate("/signup")}>
-            Sign In
+            Sign Up
           </button>
         </nav>
       </header>
@@ -173,7 +173,11 @@ function LandingPage() {
           <h2>How it Works</h2>
           <div className="works">
             <div>
-              <img src="/assets/Free-iPhone.svg" alt="15-pro"  className="iphone-15"/>
+              <img
+                src="/assets/Free-iPhone.svg"
+                alt="15-pro"
+                className="iphone-15"
+              />
             </div>
             <div className="sim-talk">
               <img src="/assets/Group-1000007163.svg" alt="path-way" />

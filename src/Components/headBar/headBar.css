@@ -1,9 +1,23 @@
+
+
+*{
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+
 .userinfo {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 0.6rem;
-  margin: 20px 0;
+ background-color: white;
+ border-radius: 10px 0px 0px 10px;
+  padding:1rem 3rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .bell-icon {
@@ -68,17 +82,14 @@
   }
 }
 
-@media (max-width: 600px){
-  .bell-icon img{
+@media (max-width: 768px){
+  /* .bell-icon img{
     display: none;
   }
 
   .user-avatar{
     display: none;
-  }
+  } */
 
-  .nav-logo{
-    width: 70%;
-  }
+
 }
-

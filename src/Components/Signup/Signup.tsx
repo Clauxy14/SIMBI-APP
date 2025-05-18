@@ -137,7 +137,6 @@ const Signup: React.FC = () => {
                 useOneTap
                 text="signup_with"
                 shape="pill"
-                // width="50%"
                 logo_alignment="center"
               />
             </GoogleOAuthProvider>
@@ -145,10 +144,10 @@ const Signup: React.FC = () => {
 
           {error && <div className="error-message">{error}</div>}
 
-          <div className="divider-line">
-            <span className="line"></span>
-            <span className="divider">or with email</span>
-            <span className="line"></span>
+          <div className="divider-line-signup">
+            <span className="line-signup"></span>
+            <span className="divider-signup">or with email</span>
+            <span className="line-signup"></span>
           </div>
 
           <input

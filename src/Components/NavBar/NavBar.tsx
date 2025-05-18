@@ -74,7 +74,7 @@ function NavBar() {
             </Link>
           </li>
           <li>
-            <Link className="links" to="">
+            <Link className="links" to="/SocialAccountability">
               <img
                 src="/assets/progress.svg"
                 style={{
@@ -115,10 +115,7 @@ function NavBar() {
         </ul>
         <div className="sidebar-web3-card">
           <h3 className="sidebar-web3-title">Web3</h3>
-          <button 
-            className="sidebar-telegram-btn" 
-            onClick={redirectToTelegram}
-          >
+          <button className="sidebar-telegram-btn" onClick={redirectToTelegram}>
             Connect to Telegram
           </button>
         </div>

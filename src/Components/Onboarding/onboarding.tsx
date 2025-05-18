@@ -59,41 +59,39 @@ const Onboarding: React.FC = () => {
         />
       </header>
       <div className="onboarding-container">
-        <div className="slide-container">
-          <div className="slide">
-            <img
-              src={slides[currentIndex].image}
-              alt="slide visual"
-              className="slide-image"
-              style={slides[currentIndex].imageStyle}
-            />
-            <div className="slide-text">
-              <h1>{slides[currentIndex].title}</h1>
-              <p>{slides[currentIndex].description}</p>
-              <div className="progress">
-                {slides.map((_, index) => (
-                  <span
-                    key={index}
-                    className={`dot ${
-                      index === currentIndex ? "active" : "dot"
-                    }`}
-                  ></span>
-                ))}
-              </div>
-              <div className="button-group">
-                <button className="onboarding-next" onClick={nextSlide}>
-                  Next
-                </button>
+        {/* <div className="slide-container"> */}
+        <div className="slide">
+          <img
+            src={slides[currentIndex].image}
+            alt="slide visual"
+            className="slide-image"
+            style={slides[currentIndex].imageStyle}
+          />
+          <div className="slide-text">
+            <h1>{slides[currentIndex].title}</h1>
+            <p>{slides[currentIndex].description}</p>
+            <div className="progress">
+              {slides.map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${index === currentIndex ? "active" : "dot"}`}
+                ></span>
+              ))}
+            </div>
+            <div className="button-group">
+              <button className="onboarding-next" onClick={nextSlide}>
+                Next
+              </button>
 
-                {currentIndex < slides.length - 1 && (
-                  <button className="skip" onClick={skipOnboarding}>
-                    Skip
-                  </button>
-                )}
-              </div>
+              {currentIndex < slides.length - 1 && (
+                <button className="skip" onClick={skipOnboarding}>
+                  Skip
+                </button>
+              )}
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </div>
   );
