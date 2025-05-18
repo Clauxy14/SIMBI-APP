@@ -1,4 +1,3 @@
-//welcome.mobile.tsx
 
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
@@ -129,7 +128,7 @@ export default function WelcomeMobile() {
           <img
             src="/assets/icons/Simbi-logo.svg"
             alt="Simbi Logo"
-            className=".logo-welcome-mobile"
+            className="logo"
           />
         </div>
 

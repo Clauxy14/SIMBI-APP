@@ -1,3 +1,4 @@
+
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -51,7 +52,7 @@ function LandingPage() {
           </a>
           <Link to="/about">About Us</Link>
           <button className="lp-sign-in" onClick={() => navigate("/signup")}>
-            Sign Up
+            Sign In
           </button>
         </nav>
       </header>
