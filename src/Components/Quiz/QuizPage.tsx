@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "./QuizPage.css";
-
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const QuizPage: React.FC = () => {
@@ -100,7 +99,7 @@ const QuizPage: React.FC = () => {
       <div className="navbar-container">
         <NavBar />
       </div>
-
+     
       <div className="quiz-form">
         <form onSubmit={startQuiz}>
           <div className="quiz-card">

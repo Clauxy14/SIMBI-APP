@@ -16,6 +16,7 @@ import './TrophyRoom.css';
 // import FastLearnerTrophy from '../Components/assets/Frame 1707479060 (1).png';
 // import MetaMaskIcon from '../Components/assets/wc-meta.svg';
 import { MetaMaskInpageProvider } from '@metamask/providers';
+import NavBar from '../NavBar/NavBar';
 
 declare global {
   interface Window {
@@ -115,6 +116,10 @@ const TrophyRoom = () => {
 
   return (
     <div className="trophy-room-wrapper">
+
+      <div>
+        <NavBar/>
+      </div>
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">

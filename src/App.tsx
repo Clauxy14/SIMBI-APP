@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./loading";
 import MainLayout from "./Components/Layout/MainLayout";
+import Accountability from "./Components/socAccount";
 // import TrophyRoom from "./Components/TrophyRoom/TrophyRoom";
 
 // Lazy load your pages
@@ -10,7 +11,7 @@ const Signup = lazy(() => import("./Components/Signup/Signup"));
 const Login = lazy(() => import("./Components/Login/Login"));
 const ConnectWallet = lazy(() => import("./Components/Wallet/Wallet"));
 const Welcome = lazy(() => import("./Components/welcome/welcome"));
-const SocialAccountability = lazy(() => import("./Components/socAccount/main"));
+// const SocialAccountability = lazy(() => import("./Components/socAccount/main"));
 const AskSimbi = lazy(() => import("./Components/AskSimbi/AskSimbi"));
 const QuizPage = lazy(() => import("./Components/Quiz/QuizPage"));
 const Quiz = lazy(() => import("./Components/Quiz/Quiz"));
@@ -40,7 +41,7 @@ function App() {
           {/* Routes with NavBar */}
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/Accountability" element={<SocialAccountability />} />
+            <Route path="/Accountability" element={<Accountability/>} />
             <Route path="/AskSimbi" element={<AskSimbi />} />
             <Route path="/QuizPage" element={<QuizPage />} />
             <Route path="/quiz" element={<Quiz />} />
