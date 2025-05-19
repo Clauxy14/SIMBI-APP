@@ -43,6 +43,7 @@ export default function Result() {
         if (!res.ok) throw new Error("Failed to fetch score");
         const data = await res.json();
         setScore(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError("Error loading your score. Please try again.");
       } finally {
@@ -86,6 +87,7 @@ export default function Result() {
           duration: data.duration || 5,
         },
       });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Could not retake quiz. Please try again.");
     } finally {
@@ -103,17 +105,25 @@ export default function Result() {
         <NavBar />
       </div>
       <h2>Quiz Complete 🎉</h2>
-      <p>You got <strong>{score.correctAnswers}</strong> out of <strong>{score.totalQuestions}</strong> questions correct.</p>
-      <p>Your Score: <strong>{score.percentage}%</strong></p>
-      <p>Status: <strong className={score.passed ? "passed" : "failed"}>
-        {score.passed ? "Passed ✅" : "Failed ❌"}
-      </strong></p>
+      <p>
+        You got <strong>{score.correctAnswers}</strong> out of{" "}
+        <strong>{score.totalQuestions}</strong> questions correct.
+      </p>
+      <p>
+        Your Score: <strong>{score.percentage}%</strong>
+      </p>
+      <p>
+        Status:{" "}
+        <strong className={score.passed ? "passed" : "failed"}>
+          {score.passed ? "Passed ✅" : "Failed ❌"}
+        </strong>
+      </p>
 
       <div className="result-actions">
         <button onClick={handleRetake} disabled={retakeLoading}>
           {retakeLoading ? "Retaking..." : "Retake Quiz"}
         </button>
-        <button onClick={() => navigate("/dashboard")}>Back to Home</button>
+        <button onClick={() => navigate("/QuizPage")}>Back to Home</button>
       </div>
     </div>
   );

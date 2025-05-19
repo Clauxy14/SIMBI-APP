@@ -1,4 +1,8 @@
-
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  }
 
 .daily-tasks-container {
     padding: 1rem;
@@ -79,4 +83,11 @@
 .skip-btn {
   background: #3b82f6;
   color: white;
+}
+
+
+@media screen and(max-width:768px) {
+  .daily-tasks-container{
+    width: 90%;
+  }
 }

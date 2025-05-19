@@ -117,7 +117,9 @@ export default function Quiz() {
   }, [timeLeft]);
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
@@ -164,7 +166,9 @@ export default function Quiz() {
       }
     } catch (error) {
       console.error("Answer submission error:", error);
-      toast.error("Failed to save your answer. It will still be counted locally.");
+      toast.error(
+        "Failed to save your answer. It will still be counted locally."
+      );
     }
   };
 
@@ -220,13 +224,20 @@ export default function Quiz() {
         <NavBar />
       </div>
       <div className="quiz-header">
-        <span>{currentIndex + 1}/{questions.length}</span>
+        <span>
+          {currentIndex + 1}/{questions.length}
+        </span>
         <span>{isTimeUp ? "Time's up!" : formatTime(timeLeft)}</span>
-        <button className="cancel-btn" onClick={handleCancel}>×</button>
+        <button className="cancel-btn" onClick={handleCancel}>
+          ×
+        </button>
       </div>
 
       <div className="progress-bar">
-        <div className="quiz-progress" style={{ width: `${progressPercent}%` }}></div>
+        <div
+          className="quiz-progress"
+          style={{ width: `${progressPercent}%` }}
+        ></div>
       </div>
 
       <h2 className="question">{question.question}</h2>
@@ -236,7 +247,9 @@ export default function Quiz() {
             key={opt}
             onClick={() => handleOptionClick(opt)}
             className={`option-btn
-              ${selectedOption === opt && opt === correctAnswer ? "correct" : ""}
+              ${
+                selectedOption === opt && opt === correctAnswer ? "correct" : ""
+              }
               ${selectedOption === opt && opt !== correctAnswer ? "wrong" : ""}
             `}
             disabled={!!selectedOption}

@@ -87,12 +87,33 @@
   color: rgba(255, 255, 255, 1);
 }
 
-.user-details{
+.user-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #96aad7;
+  border-radius: 16px;
+  padding: 6px 14px;
+}
+
+.user-details img {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+
+/* .user-details{
   height: 3rem;
   border: 1px solid rgba(150, 170, 215, 1);
   padding: 0.6rem 1.3rem;
   border-radius: 16px;
-}
+} */
 
 .search-bar {
   border: none;

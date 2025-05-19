@@ -11,7 +11,6 @@ const Signup = lazy(() => import("./Components/Signup/Signup"));
 const Login = lazy(() => import("./Components/Login/Login"));
 const ConnectWallet = lazy(() => import("./Components/Wallet/Wallet"));
 const Welcome = lazy(() => import("./Components/welcome/welcome"));
-// const SocialAccountability = lazy(() => import("./Components/socAccount/main"));
 const AskSimbi = lazy(() => import("./Components/AskSimbi/AskSimbi"));
 const QuizPage = lazy(() => import("./Components/Quiz/QuizPage"));
 const Quiz = lazy(() => import("./Components/Quiz/Quiz"));
@@ -47,7 +46,7 @@ function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/result" element={<QuizResult />} />
             <Route path="/studyPage" element={<STUDYPLAAAN />} />
-            {/* <Route path="/trophy-room" element={<TrophyRoom />} /> */}
+            {/* <Route path="/trophyroom" element={<TrophyRoom />} /> */}
           </Route>
           <Route path="/study-session/:_id" element={<StudySession />} />
           <Route path="*" element={<NotFound />} />

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "./QuizPage.css";
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const QuizPage: React.FC = () => {
   const navigate = useNavigate();
@@ -13,8 +12,9 @@ const QuizPage: React.FC = () => {
   const [topic, setTopic] = useState("");
   const [academicLevel, setAcademicLevel] = useState("");
   const [numberOfQuestions, setNumberOfQuestions] = useState(5);
-  const [duration, setDuration] = useState("5");
+  const [duration, setDuration] = useState("2");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const startQuiz = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,29 +24,32 @@ const QuizPage: React.FC = () => {
       return;
     }
 
-    const quizData = {
-      topic,
-      academicLevel,
-      numberOfQuestions,
-      duration: Number(duration),
-      difficulty: selectedDifficulty,
-    };
-
     const token = localStorage.getItem("authToken");
     if (!token) {
       alert("No token found, please log in.");
       return;
     }
 
+    setIsLoading(true); // ✅ Start loading
+
     try {
-      const response = await fetch(`${API_BASE}/api/quiz/generate`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(quizData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/quiz/generate`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            topic,
+            academicLevel,
+            difficulty: selectedDifficulty,
+            numberOfQuestions,
+            duration: parseInt(duration),
+          }),
+        }
+      );
 
       const resJson = await response.json();
 
@@ -56,7 +59,6 @@ const QuizPage: React.FC = () => {
         throw new Error(resJson.message || "Failed to generate quiz.");
       }
 
-      // Safely extract quiz data regardless of nesting
       const quizDataObj = resJson.data.quiz || resJson.data;
 
       const { _id, questions, duration: quizDuration } = quizDataObj;
@@ -65,7 +67,6 @@ const QuizPage: React.FC = () => {
         throw new Error("Invalid quiz data returned from server.");
       }
 
-      // Store locally for persistence
       localStorage.setItem(
         "quizData",
         JSON.stringify({
@@ -75,7 +76,6 @@ const QuizPage: React.FC = () => {
         })
       );
 
-      // Navigate to /quiz route with state
       navigate("/quiz", {
         state: {
           quizId: _id,
@@ -91,6 +91,8 @@ const QuizPage: React.FC = () => {
         alert("An unknown error occurred.");
         console.error("❌ Unknown error:", error);
       }
+    } finally {
+      setIsLoading(false); // ✅ End loading
     }
   };
 
@@ -99,7 +101,7 @@ const QuizPage: React.FC = () => {
       <div className="navbar-container">
         <NavBar />
       </div>
-     
+
       <div className="quiz-form">
         <form onSubmit={startQuiz}>
           <div className="quiz-card">
@@ -156,9 +158,7 @@ const QuizPage: React.FC = () => {
                 <select
                   required
                   value={numberOfQuestions}
-                  onChange={(e) =>
-                    setNumberOfQuestions(Number(e.target.value))
-                  }
+                  onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
                   className="quiz-dropdowns"
                 >
                   <option value="" disabled>
@@ -209,6 +209,8 @@ const QuizPage: React.FC = () => {
                 <option value="" disabled>
                   Select
                 </option>
+                <option value="1">1 Minutes</option>
+                <option value="2">2 Minutes</option>
                 <option value="5">5 Minutes</option>
                 <option value="10">10 Minutes</option>
                 <option value="15">15 Minutes</option>
@@ -217,8 +219,12 @@ const QuizPage: React.FC = () => {
             </div>
 
             <div className="start-quiz">
-              <button type="submit" className="start-button">
-                Start Quiz
+              <button
+                type="submit"
+                className="start-button"
+                disabled={isLoading}
+              >
+                {isLoading ? "Creating Quiz..." : "Start Quiz"}
               </button>
             </div>
           </div>
@@ -229,5 +235,3 @@ const QuizPage: React.FC = () => {
 };
 
 export default QuizPage;
-
-

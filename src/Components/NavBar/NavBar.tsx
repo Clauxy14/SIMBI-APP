@@ -91,19 +91,7 @@ function NavBar() {
               &nbsp;&nbsp;&nbsp;Accountability
             </Link>
           </li>
-          <li>
-            <Link className="links" to="/trophy-room">
-              <img
-                src="/assets/trophy.svg"
-                style={{
-                  height: "24px",
-                  width: "24px",
-                  marginBottom: "-0.5rem",
-                }}
-              />
-              &nbsp;&nbsp;&nbsp;Trophy Room
-            </Link>
-          </li>
+          
           <li>
             <Link className="links" to="/studyPage">
               <img

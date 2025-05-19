@@ -1,22 +1,7 @@
-import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import './TrophyRoom.css';
-// import SimbiLogo from '../Components/assets/Simbii.svg';
-// import DashboardIcon from '../Components/assets/Component 1.png';
-// import AskSimbiIcon from '../Components/assets/Simbii.svg';
-// import QuizIcon from '../Components/assets/Component 2.png';
-// import SocialIcon from '../Components/assets/Component 3.png';
-// import TrophyIcon from '../Components/assets/cup.png';
-// import StudyPlanIcon from '../Components/assets/studyp.png';
-// import QuizTrophy from '../Components/assets/Frame 1707479062 (1).png';
-// import StreakTrophy from '../Components/assets/Frame 1707479063 (2).png';
-// import GroupTrophy from '../Components/assets/Frame 1707479060.png';
-// import SubjectTrophy from '../Components/assets/Frame 1707479065.png';
-// import CollaborationTrophy from '../Components/assets/image 130.png';
-// import FastLearnerTrophy from '../Components/assets/Frame 1707479060 (1).png';
-// import MetaMaskIcon from '../Components/assets/wc-meta.svg';
-import { MetaMaskInpageProvider } from '@metamask/providers';
-import NavBar from '../NavBar/NavBar';
+import { useState, useEffect } from "react";
+import "./TrophyRoom.css";
+import { MetaMaskInpageProvider } from "@metamask/providers";
+import NavBar from "../NavBar/NavBar";
 
 declare global {
   interface Window {
@@ -28,98 +13,78 @@ const TrophyRoom = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState<string>('');
+  const [connectionStatus, setConnectionStatus] = useState<string>("");
 
   useEffect(() => {
     const checkMetaMask = async () => {
       if (window.ethereum && window.ethereum.isMetaMask) {
         setIsMetaMaskInstalled(true);
         try {
-          const accounts = (await window.ethereum.request({ method: 'eth_accounts' })) as string[];
+          const accounts = (await window.ethereum.request({
+            method: "eth_accounts",
+          })) as string[];
           if (accounts.length > 0) {
             setIsConnected(true);
-            setConnectionStatus('Connected');
+            setConnectionStatus("Connected");
           } else {
-            setConnectionStatus('No accounts connected');
+            setConnectionStatus("No accounts connected");
           }
         } catch (error) {
-          console.error('Error checking MetaMask accounts:', error);
-          setConnectionStatus('Error checking connection');
+          console.error("Error checking MetaMask accounts:", error);
+          setConnectionStatus("Error checking connection");
         }
       } else {
         setIsMetaMaskInstalled(false);
-        setConnectionStatus('Please install MetaMask');
+        setConnectionStatus("Please install MetaMask");
       }
-      setIsModalOpen(true); 
+      setIsModalOpen(true);
     };
     checkMetaMask();
   }, []);
 
   const connectMetaMask = async () => {
     if (!isMetaMaskInstalled) {
-      setConnectionStatus('Please install MetaMask');
-      window.open('https://metamask.io/download/', '_blank');
+      setConnectionStatus("Please install MetaMask");
+      window.open("https://metamask.io/download/", "_blank");
       return;
     }
 
     try {
       const accounts = (await window.ethereum!.request({
-        method: 'eth_requestAccounts',
+        method: "eth_requestAccounts",
       })) as string[];
 
       if (accounts.length > 0) {
         setIsConnected(true);
-        setConnectionStatus('Connected');
+        setConnectionStatus("Connected");
         setIsModalOpen(false);
       } else {
-        setConnectionStatus('Please sign in to MetaMask');
+        setConnectionStatus("Please sign in to MetaMask");
       }
     } catch (error: unknown) {
-        if (typeof error === 'object' && error !== null && 'code' in error) {
-    const typedError = error as { code: number; message?: string };
-        
-      if (typedError.code === 4001) {
-        setConnectionStatus('Connection rejected. Please sign in.');
+      if (typeof error === "object" && error !== null && "code" in error) {
+        const typedError = error as { code: number; message?: string };
+        if (typedError.code === 4001) {
+          setConnectionStatus("Connection rejected. Please sign in.");
+        } else {
+          setConnectionStatus("Error connecting to MetaMask");
+          console.error("MetaMask connection error:", error);
+        }
       } else {
-        setConnectionStatus('Error connecting to MetaMask');
-        console.error('MetaMask connection error:', error);
+        setConnectionStatus("An unknown error occurred.");
+        console.error("Unknown error:", error);
       }
-    }else {
-    setConnectionStatus('An unknown error occurred.');
-    console.error('Unknown error:', error);
-  }
     }
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const skipForNow = () => {
-    setIsModalOpen(false);
-  };
-
-  // Sidebar navigation items
-  // u can add it with actual navigation 
-  const navItems = [
-    { name: 'Dashboard', icon: "/assets/dashboard.svg", path: '/dashboard' },
-    { name: 'Ask Simbi', icon: "/assets/icons/Simbii.svg", path: '/asksimbi' },
-    { name: 'Quizzes', icon: "/assets/icons/quiz.svg", path: '/quizzes' },
-    { name: 'Social Acct.', icon: "/assets/icons/chart1.svg", path: '' },
-    { name: 'Trophy Room', icon: "/assets/trophy.svg", path: '' },
-    { name: 'Study Plans', icon: "/assets/icons/book1.svg", path: '' },
-  ];
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  const skipForNow = () => setIsModalOpen(false);
 
   return (
     <div className="trophy-room-wrapper">
+      <NavBar />
 
-      <div>
-        <NavBar/>
-      </div>
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -138,14 +103,23 @@ const TrophyRoom = () => {
             </div>
             <div className="modal-body">
               <p className="modal-description">
-                {connectionStatus || 'Connect your MetaMask wallet to Simbi Trophy Room and view your achievements.'}
+                {connectionStatus ||
+                  "Connect your MetaMask wallet to Simbi Trophy Room and view your achievements."}
               </p>
               <ul className="wallet-options">
                 <li className="wallet-item">
                   <button onClick={connectMetaMask} className="wallet-btn">
-                    <img src="/assets/profile-image/wc-meta.svg" alt="MetaMask" className="wallet-icon" />
+                    <img
+                      src="/assets/profile-image/wc-meta.svg"
+                      alt="MetaMask"
+                      className="wallet-icon"
+                    />
                     <span>MetaMask</span>
-                    <svg viewBox="0 0 20 20" fill="currentColor" className="arrow-icon">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="arrow-icon"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M7.293 14.707a1 1 0 0 1 0-1.414L10.586 10 7.293 6.707a1 1 0 0 1 1.414-1.414l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0z"
@@ -161,67 +135,45 @@ const TrophyRoom = () => {
                 Skip for Now
               </button>
               <button className="connect-btn" onClick={connectMetaMask}>
-                {isConnected ? 'Connected' : 'Connect'}
+                {isConnected ? "Connected" : "Connect"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <div className="dashboard">
-        <aside className="sidebar">
-          <div className="sidebar-logo">
-            <img src="/assets/icons/Simbii.svg" alt="Simbi Logo" className="logo-img" />
-            Simbi
+      <main className="main-content">
+        <div className="header">
+          <button className="tokens" onClick={openModal}>
+            {isConnected ? "Connected" : "Connect wallet"}
+          </button>
+          <div className="user-dropdown">👤 Tifechi</div>
+        </div>
+        <h1 className="main-title">My Trophy Room</h1>
+        <div className="trophy-grid">
+          <div className="trophy-card">
+            <img src="/assets/Fram-1707479062.png" alt="Quiz Conqueror" />
           </div>
-          <ul className="sidebar-nav">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                >
-                  <img src={item.icon} alt={item.name} className="nav-icon" />
-                  {item.name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-          <div className="connect-telegram">
-            {/* <button className="telegram-btn">Connect to Telegram</button> */}
+          <div className="trophy-card">
+            <img src="/assets/Frame-1707479063.png" alt="Streak Scholar" />
           </div>
-        </aside>
-
-        <main className="main-content">
-          <div className="header">
-            <button className="tokens" onClick={openModal}>
-              {isConnected ? 'Connected' : 'Connect wallet'}
-            </button>
-            <div className="user-dropdown">👤 Tifechi</div>
+          <div className="trophy-card">
+            <img src="/assets/Frame-1707479060.png" alt="Study Group Leader" />
           </div>
-          <h1 className="main-title">My Trophy Room</h1>
-          <div className="trophy-grid">
-            <div className="trophy-card">
-              <img src= "/assets/Frame-1707479062.png" alt="Quiz Conqueror" />
-            </div>
-            <div className="trophy-card">
-              <img src= "/assets/Fram-1707479063.png" alt="Streak Scholar" />
-            </div>
-            <div className="trophy-card">
-              <img src= "/assets/Frame-1707479060.png" alt="Study Group Leader" />
-            </div>
-            <div className="trophy-card">
-              <img src= "/assets/Frame 1707479065.png" alt="Subject Expert" />
-            </div>
-            <div className="trophy-card">
-              <img src= "/assets/Frame 1707479065 (1).png" alt="Collaboration Champion" />
-            </div>
-            <div className="trophy-card">
-              <img src= "/assets/Frame 1707479060 (1).png" alt="Fast Learner" />
-            </div>
+          <div className="trophy-card">
+            <img src="/assets/Frame-1707479065.png" alt="Subject Expert" />
           </div>
-        </main>
-      </div>
+          <div className="trophy-card">
+            <img
+              src="/assets/Frame-1707479067.png"
+              alt="Collaboration Champion"
+            />
+          </div>
+          <div className="trophy-card">
+            <img src="/assets/Frame-1707479069.png" alt="Fast Learner" />
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
