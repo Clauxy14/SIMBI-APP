@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./loading";
 import MainLayout from "./Components/Layout/MainLayout";
 import Accountability from "./Components/socAccount";
-// import TrophyRoom from "./Components/TrophyRoom/TrophyRoom";
+
 
 // Lazy load your pages
-const Onboarding = lazy(() => import("./Components/Onboarding/onboarding"));
+const Onboarding = lazy(() => import("./Components/onboarding"));
 const Signup = lazy(() => import("./Components/Signup/Signup"));
 const Login = lazy(() => import("./Components/Login/Login"));
 const ConnectWallet = lazy(() => import("./Components/Wallet/Wallet"));
@@ -46,7 +46,7 @@ function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/result" element={<QuizResult />} />
             <Route path="/studyPage" element={<STUDYPLAAAN />} />
-            {/* <Route path="/trophyroom" element={<TrophyRoom />} /> */}
+        
           </Route>
           <Route path="/study-session/:_id" element={<StudySession />} />
           <Route path="*" element={<NotFound />} />
